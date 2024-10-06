@@ -1,0 +1,119 @@
+.top-bar {
+    background-color: #1a5f7a;
+    color: white;
+    padding: 5px 0;
+    font-size: 0.9em;
+}
+
+.navbar-nav .nav-link {
+    color: #333;
+    font-weight: 600;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #1a5f7a;
+}
+
+.hero-image {
+    height: 400px;
+    background-image: url('https://placeholder.com/800x400');
+    background-size: cover;
+    background-position: center;
+}
+.carousel-inner{
+    height:70vh;
+}
+.carousel-item, img{
+height: 100% !important;
+width:  100% !important;
+
+}
+.card-shop{
+height:28vw;
+}
+.service-title{
+margin-top:7px;
+text-align: center;
+}
+.service-description{
+margin-top:7px;
+text-align:justify;
+}
+.form-control {
+border-radius: 0;
+}
+.btn-danger {
+background-color: #dc3545;
+border-color: #dc3545;
+border-radius: 0;
+}
+.form-control {
+border-radius: 0;
+border: 1px solid #e0e0e0;
+padding: 0.75rem 1rem;
+}
+.form-control::placeholder {
+color: #999999;
+text-transform: uppercase;
+font-size: 0.8rem;
+}
+.btn-danger {
+background-color: #ff0000;
+border-color: #ff0000;
+border-radius: 0;
+padding: 0.5rem 2rem;
+font-size: 0.9rem;
+}
+h1 {
+font-weight: normal;
+margin-bottom: 2rem;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+}
+.signup-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+}
+.footer {
+    background-color: #1c4e5e;
+    color: white;
+    padding: 40px 0;
+}
+.footer h5 {
+    margin-bottom: 20px;
+}
+.footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+.footer li {
+    margin-bottom: 10px;
+}
+.social-icons {
+    font-size: 24px;
+}
+.social-icons a {
+    color: white;
+    margin-right: 10px;
+}
+.language-selector {
+    background-color: transparent;
+    border: 1px solid white;
+    color: black;
+    width: 100px; /* Decreased width */
+    max-width: 100%;
+    background-color: white;
+}
+
+.currency-option {
+            display: flex;
+            align-items: center;
+        }
+        .currency-flag {
+            width: 20px;
+            height: 15px;
+            margin-right: 5px;
+        }
