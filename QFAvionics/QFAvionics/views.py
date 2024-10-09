@@ -39,4 +39,4 @@ def home(request):
     }
                 
     ]
-    return render(request, "index.html", {'categories':categories, 'products':products, 'services':services})
+    return render(request, "home.html", {'categories':categories, 'products':products, 'services':services})
