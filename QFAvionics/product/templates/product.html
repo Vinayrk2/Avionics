@@ -1,13 +1,161 @@
 {% extends "master.html" %}
 
-{%  block content %}
+
+
+{% block content %}
+
+<div class="container" style="border:1px solid brown">
+
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+               <div class="row">
+                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/1280x1280/products/11841/110168/SGP156374_1_inset1__71799.1617249266.jpg?c=1"
+                    alt="Nexus TJ-102 In-Line Microphone Jack" class="img-fluid" id="main-img">
+               </div> 
+                
+
+               <div class="row" style="display: flex; justify-content: space-evenly;">
+                <div class="box" style="height:8vh;width:8vh;border: 1px solid black;">
+                    <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/1280x1280/products/11841/110168/SGP156374_1_inset1__71799.1617249266.jpg?c=1"
+                        alt="" class="zoom">
+                </div>
+                <div class="box" style="height: 8vh;width:8vh;border: 1px solid black;">
+                
+                    <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/1280x1280/products/11841/110169/SGP156374_1_inset2__71480.1617249267.jpg?c=1"
+                        alt="" class="zoom">    
+                </div>
+                <div class="box" style="height: 8vh;width:8vh;border: 1px solid black;">
+                    <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/1280x1280/products/11841/110167/SGP156374_1_main__79318.1617249264.jpg?c=1"
+                        alt="" class="zoom">
+                </div>
+
+               </div> 
+            </div>
+            <div class="col-md-6">
+                <h1 class="mb-3">{{product.name}}</h1>
+                <p>Our Part #: {{product.description}}</p>
+                <p>Weight: {{product.weight}}</p>
+                <p class="price">Our Price: {{product.price}}</p>
+                <p>Category:{{product.category.name}}</p>
+
+
+
+
+                <p class="stock-info in-stock">In-Stock: 186 Units available.</p>
+
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-success me-2">ADD TO CART</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<div class="container" style="margin-bottom: 10vh;">
+    <main class="container mt-4"></main>
+    <h2 class="mb-3">Related Items</h2>
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x500/products/46848/110176/SGP156377_1_inset1__15873.1617249280.jpg?c=1"
+                    class="card-img-top" alt="Amphenol NEXUS TJ-105">
+                <div class="card-body">
+                    <h5 class="card-title">Amphenol NEXUS TJ-105</h5>
+                    <p class="card-text">Black/Red Plastic In-Line Molded Contact 4-Conductor Telephone Jack</p>
+                    <a href="#" class="btn btn-link p-0">View Details</a>
+                </div>
+                <div class="card-footer bg-white">
+                    <small class="text-danger">Quote Item:</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x500/products/46848/110176/SGP156377_1_inset1__15873.1617249280.jpg?c=1"
+                    class="card-img-top" alt="Amphenol NEXUS TJ-101">
+                <div class="card-body">
+                    <h5 class="card-title">Amphenol NEXUS TJ-101</h5>
+                    <p class="card-text">Black Plastic In-Line Molded Contact 4-Conductor Telephone Jack</p>
+                    <a href="#" class="btn btn-link p-0">View Details</a>
+                </div>
+                <div class="card-footer bg-white">
+                    <small class="text-success">In-Stock: 48 Units available.</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x500/products/46848/110176/SGP156377_1_inset1__15873.1617249280.jpg?c=1"
+                    class="card-img-top" alt="Amphenol NEXUS TJ-120">
+                <div class="card-body">
+                    <h5 class="card-title">Amphenol NEXUS TJ-120</h5>
+                    <p class="card-text">Black Plastic In-Line Molded Contact 4-Conductor Flanged Rear-Mounted Telephone
+                        Jack</p>
+                    <a href="#" class="btn btn-link p-0">View Details</a>
+                </div>
+                <div class="card-footer bg-white">
+                    <small class="text-success">In-Stock: 40 Units available.</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x500/products/46848/110176/SGP156377_1_inset1__15873.1617249280.jpg?c=1"
+                    class="card-img-top" alt="Amphenol NEXUS TJ-106">
+                <div class="card-body">
+                    <h5 class="card-title">Amphenol NEXUS TJ-106</h5>
+                    <p class="card-text">Black Plastic Molded Contact 6-Conductor Biaxial Shielded Telephone Jack</p>
+                    <a href="#" class="btn btn-link p-0">View Details</a>
+                </div>
+                <div class="card-footer bg-white">
+                    <small class="text-warning">On Order: 7 Units on order & due in ± 9-12 days</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x659/products/61747/110170/SGP156375_1_main__88525.1617249270.jpg?c=1"
+                    class="card-img-top" alt="Amphenol NEXUS TP-102">
+                <div class="card-body">
+                    <h5 class="card-title">Amphenol NEXUS TP-102</h5>
+                    <p class="card-text">Black Plastic Molded Contact 4-Conductor Telephone Plug</p>
+                    <a href="#" class="btn btn-link p-0">View Details</a>
+                </div>
+                <div class="card-footer bg-white">
+                    <small class="text-success">In-Stock: 90 Units available.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+</div>
+
+
+<!-- <div class="container" style="border: 1px solid red;">
     <h1> Product Details Here....</h1>
     <h2> {{product.name}}</h2>
     {% for key, value in product.items %}
-    <h3>  {{key}} : {{value}}</h3>
+    <h3> {{key}} : {{value}}</h3>
     {% endfor %}
 
-    {%  for image in product.images %}
-    <img src="{{image.image.url}}" style="display: inline; width:100px; height:100px;"/>
+    {% for image in product.images %}
+    <!-- <img src="{{image.image.url}}" style="display: inline; width:100px; height:100px;"/> -->
     {% endfor %}
+</div> -->
+
+<script>
+    let zoom = document.getElementsByClassName('zoom');
+    let img = document.getElementById('main-img');
+    
+
+    for(let i=0;i<zoom.length;i++){
+        zoom[i].addEventListener('click',(e)=>{
+            
+            img.src=e.target.src;
+            
+        })
+    }
+</script>
 {% endblock %}
