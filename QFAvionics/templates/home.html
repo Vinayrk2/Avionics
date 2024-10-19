@@ -111,8 +111,11 @@
         <div class="row mt-2 d-flex justify-content-center">
         {% if categories %}
         {% for category in categories %}
-        
+            {% if categories|length < 4 %}
             <div class="col-md-{{categories|length|card_size}} mb-4">
+            {% else %}
+            <div class="col-md-3 mb-4">
+            {% endif %}    
                 <div class="category-box">
                     <img src="{{ category.image }}" alt="Communications Equipment" class="equipment-image" >
                     <div class="category-label">
