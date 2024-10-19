@@ -2,5 +2,12 @@
 
 {%  block content %}
     <h1> Product Details Here....</h1>
+    <h2> {{product.name}}</h2>
+    {% for key, value in product.items %}
+    <h3>  {{key}} : {{value}}</h3>
+    {% endfor %}
 
+    {%  for image in product.images %}
+    <img src="{{image.image.url}}" style="display: inline; width:100px; height:100px;"/>
+    {% endfor %}
 {% endblock %}

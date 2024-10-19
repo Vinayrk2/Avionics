@@ -44,6 +44,20 @@ class Product(models.Model):
             return False
         # Implement stock logic here
         return True  # Placeholder return value
+    
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'description': self.description,
+            'price': str(self.price),  # Convert to string for JSON serialization
+            'weight': str(self.weight),  # Convert to string for JSON serialization
+            'stock_quantity': self.stock_quantity,
+            'category': self.category.id if self.category else None,  # Use category ID or None
+            'is_available': self.is_available,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
+            'images': [image.id for image in self.images.all()]  # List of image IDs
+        }
 
 
 class Image(models.Model):

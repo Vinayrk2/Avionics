@@ -7,5 +7,5 @@ from user.views import signup,userlogin, userlogout
 
 urlpatterns = [
     path("view", views.product_view, name="product-view"),
-    
+    path("category", views.product_by_category, name="product-list-categorized")
 ] 
