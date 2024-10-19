@@ -37,6 +37,9 @@ def home(request):
         "name": "MAINTENANCE, REPAIR & OVERHAUL (MRO)",
         "description":"We provide best-in-class helicopter and fixed-wing MRO services for several of the most commonly operated light, medium and heavy helicopter models."   
     }
-                
     ]
+    
+    for product  in products:
+        product.image = product.images.all()[0].image.url
+
     return render(request, "home.html", {'categories':categories, 'products':products, 'services':services})

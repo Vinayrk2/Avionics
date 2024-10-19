@@ -7,7 +7,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     weight = models.DecimalField(max_digits=10, decimal_places=2)
     stock_quantity = models.PositiveIntegerField(default=0)  
-    category = models.OneToOneField('Category', blank=True, on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', blank=True, on_delete=models.CASCADE)
     is_available = models.BooleanField(default=True)  # New field for active status
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
