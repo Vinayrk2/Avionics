@@ -11,14 +11,13 @@ class Product(models.Model):
     is_available = models.BooleanField(default=True)  # New field for active status
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    images = models.ManyToManyField('Image', blank=True)
-
+    
     def __str__(self):
         return self.name
 
-    def get_images(self):
+    def get_image(self):
         """Retrieve all images associated with the product."""
-        return self.images.all()
+        return self.images.all()[0].image
 
     def update_details(self, name=None, description=None, price=None, weight=None):
         if name is not None:
@@ -52,16 +51,17 @@ class Product(models.Model):
             'price': str(self.price),  # Convert to string for JSON serialization
             'weight': str(self.weight),  # Convert to string for JSON serialization
             'stock_quantity': self.stock_quantity,
-            'category': self.category.id if self.category else None,  # Use category ID or None
+            'category': self.category if self.category else None,  # Use category ID or None
             'is_available': self.is_available,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
-            'images': [image.id for image in self.images.all()]  # List of image IDs
+            # 'images': [image.id for image in self.images.all()]  # List of image IDs
         }
 
 
 class Image(models.Model):
     image = models.ImageField(upload_to="static/product/images/")
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='images', blank=True)  # Link image to product
 
 
 class Category(models.Model):

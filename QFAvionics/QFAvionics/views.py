@@ -38,8 +38,9 @@ def home(request):
         "description":"We provide best-in-class helicopter and fixed-wing MRO services for several of the most commonly operated light, medium and heavy helicopter models."   
     }
     ]
-    
     for product  in products:
-        product.image = product.images.all()[0].image.url
-
+        # print(product.images.all()[0])
+        if len(product.images.all()) > 0:
+            product.image = product.get_image().url
+        
     return render(request, "home.html", {'categories':categories, 'products':products, 'services':services})

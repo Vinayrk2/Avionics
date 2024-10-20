@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container-fluid" >
-        <div id="carouselExample"  class="carousel slide">
+        <div id="carouselExample"  class="carousel slide" style="box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;">
             <div class="carousel-inner" style="height:max(35vh,35vw)">
                 <div class="carousel-item active">
                     <img src="{% static "images/heli.webp" %}" class="d-block w-100" alt="..."  style="object-fit:cover; height:inherit;">
@@ -40,8 +40,8 @@
             <div class="row px-1 gx-4 gy-4 d-flex justify-content-center">
                 {% if services %}
                 {% for service in services %}
-                <div class="col-md-4">
-                    <div class="card" style="height: min(60vh, 90vw);">
+                <div class="col-md-4" >
+                    <div class="card" style="height: min(60vh, 90vw); box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;">
                         <div class="row no-gutters" style="height:100%;">
                             <div class="col-12" style="height: 50%;">
                                 <img src="{% static 'images/warehouse.webp' %}" alt="Online Store" class="card-img" style="height: 100%; object-fit: cover;">
@@ -69,7 +69,7 @@
         {% if categories %}
         {% for category in categories %}
         {% if categories|length < 4 %}
-        <div class="col-md-{{categories|length|card_size}} mb-4">
+        <div class="col-md-{{categories|length|card_size}} mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;">
         {% else %}
         <div class="col-md-3 mb-4">
         {% endif %}    
@@ -94,15 +94,16 @@
        <div class="row mt-5"></div>
         <div class="container mt-5">
             <h1 class="text-center fw-bolder">Featured Collection</h1>
-            <div class="row">
+            <div class="row h-auto">
                 {% if products %}
                 {% for product in products %}
-                <div class="col-md-4 card-shop">
+                <div class="col-md-3 card-shop" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; border-radius:3px;">
                     <a href="{% url 'product-view' id=product.id %}" style="text-decoration:none; color:black; font-weight:bolder;">
                     <img src="{{product.image}}" alt="Online Store" class="service-image" style="max-height:60%; object-fit:cover;">
-                    <h2 class="service-title"> {{product.name}} </h2>
-                    <p class="service-description">{{product.description}}</p>
-                    <p class="service-description fw-bolder text-primary">Price : ${{product.price}}</p>
+                    <h5 class="service-title fw-bolder"> {{product.name}} </h5>
+                    <p class="service-description fw-light">{{product.description}}</p>
+                    <p class="service-description fw-light">{{product.category}}</p>
+                    <p class="service-description fw-bolder">Price : ${{product.price}}</p>
                 </a>
                 </div>
                 {%  endfor %}
@@ -117,16 +118,12 @@
 
      <section class="signup-section">
         <div class="container-fluid text-center">
-            <h2 class="mb-4">SIGN UP AND SAVE</h2>
-            <p class="mb-4">Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
-            <form class="row justify-content-center">
-                <div class="col-auto">
-                    <input type="email" class="form-control" placeholder="Enter your email">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-danger">SUBSCRIBE</button>
-                </div>
-            </form>
+            <h2 class="mb-4">SIGNUP OR LOGIN </h2>
+            <p class="mb-4">Login to the system to access the features and to get the latest updates on our products and services.</p>
+
+            <a href="{% url 'signup' %}" style="text-decoration:none; color:black;"> <button class="btn fw-bolder btn-warning" style="width:14vh;"> signup </button></a>
+            <a href="{% url 'login' %}" style="text-decoration:none; color:black;"> <button class="btn fw-bolder btn-danger" style="width:14vh"> Login </button></a>
+
         </div>
     </section>
 {% endblock content%}

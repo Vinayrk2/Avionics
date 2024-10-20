@@ -10,26 +10,20 @@
         <div class="row">
             <div class="col-md-6">
                <div class="row">
-                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/1280x1280/products/11841/110168/SGP156374_1_inset1__71799.1617249266.jpg?c=1"
+                <img src="{{product.image.url}}"
                     alt="Nexus TJ-102 In-Line Microphone Jack" class="img-fluid" id="main-img">
                </div> 
                 
 
                <div class="row" style="display: flex; justify-content: space-evenly;">
-                <div class="box" style="height:8vh;width:8vh;border: 1px solid black;">
-                    <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/1280x1280/products/11841/110168/SGP156374_1_inset1__71799.1617249266.jpg?c=1"
-                        alt="" class="zoom">
-                </div>
-                <div class="box" style="height: 8vh;width:8vh;border: 1px solid black;">
-                
-                    <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/1280x1280/products/11841/110169/SGP156374_1_inset2__71480.1617249267.jpg?c=1"
-                        alt="" class="zoom">    
-                </div>
-                <div class="box" style="height: 8vh;width:8vh;border: 1px solid black;">
-                    <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/1280x1280/products/11841/110167/SGP156374_1_main__79318.1617249264.jpg?c=1"
-                        alt="" class="zoom">
-                </div>
 
+                {% for image in product.images %}
+    <!-- <img src="{{image.image.url}}" style="display: inline; width:100px; height:100px;"/> -->
+                    <div class="box" style="height:8vh;width:8vh;border: 1px solid black;">
+                        <img src="{{image.image.url}}"
+                            alt="" class="zoom">
+                    </div>
+                {% endfor %}                
                </div> 
             </div>
             <div class="col-md-6">
@@ -140,9 +134,7 @@
     <h3> {{key}} : {{value}}</h3>
     {% endfor %}
 
-    {% for image in product.images %}
-    <!-- <img src="{{image.image.url}}" style="display: inline; width:100px; height:100px;"/> -->
-    {% endfor %}
+    
 </div> -->
 
 <script>
