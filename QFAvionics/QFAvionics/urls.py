@@ -8,8 +8,8 @@ from user.views import signup,userlogin, userlogout, userprofile, usercart
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", home, name="home"),
-    path("signup", signup, name="signup"),
-    path("login", userlogin, name="login"),
+    path("signup/", signup, name="signup"),
+    path("login/", userlogin, name="login"),
     path("logout", userlogout, name="logout"),
     path("user/profile", userprofile, name="profile"),
     path("user/cart", usercart, name="cart"),

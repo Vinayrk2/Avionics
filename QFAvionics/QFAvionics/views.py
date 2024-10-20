@@ -44,3 +44,4 @@ def home(request):
             product.image = product.get_image().url
         
     return render(request, "home.html", {'categories':categories, 'products':products, 'services':services})
+
