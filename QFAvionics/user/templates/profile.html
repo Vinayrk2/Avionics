@@ -1,0 +1,12 @@
+{% extends "master.html" %}
+
+{%  block content %}
+    User Profile
+    <h2>{{user.email}}</h2>
+    <h2>{{user.phone_number}}</h2>
+    <h2>{{user.address}}</h2>
+    <h2>{{user.image}}</h2>
+    <h2>{{user.first_name}}</h2>
+    <h2>{{user.last_name}}</h2>
+    <a href="{% url 'logout' %}"><button class="btn btn-danger"> Logout </button></a>
+{% endblock %}

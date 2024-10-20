@@ -2,6 +2,7 @@ from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import UserSignUpForm, UserLoginForm
 from django.contrib.auth import  authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -37,7 +38,12 @@ def userlogin(request):
     else:
         form = UserLoginForm()
         return render(request, "login.html", {"form": UserLoginForm})
+    
+@login_required(login_url='/login')
+def userprofile(request):
+    return render(request, "profile.html")
 
+@login_required(login_url='/login')
 def userlogout(request):
     logout(request)
     return HttpResponseRedirect("/")
