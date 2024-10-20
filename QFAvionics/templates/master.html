@@ -11,7 +11,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     {% load static %}
     <link rel="stylesheet" href="{% static 'index.css' %}">
-    
+    <style>
+        #dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            z-index: 1000;
+        }
+
+        #menu:hover #dropdown {
+            display: block;
+
+
+            /* Show dropdown on hover */
+        }
+
+        #dropdown li {
+            padding: 10px;
+            /* Add some padding */
+        }
+
+        #dropdown li:hover {
+            background-color: #f0f0f0;
+            /* Change background on hover */
+        }
+
+        .icon-container {
+            display: flex;
+            align-items: center;
+            /* Aligns icons vertically */
+        }
+
+        .icon-container a {
+            margin-right: 1rem;
+            /* Adjusts space between icons */
+        }
+
+        .icon-container a:last-child {
+            margin-right: 0;
+            /* Removes margin from the last icon */
+        }
+    </style>
+
 </head>
 
 <body>
@@ -27,6 +72,7 @@
                 <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
                 <select class="form-select form-select-sm d-inline-block w-auto">
                     <option>CAD $</option>
+                    <option>USD $</option>
                 </select>
             </div>
         </div>
@@ -44,41 +90,53 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
 
-                    <li class="nav-item" id="menu">
-                        <a class="nav-link" href="#">HOME</a>
-                        <ul id="dropdown">
-                            <li>Category</li>
-                            <li>Products</li>
-                        </ul>
-                    </li>
 
 
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'home' %}">HOME</a>
+
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="menu">
                         <a class="nav-link" href="#">SERVICES</a>
+                        <ul id="dropdown">
+                            <li>Airframe Wiring</li>
+                            <li>CNC Machining</li>
+                            <li>Fixed Wings</li>
+                            <li>Glass Cockpits</li>
+                            <li>Rotorcraft</li>
+                            <li>5G Radar Alimeters</li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="menu">
                         <a class="nav-link" href="#">SHOP</a>
+                        <ul id="dropdown">
+                            <li>All Products </li>
+                            <li>Communications</li>
+                            <li>Navigations</li>
+
+                        </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="menu">
                         <a class="nav-link" href="#">NEWS</a>
+
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="menu">
                         <a class="nav-link" href="#">ABOUT</a>
+
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="menu">
                         <a class="nav-link" href="#">CONTACT</a>
+
                     </li>
                 </ul>
-                <div>
+                <div class="icon-container d-flex">
                     {% if user %}
                     <a href="/user/profile" class="text-dark me-3"><i class="fas fa-user"></i> {{ user.username }} </a>
-                    <a href="#" class="text-dark"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="#" class="text-dark me-3"><i class="fas fa-shopping-cart"></i></a>
                     {% endif %}
-                    <a href="#" class="text-dark me-3"><i class="fas fa-search"></i></a>
+                    <a href="#" class="text-dark"><i class="fas fa-search"></i></a>
                 </div>
+                
             </div>
         </div>
     </nav>
@@ -143,7 +201,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-4">
+            <!-- <div class="row mt-4">
                 <div class="col-auto">
                     <select class="form-select language-selector">
                         <option selected><span class="currency-option">
@@ -156,7 +214,7 @@
                         <option>USD $</option>
                     </select>
                 </div>
-            </div>
+            </div> -->
         </div>
     </footer>
 </body>
