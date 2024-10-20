@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QF Avionics</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     {% load static %}
     <link rel="stylesheet" href="{% static 'index.css' %}">
+    
 </head>
 
 <body>
@@ -33,28 +35,23 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="{% static 'images/logo.png' %}" alt="QF Avionics Logo" style="max-width: min(10vh,10vw);; max-height: min(10vh,10vw);">
+                <img src="{% static 'images/logo.png' %}" alt="QF Avionics Logo"
+                    style="max-width: min(10vh,10vw);; max-height: min(10vh,10vw);">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                   
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Home
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                              </ul>
-                        </div>
-                        
+
+                    <li class="nav-item" id="menu">
+                        <a class="nav-link" href="#">HOME</a>
+                        <ul id="dropdown">
+                            <li>Category</li>
+                            <li>Products</li>
+                        </ul>
                     </li>
-                    
+
 
                     <li class="nav-item">
                         <a class="nav-link" href="#">SERVICES</a>
@@ -74,7 +71,7 @@
                 </ul>
                 <div>
                     {% if user %}
-                    <a href="/user/profile" class="text-dark me-3"><i class="fas fa-user"></i> {{  user.username }} </a>
+                    <a href="/user/profile" class="text-dark me-3"><i class="fas fa-user"></i> {{ user.username }} </a>
                     <a href="#" class="text-dark"><i class="fas fa-shopping-cart"></i></a>
                     {% endif %}
                     <a href="#" class="text-dark me-3"><i class="fas fa-search"></i></a>
@@ -116,13 +113,13 @@
                 <div class="col-md-3 mb-4">
                     <h5>Location</h5>
                     <p>Address:<br>
-                    QF Avionics Center LtdHangar #11<br>
-                    Airport DriveSpringbook,ABT4S<br>
-                    2E8Canada</p>
+                        QF Avionics Center LtdHangar #11<br>
+                        Airport DriveSpringbook,ABT4S<br>
+                        2E8Canada</p>
                     <p>Airport:<br>
-                    Red Deer Regional Airport, CYQF, YQF</p>
+                        Red Deer Regional Airport, CYQF, YQF</p>
                     <p>Phone:<br>
-                    +1 (403) 886-4306</p>
+                        +1 (403) 886-4306</p>
                 </div>
                 <div class="col-md-3 mb-4">
                     <h5>Sign up and save</h5>
@@ -147,9 +144,12 @@
                 <div class="col-auto">
                     <select class="form-select language-selector">
                         <option selected><span class="currency-option">
-                            <svg class="currency-flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#D80027" d="M0 0h512v512H0z"/><path fill="#FFF" d="M256 0v512h256V0z"/></svg>
-                            CAD $
-                        </span></option>
+                                <svg class="currency-flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="#D80027" d="M0 0h512v512H0z" />
+                                    <path fill="#FFF" d="M256 0v512h256V0z" />
+                                </svg>
+                                CAD $
+                            </span></option>
                         <option>USD $</option>
                     </select>
                 </div>
