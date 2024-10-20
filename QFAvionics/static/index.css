@@ -119,4 +119,12 @@ body {
         }
 
 
-        
+.no-link>a{
+    text-decoration: none;
+    color: white;
+}
+.no-link{
+    display: flex;
+    align-items: center;
+    height: 40px;
+}

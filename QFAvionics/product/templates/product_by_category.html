@@ -45,138 +45,57 @@
             background-color: #dc3545;
             color: white;
         }
+        
     </style>
     
+    <div class="container-fluid bg-primary px-5 h-10 d-flex align-items-center justify-content-start">
+        {% if categories %}
+            {% for category in categories %}
+            <span class="w-10 mx-2 no-link"><a href="{% url 'product-list-categorized' name=category %}"> {{category}} </a></span>
+            {% endfor %}
+            {% else %}
+            <span class="w-10 mx-2 no-link"> Sorry! No Categories Available Right Now...</span>
+            {% endif %}
+    </div>
 
-    <div class="container-fluid" style="border: 1px solid;">
-        <div class="row">
+
+    <div class="container-fluid mt-3" >
+        <div class="row d-flex  justify-content-center">
+
             <!-- Sidebar -->
 
             <!-- Main Content -->
-            <div class="col-md-12">
-                <h1 class="mt-3">Showing products with fast delivery</h1>
-                <p>See all products, across price ranges.</p>
+            <div class="col-md-10">
+                <p>Showing products of {{name}} category. </p>
 
                 <h2>Results</h2>
-                <p>Check each product page for other buying options.</p>
-
-                <div class="row" style="border: 1px solid black;" >
+                <div class="row" >
                     <!-- Product 1 -->
+                    {% if products %}
+                    {% for product in products %}
                     <div class="col-md-4">
                         <div class="product-card">
-                            <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x659/products/61747/110170/SGP156375_1_main__88525.1617249270.jpg?c=1"
+                            <img src="{{product.image}}"
                                 alt="Cyber Acoustics Stereo USB" class="img-fluid product-image d-block m-auto">
-                            <h3>Amphenol NEXUS TJ-105 Black/Red Plastic In-Line Molded Contact 4-Conductor Telephone
-                                Jack</h3>
-                            <div class="mb-2">
+                            <h3>{{product.name}}</h3>
+
+                            <!-- <div class="mb-2">
                                 <span class="badge badge-festival">Great Canadian Festival</span>
-                            </div>
+                            </div> -->
                             <div>
-                                <span class="price">₹1,839</span>
-                                <span class="original-price">₹5,590</span>
-                                <span class="discount">(67% off)</span>
+                                <span class="category">In {{product.category}}</span><br>
+                                <span class="price" style="color:#28a745">${{product.price}}</span>
                             </div>
-                            <button class="btn btn-warning">Add to cart</button>
+                            <a href="#"><button class="btn btn-warning fw-bolder mt-1 border"> ➕ Add to cart</button></a>
                         </div>
                     </div>
-
-                    <!-- Product 2 -->
+                    {% endfor %}
+                    {% else %}
                     <div class="col-md-4">
-                        <div class="product-card">
-                            <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x659/products/61747/110170/SGP156375_1_main__88525.1617249270.jpg?c=1"
-                                alt="Cyber Acoustics Stereo USB" class="img-fluid product-image">
-                            <h3>Amphenol NEXUS TJ-105 Black/Red Plastic In-Line Molded Contact 4-Conductor Telephone
-                                Jack</h3>
-                            <div class="mb-2">
-                                <span class="badge badge-best-seller">Best seller</span>
-                                <span class="badge badge-festival">Great Canadian Festival</span>
-                            </div>
-                            <div>
-                                <span class="price">₹629</span>
-                                <span class="original-price">₹999</span>
-                                <span class="discount">(37% off)</span>
-                            </div>
-                            <button class="btn btn-warning">Add to cart</button>
-                        </div>
+                        <div class="fw-bolder" style="height: 50vh;"> Sorry! No Products Available For {{name}}</div>
+
                     </div>
-
-                    <!-- Product 3 -->
-                    <div class="col-md-4">
-                        <div class="product-card">
-                            <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x659/products/61747/110170/SGP156375_1_main__88525.1617249270.jpg?c=1"
-                                alt="Cyber Acoustics Stereo USB" class="img-fluid product-image">
-                            <h3>Amphenol NEXUS TJ-105 Black/Red Plastic In-Line Molded Contact 4-Conductor Telephone
-                                Jack</h3>
-                            <div class="mb-2">
-                                <span class="badge badge-festival">Great Canadian Festival</span>
-                            </div>
-                            <div>
-                                <span class="price">₹2,689</span>
-                                <span class="original-price">₹4,797</span>
-                                <span class="discount">(44% off)</span>
-                            </div>
-                            <button class="btn btn-warning">Add to cart</button>
-                        </div>
-                    </div>
-
-
-                    <!-- Product 4 -->
-                    <div class="col-md-4">
-                        <div class="product-card">
-                            <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x659/products/61747/110170/SGP156375_1_main__88525.1617249270.jpg?c=1"
-                                alt="Cyber Acoustics Stereo USB" class="img-fluid product-image">
-                            <h3>Amphenol NEXUS TJ-105 Black/Red Plastic In-Line Molded Contact 4-Conductor Telephone
-                                Jack</h3>
-                            <div class="mb-2">
-                                <span class="badge badge-festival">Great Canadian Festival</span>
-                            </div>
-                            <div>
-                                <span class="price">₹1,839</span>
-                                <span class="original-price">₹5,590</span>
-                                <span class="discount">(67% off)</span>
-                            </div>
-                            <button class="btn btn-warning">Add to cart</button>
-                        </div>
-                    </div>
-
-                    <!-- Product 1 -->
-                    <div class="col-md-4">
-                        <div class="product-card">
-                            <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x659/products/61747/110170/SGP156375_1_main__88525.1617249270.jpg?c=1"
-                                alt="Cyber Acoustics Stereo USB" class="img-fluid product-image">
-                            <h3>Amphenol NEXUS TJ-105 Black/Red Plastic In-Line Molded Contact 4-Conductor Telephone
-                                Jack</h3>
-                            <div class="mb-2">
-                                <span class="badge badge-festival">Great Canadian Festival</span>
-                            </div>
-                            <div>
-                                <span class="price">₹1,839</span>
-                                <span class="original-price">₹5,590</span>
-                                <span class="discount">(67% off)</span>
-                            </div>
-                            <button class="btn btn-warning">Add to cart</button>
-                        </div>
-                    </div>
-
-                    <!-- Product 1 -->
-                    <div class="col-md-4">
-                        <div class="product-card">
-                            <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x659/products/61747/110170/SGP156375_1_main__88525.1617249270.jpg?c=1"
-                                alt="Cyber Acoustics Stereo USB" class="img-fluid product-image">
-                            <h3>Amphenol NEXUS TJ-105 Black/Red Plastic In-Line Molded Contact 4-Conductor Telephone
-                                Jack</h3>
-                            <div class="mb-2">
-                                <span class="badge badge-festival">Great Canadian Festival</span>
-                            </div>
-                            <div>
-                                <span class="price">₹1,839</span>
-                                <span class="original-price">₹5,590</span>
-                                <span class="discount">(67% off)</span>
-                            </div>
-                            <button class="btn btn-warning">Add to cart</button>
-                        </div>
-                    </div>
-
+                    {% endif %}
 
                 </div>
             </div>

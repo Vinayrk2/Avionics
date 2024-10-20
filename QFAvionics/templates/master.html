@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                    
-                    <li class="nav-item">
+                    {% comment %} <li class="nav-item">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Home
@@ -53,9 +53,12 @@
                               </ul>
                         </div>
                         
-                    </li>
+                    </li> {% endcomment %}
                     
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">HOME</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">SERVICES</a>
                     </li>
@@ -74,7 +77,8 @@
                 </ul>
                 <div>
                     {% if user %}
-                    <a href="/user/profile" class="text-dark me-3"><i class="fas fa-user"></i> {{  user.username }} </a>
+                    {% comment %} <a href="/user/profile" class="text-dark me-3"><i class="fas fa-user"></i> {{  user.username }} </a> {% endcomment %}
+                    <a href="/user/profile" class="text-dark me-3"><i class="fas fa-user"></i></a>
                     <a href="#" class="text-dark"><i class="fas fa-shopping-cart"></i></a>
                     {% endif %}
                     <a href="#" class="text-dark me-3"><i class="fas fa-search"></i></a>
