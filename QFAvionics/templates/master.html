@@ -131,10 +131,10 @@
                 </ul>
                 <div class="icon-container d-flex">
                     {% if user %}
-                    <a href="/user/profile" class="text-dark me-3"><i class="fas fa-user"></i> {{ user.username }} </a>
-                    <a href="#" class="text-dark me-3"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="{% url 'profile' %}" class="text-dark me-3"><i class="fas fa-user"></i> {{ user.username }} </a>
+                    <a href="{% url 'cart' %}" class="text-dark me-3"><i class="fas fa-shopping-cart"></i></a>
                     {% endif %}
-                    <a href="#" class="text-dark"><i class="fas fa-search"></i></a>
+                    <a href="{% url 'login' %}" class="text-dark"><i class="fas fa-search"></i></a>
                 </div>
                 
             </div>

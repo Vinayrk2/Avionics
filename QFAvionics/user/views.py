@@ -44,6 +44,10 @@ def userprofile(request):
     return render(request, "profile.html")
 
 @login_required(login_url='/login')
+def usercart(request):
+    return render(request, "cart.html")
+
+@login_required(login_url='/login')
 def userlogout(request):
     logout(request)
     return HttpResponseRedirect("/")
