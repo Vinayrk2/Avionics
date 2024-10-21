@@ -2,7 +2,7 @@ from django.shortcuts import render
 from product.models import Category, Product
 
 def home(request):
-    categories = Category.objects.all()[:3]
+    categories = Category.objects.all()[:4]
     products = Product.objects.all()[:6]
     services = [{
         "image":"images/warehouse.webp",

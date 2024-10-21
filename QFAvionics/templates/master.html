@@ -110,11 +110,10 @@
                     <li class="nav-item" id="menu">
                         <a class="nav-link" href="#">SHOP</a>
                         <ul id="dropdown">
-                            <li>All Products </li>
+                            <a href="{% url 'product-list-categorized' name='all' %}" style="text-decoration:none; color:black;"><li> All Products </li></a>
                             {% for category in  categories %}
                             <a href="{% url 'product-list-categorized' name=category %}" style="text-decoration:none; color:black;"><li>{{category}} </li></a>
                             {% endfor %}
-
                         </ul>
                     </li>
                     <li class="nav-item" id="menu">

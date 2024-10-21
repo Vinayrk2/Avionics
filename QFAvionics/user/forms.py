@@ -5,14 +5,15 @@ class UserSignUpForm(UserCreationForm):
     
 	class Meta:
 		model  = CustomUser
-		fields = ["username","first_name","last_name","password1","email","phone_number","address","image"]
+		fields = ["username","first_name","last_name","email","phone_number","password1"]
 
 	def __init__(self, *args, **kwargs):
 		super(UserCreationForm, self).__init__(*args,**kwargs)
 
-		for fieldname in ['username', 'password1', 'password2','email',"phone_number","address","image","first_name","last_name"]:
+		for fieldname in ['username', 'password1', 'password2','email',"phone_number","first_name","last_name"]:
 			self.fields[fieldname].help_text = None
 			self.fields[fieldname].widget.attrs.update({'class': 'form-control'})
+		
 		if 'usable_password' in self.fields:
 			del self.fields['usable_password']
    
