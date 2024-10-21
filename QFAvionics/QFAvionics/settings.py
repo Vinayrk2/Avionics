@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-kj)^s7oyb9j$6x@kactjg7ar$-7_&jys@&+v5jber@+=$*9db%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1',"localhost"]
 
 
 # Application definition
@@ -147,3 +147,19 @@ PAYPAL_CLIENT_ID = 'AamSPtTgAdT88ZxAl1JjLcvxkyq_o1L7uhOVU_fFw3cUqXzt-ov4un4IuUaM
 PAYPAL_SECRET_KEY = 'EAXeVPrOLV4NbYU05kQYSoduDyeg8wltiDn_8-ojLhTzODBoOb53BjgteVjo2M4s_xNfrVzuCz0DlEkC'
 PAYPAL_TEST = True
 PAYPAL_MERCHANT_EMAIL = "sb-dxkwi33245180@business.example.com"
+
+
+""" REquired for manager for tax and shipping and additional charges"""
+
+CHARGES = {
+    "tax":0.01,
+    "shipping": 10.0,
+    "additional": 5.0
+}
+
+"""session related"""
+
+SESSION_COOKIE_AGE = 18000  # Session expires in 30 minutes
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Don't expire on browser close
+# SESSION_SAVE_EVERY_REQUEST = True  # Reset session expiration time on every request
+# SESSION_COOKIE_SECURE = True  # Use this if you're using HTTPS

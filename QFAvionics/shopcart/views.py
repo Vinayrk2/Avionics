@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
 from django.contrib import messages
 from django.shortcuts import HttpResponse
+from django.conf import settings
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/login/")
 def cart_add(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
@@ -15,7 +16,7 @@ def cart_add(request, id):
     return redirect("/product/view/{}/".format(product.id))
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/login/")
 def item_clear(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
@@ -23,7 +24,7 @@ def item_clear(request, id):
     return redirect("cart_detail")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/login/")
 def item_increment(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
@@ -31,7 +32,7 @@ def item_increment(request, id):
     return redirect("cart_detail")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/login/")
 def item_decrement(request, id):
     try:
         cart = Cart(request)
@@ -48,26 +49,26 @@ def item_decrement(request, id):
         print(e)
     return redirect("cart_detail")
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/login/")
 def cart_clear(request):
     cart = Cart(request)
     cart.clear()
     return redirect("cart_detail")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/login/")
 def cart_detail(request):
     total = 0
     for key,item in request.session.get("cart").items():
         total += float(item["price"]) * float(item["quantity"])
     
-    shipping_charge = 8
-    tax = round(total * 0.01,2)
+    shipping_charge = round(settings.CHARGES["shipping"],2)
+    tax = round(settings.CHARGES["tax"]*total,2)
     print(tax)
     
     context = {
-        "total": total+tax+shipping_charge,
-        "sub_total": total,
+        "total": round(total+tax+shipping_charge,2),
+        "sub_total": round(total,2),
         "tax": tax,
         "shipping_charge":shipping_charge
     }

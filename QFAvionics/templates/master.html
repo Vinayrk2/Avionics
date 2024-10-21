@@ -143,11 +143,20 @@
         </div>
     </nav>
 
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-primary notification" role="alert">
+            {{ message }}
+          </div>
+        
+        {% endfor %}
+    </ul>
+    {% endif %}
     {% block content %}
 
     {% endblock %}
-
-
+    
     <footer class="footer">
         <div class="container-fluid">
             <div class="row">
