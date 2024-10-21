@@ -24,8 +24,8 @@ def create_payment(request):
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:8000/payment/execute/",
-            "cancel_url": "http://localhost:8000/payment/cancel/"
+            "return_url": "http://localhost:8000/order/execute/",
+            "cancel_url": "http://localhost:8000/order/cancel/"
         },
         "transactions": [{
             "item_list": {
@@ -89,3 +89,6 @@ def execute_payment(request):
             # Handle payment failure
         return render(request, 'paypal_cancel.html')
 
+def confirm_order(request):
+    context = {}
+    return render(request, "confirm.html", context)
