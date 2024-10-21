@@ -99,12 +99,17 @@
                     <li class="nav-item" id="menu">
                         <a class="nav-link" href="#">SERVICES</a>
                         <ul id="dropdown">
-                            <li>Airframe Wiring</li>
-                            <li>CNC Machining</li>
+                            {% comment %} <li>Airframe Wiring</li>
                             <li>Fixed Wings</li>
                             <li>Glass Cockpits</li>
                             <li>Rotorcraft</li>
-                            <li>5G Radar Alimeters</li>
+                            <li>5G Radar Alimeters</li> {% endcomment %}
+                            {% if services %}
+                            {% for service in services %}
+                            <li>{{service}}</li>
+                            {% endfor %}
+                            {% endif %}
+
                         </ul>
                     </li>
                     <li class="nav-item" id="menu">
@@ -163,13 +168,17 @@
                 <div class="col-md-3 mb-4">
                     <h5>Services</h5>
                     <ul>
-                        <li>Air-Frame Rewiring</li>
-                        <li>CNC Machining</li>
+                        {% comment %} <li>Air-Frame Rewiring</li>
                         <li>Fixed Wing</li>
                         <li>Glass Cockpits</li>
                         <li>Laser Wire Marking</li>
                         <li>Rotorcraft</li>
-                        <li>5G Radar Altimeters</li>
+                        <li>5G Radar Altimeters</li> {% endcomment %}
+                        {% if services %}
+                        {% for service in services %}
+                        <li>{{service}}</li>
+                        {% endfor %}
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">

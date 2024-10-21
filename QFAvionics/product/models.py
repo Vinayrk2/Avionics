@@ -17,8 +17,12 @@ class Product(models.Model):
 
     def get_image(self):
         """Retrieve all images associated with the product."""
-        return self.images.all()[0].image
-
+        if  self.images.exists():
+            return self.images.all()[0].image
+        else:
+            image = DefaultImage()
+            # image.url = "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1sDmEk.img?w=612&h=304&q=90&m=6&f=webp&x=587&y=269&u=t" 
+            return image
     def update_details(self, name=None, description=None, price=None, weight=None):
         if name is not None:
             self.name = name
@@ -59,6 +63,10 @@ class Product(models.Model):
             # 'images': [image.id for image in self.images.all()]  # List of image IDs
         }
 
+class DefaultImage():
+    url = "https://bonwazadile.websites.co.in/e-store/img/defaults/product-default.png"
+    
+        
 
 class Image(models.Model):
     image = models.ImageField(upload_to="static/product/images/")

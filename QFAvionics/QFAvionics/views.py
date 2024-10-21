@@ -39,9 +39,7 @@ def home(request):
     }
     ]
     for product  in products:
-        # print(product.images.all()[0])
-        if len(product.images.all()) > 0:
-            product.image = product.get_image().url
+        product.image = product.get_image().url
         
-    return render(request, "home.html", {'categories':categories, 'products':products, 'services':services})
+    return render(request, "home.html", {'categories':categories, 'products':products, 'comp_services':services})
 
