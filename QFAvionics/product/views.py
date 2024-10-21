@@ -22,8 +22,7 @@ def product_by_category(request,name):
     
     for product in products:
         temp = product.to_dict()
-        if len(product.images) > 0:
-            temp["image"] = product.images.all()[0].image.url
+        temp["image"] = product.get_image().url
         products_dict.append(temp)
             
     return render(request, 'product_by_category.html',{"products":products_dict, "name":name, "categories":categories})
