@@ -184,11 +184,15 @@
                 <div class="col-md-3 mb-4">
                     <h5>Customer Care</h5>
                     <ul>
-                        <li>Contact Us</li>
+                        {% comment %} <li>Contact Us</li>
                         <li>Privacy Policy</li>
-                        <li>Refund Policy</li>
                         <li>Shipping Policy</li>
-                        <li>Terms of Service</li>
+                        <li>Terms of Service</li> {% endcomment %}
+                        {% if links %}
+                        {% for link in links %}
+                        <a href="{{link.url}}"><li>{{link.name}}</li></a>
+                        {% endfor %}
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
