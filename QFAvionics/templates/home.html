@@ -100,7 +100,7 @@
                 <div class="col-md-3 card-shop" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; border-radius:3px;">
                     <a href="{% url 'product-view' id=product.id %}" style="text-decoration:none; color:black; font-weight:bolder;">
                     <img src="{{product.image}}" alt="Online Store" class="service-image" style="max-height:60%; object-fit:cover;">
-                    <h5 class="service-title fw-bolder"> {{product.name}} </h5>
+                    <h6 class="service-title fw-bolder"> {{product.name}} </h5>
                     <p class="service-description fw-light">{{product.description}}</p>
                     <p class="service-description fw-light">{{product.category}}</p>
                     <p class="service-description fw-bolder">Price : ${{product.price}}</p>
@@ -121,8 +121,8 @@
             <h2 class="mb-4">SIGNUP OR LOGIN </h2>
             <p class="mb-4">Login to the system to access the features and to get the latest updates on our products and services.</p>
 
-            <a href="{% url 'signup' %}" style="text-decoration:none; color:black;"> <button class="btn fw-bolder btn-warning" style="width:14vh;"> signup </button></a>
-            <a href="{% url 'login' %}" style="text-decoration:none; color:black;"> <button class="btn fw-bolder btn-danger" style="width:14vh"> Login </button></a>
+            <a href="{% url 'signup' %}" style="text-decoration:none; color:black;"> <button class="btn fw-bolder btn-success" style="width:28vh;"> CREATE YOUR ACCOUNT</button></a>
+            <a href="{% url 'login' %}" style="text-decoration:none; color:black;"> <button class="btn fw-bolder btn-dark" style="width:16vh;;"> SIGN-IN </button></a>
 
         </div>
     </section>

@@ -1,12 +1,53 @@
 {% extends "master.html" %}
 
-{%  block content %}
-    User Profile
-    <h2>{{user.email}}</h2>
-    <h2>{{user.phone_number}}</h2>
-    <h2>{{user.address}}</h2>
-    <h2>{{user.image}}</h2>
-    <h2>{{user.first_name}}</h2>
-    <h2>{{user.last_name}}</h2>
+{% block content %}
+<style>
+    .cont{
+        border: 1px solid black;
+        border-radius: 10px;
+        background-color: aliceblue;
+        width:fit-content;
+        height: auto;
+        margin: 5vh auto;
+        padding:2vh;
+    }
+    #title{
+        text-align: center;
+        font-size: 2rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .fields{
+        
+    }
+    .img{
+        width:15vh;
+        height:15vh;
+        background-color: antiquewhite;
+        border-radius: 50%;
+        margin: 2vh auto;
+    }
+    .btn{
+        margin: 2vh 38%;
+        font-weight: 700;
+    }
+    .btn:hover{
+        background-color: black;
+        color:white;
+    }
+</style>
+
+<div class="cont">
+   <p id="title"> User Profile</p>
+   <div class="img">
+    <!-- <h2 class="">{{user.image}}</h2> -->
+   </div>
+    <h2 class="fields">UserName: {{user.email}}</h2>
+    <h2 class="fields">First Name: {{user.first_name}}</h2>
+    <h2 class="fields">Last Name: {{user.last_name}}</h2>
+    <h2 class="fields">Cell No: {{user.phone_number}}</h2>
+    <h2 class="fields">Address: {{user.address}}</h2>
+   
     <a href="{% url 'logout' %}"><button class="btn btn-danger"> Logout </button></a>
+</div>
+
 {% endblock %}
