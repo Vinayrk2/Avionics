@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Product, Category
-# Create your views here.
+
 def product_view(request, id):
     product = Product.objects.get(id=id)
     context = {
@@ -8,13 +8,15 @@ def product_view(request, id):
     }
     context["product"]["images"] = product.images.all()
     context["product"]["image"] = product.get_image()
-    # images = product.images.all()[0]
-    # print(images[0])
     return render(request, 'product.html', context)
 
 def product_by_category(request,name):
-    category = Category.objects.get(name=name)
-    products = Product.objects.filter(category__name=category.name)
+    if  name == "all":
+        products = Product.objects.all()
+    else:
+        category = Category.objects.get(name=name)
+        products = Product.objects.filter(category__name=category.name)
+
     products_dict = []
     categories = Category.objects.all()
     

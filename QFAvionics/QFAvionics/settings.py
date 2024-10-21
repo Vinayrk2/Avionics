@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'product',
     'user',
+    'cart',
+    'shopcart'
 ]
 
 MIDDLEWARE = [
@@ -64,7 +66,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'QFAvionics.header_context.header_options'
+                'QFAvionics.header_context.header_options',
+                'cart.context_processor.cart_total_amount'
             ],
         },
     },
@@ -72,7 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'QFAvionics.wsgi.application'
 
-
+CART_SESSION_ID = 'cart'   
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -137,3 +140,9 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.CustomUser'  # Adjust the app name if necessary
+
+""" Payment Credantials """
+PAYPAL_CLIENT_ID = 'AamSPtTgAdT88ZxAl1JjLcvxkyq_o1L7uhOVU_fFw3cUqXzt-ov4un4IuUaMkB-74LrKVD1mP3lIsHx1'
+PAYPAL_SECRET_KEY = 'EAXeVPrOLV4NbYU05kQYSoduDyeg8wltiDn_8-ojLhTzODBoOb53BjgteVjo2M4s_xNfrVzuCz0DlEkC'
+PAYPAL_TEST = True
+PAYPAL_MERCHANT_EMAIL = "sb-dxkwi33245180@business.example.com"
