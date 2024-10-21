@@ -5,8 +5,7 @@ from django.utils.timezone import now
 class CustomUser(AbstractUser):
     email = models.EmailField(max_length=100, unique=True, blank=False)
     phone_number = models.CharField(max_length=15, blank=True, null=True) 
-    address = models.TextField(blank=True, null=True)  
-    image = models.ImageField(upload_to='user/profile_pictures/', blank=True, null=True) 
+    address = models.TextField(blank=True, null=True, default='')  
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
     
@@ -25,7 +24,7 @@ class Order(models.Model):
     payer_email = models.CharField(max_length=100, blank=False, null=False)
     payer_id = models.CharField(max_length=100, blank=False, null=False)
     items = models.JSONField(default=dict)
-    
+    address = models.TextField(max_length=300, blank=False)
     
 
     
