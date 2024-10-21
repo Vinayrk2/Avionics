@@ -35,6 +35,8 @@ def signup(request):
         return render(request, "signup.html", {"form": form})
     
 def userlogin(request):
+    if request.user.is_authenticated :
+        return redirect('/')
     if request.method == 'POST':
         try:
             username = request.POST.get('username')
