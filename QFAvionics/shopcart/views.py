@@ -10,8 +10,9 @@ def cart_add(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.add(product=product)
+    print(cart.cart)
     messages.add_message(request, messages.INFO, "Product added Successfully.")
-    return redirect("home")
+    return redirect("/product/view/{}/".format(product.id))
 
 
 @login_required(login_url="/users/login")
@@ -60,6 +61,15 @@ def cart_detail(request):
     for key,item in request.session.get("cart").items():
         total += float(item["price"]) * float(item["quantity"])
     
+    shipping_charge = 8
+    tax = round(total * 0.01,2)
+    print(tax)
     
-    return render(request, 'cart.html',{"total_price":total})
-
+    context = {
+        "total": total+tax+shipping_charge,
+        "sub_total": total,
+        "tax": tax,
+        "shipping_charge":shipping_charge
+    }
+    
+    return render(request, 'cart_details.html',context)

@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import  HttpResponse, JsonResponse
 from django.contrib import messages
 # Create your views here.
+
 def signup(request):
     if request.user.is_authenticated :
         return redirect('/')
@@ -57,9 +58,6 @@ def userlogin(request):
 def userprofile(request):
     return render(request, "profile.html")
 
-@login_required(login_url='/login')
-def usercart(request):
-    return render(request, "cart.html")
 
 def userlogout(request):
     logout(request)

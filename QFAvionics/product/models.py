@@ -55,6 +55,7 @@ class Product(models.Model):
             'is_available': self.is_available,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
+            'id':self.pk
             # 'images': [image.id for image in self.images.all()]  # List of image IDs
         }
 

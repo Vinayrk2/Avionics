@@ -39,7 +39,7 @@
                 <p class="stock-info in-stock">In-Stock: 186 Units available.</p>
 
                 <div class="d-flex align-items-center">
-                    <button class="btn btn-success me-2">ADD TO CART</button>
+                    <a href="{% url 'cart_add' id=product.id %}"><button class="btn btn-success me-2">ADD TO CART</button></a>
                 </div>
             </div>
 

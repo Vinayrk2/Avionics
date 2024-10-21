@@ -36,48 +36,59 @@
                     <div class="col-10"> 
                     <h2 class="mb-4">Items</h2> 
                     </div>
+                    {% if request.session.cart %}
                     <div class="col-2">
-                    <a href="{% url 'cart_clear' %}"><button type="button" class="btn btn-primary">Clear Cart</button></a>
-
+                        <a href="{% url 'cart_clear' %}"><button type="button" class="btn btn-primary">Clear Cart</button></a>
                     </div>
+                    {% endif %}
                 </div>
 
+                {% if request.session.cart %}
+                {% for key,product  in request.session.cart.items %}
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="http://127.0.0.1:8000/static/product/images/SGP156374_1_inset2__71480_VZQKii4.jpg" alt="NikeCourt Air Max Volley"
+                                <img src="{{product.image}}" alt="NikeCourt Air Max Volley"
                                     class="img-fluid rounded">
                             </div>
                             <div class="col-md-8">
-                                <h5 class="card-title">Amphenol NEXUS TJ-102</h5>
-                                <p class="card-text text-muted">Black Plastic In-Line Molded Contact 4-Conductor Telephone Jack</p>
+                                <h5 class="card-title">{{product.name}}</h5>
+                                <p class="card-text text-muted">{{product.category}}</p>
                                 <div class="row g-2 mb-3">
 
                                     <div class="col-auto">
                                         <div class="row">
-                                            <div class="col-8">
-                                                <h5>Quantity: 1</h5>
+                                            <div class="col">
+                                                <h5>Quantity: </h5>
                                             </div>
-                                            <div class="col-2">
-                                                <h5><a href="#" style="text-decoration: none;">+</a></h5>
+                                            <div class="col">
+                                                <h5><a href="{% url 'item_decrement' id=product.product_id %}" style="text-decoration: none;">-</a></h5>
                                             </div>
-                                            <div class="col-2">
-                                                <h5><a href="#" style="text-decoration: none;">-</a></h5>
+                                            <div class="col">
+                                                <h5> {{product.quantity}} </h5>
+                                            </div>
+                                            <div class="col">
+                                                <h5><a href="{% url 'item_increment' id=product.product_id %}" style="text-decoration: none;">+</a></h5>
                                             </div>
                                         </div>
                                     </div>
                                    
-                                    <button type="button" class="btn btn-light">Remove Item</button>
+                                    <a href="{% url 'item_clear' id=product.product_id %}" class="container"><button type="button" class="btn btn-light">Remove Item</button></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                {% endfor %}
                 <h5>Pickup</h5>
                 <p><a href="https://www.google.ca/maps/search/QF+Avionics+Center+LtdHangar+%2311+Airport+Drive,+Springbook,ABT4S+2E8Canada/@52.1779893,-113.8879949,16z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI0MTAxNi4wIKXMDSoASAFQAw%3D%3D"
                         class="text-muted" target="_blank">Find a Store</a></p>
+                {% else %}
+                    <div class="text-center fw-bold"> No items in the cart. </div>
+
+                {% endif %}
+
 
     
             </div>
@@ -88,19 +99,19 @@
                         <h2 class="card-title mb-4">Summary</h2>
                         <div class="d-flex justify-content-between mb-2">
                             <span>Subtotal</span>
-                            <span>$90.00</span>
+                            <span>${{sub_total}}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span>Estimated Shipping & Handling</span>
-                            <span>$8.00</span>
+                            <span>${{shipping_charge}}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span>Estimated Tax</span>
-                            <span>--</span>
+                            <span>${{tax}}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-4 fw-bold">
                             <span>Total</span>
-                            <span>$98.00</span>
+                            <span>${{total}}</span>
                         </div>
                         <a href="{% url 'order_confirm' %}"><button class="btn btn-dark w-100 mb-3">Checkout</button></a>
                         

@@ -74,6 +74,7 @@
                     {% if products %}
                     {% for product in products %}
                     <div class="col-md-4">
+                        <a href="{% url 'product-view' id=product.id %}">
                         <div class="product-card">
                             <img src="{{product.image}}"
                                 alt="Cyber Acoustics Stereo USB" class="img-fluid product-image d-block m-auto">
@@ -86,8 +87,9 @@
                                 <span class="category">In {{product.category}}</span><br>
                                 <span class="price" style="color:#28a745">${{product.price}}</span>
                             </div>
-                            <a href="#"><button class="btn btn-warning fw-bolder mt-1 border"> ➕ Add to cart</button></a>
+                            {% comment %} <a href="{% url 'cart_add' id=product.id %}"><button class="btn btn-warning fw-bolder mt-1 border"> ➕ Add to cart</button></a> {% endcomment %}
                         </div>
+                    </a>
                     </div>
                     {% endfor %}
                     {% else %}
