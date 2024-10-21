@@ -10,3 +10,10 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Link(models.Model):
+    name = models.CharField(max_length=40, default='', blank=False, null=False)
+    url = models.CharField(max_length=100, default='', blank=False, null=False)
+    
+    def __str__(self):
+        return self.name
