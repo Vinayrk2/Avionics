@@ -1,15 +1,101 @@
 {% extends "master.html" %}
 
 {% block content %}
-    {% if notifications %}
-        {% for notification in  notifications %}
+{% load static %}
+<style>
+    .news-item {
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+        height: 100%;
+    }
+    .news-item img {
+       width:50%;
+       max-height:34vh;
+       
+    }
+    .news-content {
+        padding: 15px;
+    }
+    .news-title {
+        color: #0056b3;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .news-date {
+        color: #dc3545;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+    .learn-more {
+        color: #6c757d;
+        text-decoration: none;
+    }
+    .learn-more:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         
-        {{notification.created_at}}
-        {{notification.title}}
-        {{notification.description}}
-        <a href="{% url 'view-perticular-news' id=notification.id%}"> View Details </a>
+    {% if notifications %}
+
+        {% for notification in  notifications %}
+
+            
+                    <div class="col">
+                        <div class="news-item">
+                            <img src="{{notification.image.url}}" alt="Aircraft">
+                            <div class="news-content">
+                                <h2 class="news-title">{{notification.title}}</h2>
+                                   <p> {{notification.description}}</p>
+    
+                                <p class="news-date">
+                                 {{notification.created_at}}
+
+                                </p>
+
+                                    <a href="{% url 'view-perticular-news' id=notification.id%}"> View Details </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% comment %} <div class="col">
+                        <div class="news-item">
+                            <img src="" alt="Cockpit">
+                            <div class="news-content">
+                                <h2 class="news-title">Southeast Aerospace Secures Expanded International Approvals For Garmin GI 275 IVSI And ESI In Part 25 Aircraft</h2>
+                                <p>SEA is pleased to announce that we have received expanded international approvals for the Garmin GI 275 Electronic Flight Instrument in Part 25 aircraft on an Approved Model List as an Electronic Standby Instrument (ESI) and as an Instantaneous Vertical Speed Indicator (IVSI).</p>
+                                <p class="news-date">6/7/2024</p>
+                                <a href="#" class="learn-more">Learn More ...</a>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                    {% comment %} <div class="col">
+                        <div class="news-item">
+                            <img src="" alt="Flight Deck">
+                            <div class="news-content">
+                                <h2 class="news-title">Southeast Aerospace Secures Amendment To FAA STC For Hawker 800 Series Aircraft With Insight Integrated Flight Deck</h2>
+                                <p>SEA is pleased to announce that we have received Federal Aviation Administration (FAA) approval for the amendment to FAA Supplemental Type Certificate (STC) number ST04570CH. This amendment now provides Honeywell SPZ 8000 Equipped Hawker 800 series aircraft the opportunity for cockpit modernization.</p>
+                                <p class="news-date">5/13/2024</p>
+                                <a href="#" class="learn-more">Learn More ...</a>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+              
+      
+
+
+
+        
+        
         {% endfor %}
+
     {% else %}
     <p>No notifications.</p>
+
     {% endif %}
+</div>
+</div>
 {% endblock %}
