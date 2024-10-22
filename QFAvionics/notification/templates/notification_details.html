@@ -1,0 +1,10 @@
+{% extends "master.html" %}
+{% block content %}
+    {{notification.title}}
+    {{notification.description}}
+    {{notification.image}}
+    {{notification.created_at}}
+    {{notification.updated_at}}
+    {{notification.notification_type}}
+    {{notification.additional_write}}
+{% endblock %}

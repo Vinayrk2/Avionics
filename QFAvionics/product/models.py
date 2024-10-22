@@ -48,11 +48,11 @@ class Product(models.Model):
         # Implement stock logic here
         return True  # Placeholder return value
     
-    def to_dict(self):
-        return {
+    def to_dict(self,request):
+        obj = {
             'name': self.name,
             'description': self.description,
-            'price': str(self.price),  # Convert to string for JSON serialization
+            # 'price': str(self.price),  # Convert to string for JSON serialization
             'weight': str(self.weight),  # Convert to string for JSON serialization
             'stock_quantity': self.stock_quantity,
             'category': self.category if self.category else None,  # Use category ID or None
@@ -62,6 +62,13 @@ class Product(models.Model):
             'id':self.pk
             # 'images': [image.id for image in self.images.all()]  # List of image IDs
         }
+        
+        if request.user.is_authenticated:
+            obj['price'] = self.price
+        else:
+            obj['price'] = 'login to view the price'
+        return obj
+        
 
 class DefaultImage():
     url = "https://bonwazadile.websites.co.in/e-store/img/defaults/product-default.png"

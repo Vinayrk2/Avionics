@@ -10,4 +10,5 @@ urlpatterns = [
          views.item_decrement, name='item_decrement'),
     path('cart_clear/', views.cart_clear, name='cart_clear'),
     path('cart_detail/',views.cart_detail,name='cart_detail'),
+    path('send_detail/',views.send_mail_page,name='send_detail'),
 ]
