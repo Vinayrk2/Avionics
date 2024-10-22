@@ -3,6 +3,7 @@
 {% block content %}
     {% if notifications %}
         {% for notification in  notifications %}
+        
         {{notification.created_at}}
         {{notification.title}}
         {{notification.description}}
