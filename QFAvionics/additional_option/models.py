@@ -18,3 +18,17 @@ class Link(models.Model):
     def __str__(self):
         return self.name
     
+from django.db import models
+
+class SiteSettings(models.Model):
+    site_name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=70, blank=False, null=False)
+    phone_number_1 = models.IntegerField(blank=True, null=True)
+    phone_number_2 = models.IntegerField(blank=True, null=True)
+    bussiness_email = models.EmailField(max_length=70, blank=False, null=False, help_text="Email on which receive the email")
+    product_default_price_show = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.site_name
+
+    
