@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #007bff;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+        .user-details, .summary-table {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .product-image {
+            max-width: 100px;
+            height: auto;
+            margin-right: 15px;
+            float: left;
+        }
+        .product-info {
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .total {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Order Information</h1>
+    </div>
+
+    <div class="section">
+        <div class="section-title">User Details</div>
+        <div class="user-details">
+            <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Mobile:</strong> {{ user.mobile }}</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Ordered Products</div>
+        {% for key,product in products.items %}
+        <div class="product-card">
+            {% comment %} <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image"> {% endcomment %}
+            <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p><strong>Category:</strong> {{ product.category }}</p>
+                <p><strong>Quantity:</strong> {{ product.quantity }}</p>
+                <p><strong>Price:</strong> ${{ product.price }} per unit</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <div class="section-title">Order Summary</div>
+        <div class="summary-table">
+            <table>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>${{ order.subtotal }}</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td>${{ order.tax }}</td>
+                </tr>
+                <tr class="total">
+                    <td>Total</td>
+                    <td>${{ order.total }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <p>Thank you for your order. If you have any questions, please contact our customer support.</p>
+    </div>
+</body>
+</html>

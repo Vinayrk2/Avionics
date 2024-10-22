@@ -5,46 +5,63 @@ from cart.cart import Cart
 from django.contrib import messages
 from django.shortcuts import HttpResponse
 from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+
 
 @login_required(login_url="/login/")
 def cart_add(request, id):
     cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.add(product=product)
-    print(cart.cart)
-    messages.add_message(request, messages.INFO, "Product added Successfully.")
-    return redirect("/product/view/{}/".format(product.id))
-
+    product = Product.objects.filter(id=id).first()
+    if product:
+        cart.add(product=product)
+        messages.add_message(request, messages.INFO, "Product added Successfully.")
+        return redirect("/product/view/{}/".format(product.id))
+    else:
+        messages.add_message(request,  messages.ERROR, "Product not found.")
+        return redirect("/")
 
 @login_required(login_url="/login/")
 def item_clear(request, id):
     cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.remove(product)
-    return redirect("cart_detail")
-
+    product = Product.objects.filter(id=id).first()
+    if product:
+        cart.remove(product)
+        messages.add_message(request, messages.INFO, "Product Removed Successfully.")
+        return redirect("cart_detail")
+    else:
+        messages.add_message(request,  messages.ERROR, "Product may not be available.")
+        return redirect("/")
 
 @login_required(login_url="/login/")
 def item_increment(request, id):
     cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.add(product=product)
-    return redirect("cart_detail")
-
+    product = Product.objects.filter(id=id).first()
+    if product:
+        cart.add(product=product)
+        return redirect("cart_detail")
+    else:
+        messages.add_message(request,  messages.ERROR, "Product may not be available.")
+        return redirect("/")
 
 @login_required(login_url="/login/")
 def item_decrement(request, id):
     try:
         cart = Cart(request)
         product = Product.objects.get(id=id)
-        for value in cart.cart.values():
-            if value["product_id"] == id:
-                if value["quantity"] == 1:
-                    cart.remove(product=product)
-                    return redirect("cart_detail")
-                else:
-                    break
-        cart.decrement(product=product)
+        
+        if product:
+            for value in cart.cart.values():
+                if value["product_id"] == id:
+                    if value["quantity"] == 1:
+                        cart.remove(product=product)
+                        return redirect("cart_detail")
+                    else:
+                        break
+            cart.decrement(product=product)
+        else:
+            messages.add_message(request,  messages.ERROR, "Product may not be available.")
+            return redirect("/")
     except Exception as e:
         print(e)
     return redirect("cart_detail")
@@ -64,7 +81,6 @@ def cart_detail(request):
     
     shipping_charge = round(settings.CHARGES["shipping"],2)
     tax = round(settings.CHARGES["tax"]*total,2)
-    print(tax)
     
     context = {
         "total": round(total+tax+shipping_charge,2),
@@ -74,3 +90,49 @@ def cart_detail(request):
     }
     
     return render(request, 'cart_details.html',context)
+
+@login_required(login_url="/login/")
+def send_mail_page(request):
+    context = {}
+
+    if request.method == 'POST':
+        user = request.user
+        cart = Cart(request)
+        products = cart.cart    
+        
+        total = 0
+        tax = settings.CHARGES["tax"]
+        for key,item in request.session.get("cart").items():
+            total += float(item["price"]) * float(item["quantity"])
+        order_summary = {
+            "total": round(total+tax,2),
+            "subtotal": round(total,2),
+            "tax": tax
+        }
+        subject = "Order Details"
+        message = "Thank you for your order! we will contact you ASAP."  # Fallback plain text message
+        html_message = render_to_string('emailtemplate.html', {
+            'user': user,
+            'products': products,
+            'order': order_summary
+        })
+        
+        flag = send_mail(
+            subject=subject,
+            message=message,  # This is the plain text version for email clients that can't display HTML
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user.email, settings.EMAIL_HOST_USER],
+            html_message=html_message,  # The actual HTML content
+            fail_silently=False,
+        )
+        if flag:
+            cart.clear()
+        else:
+            messages.add_message(request,  messages.ERROR, 'Failed to send mail, try again later')
+            return redirect('/cart/cart_detail/')
+        
+    else:
+        messages.add_message(request,  messages.INFO, 'Invalid Operation')
+        return redirect("/")
+
+    return render(request, "emailsuccess.html", {})

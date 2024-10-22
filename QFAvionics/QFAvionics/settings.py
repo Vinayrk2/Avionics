@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'user',
     'cart',
     'shopcart',
-    'additional_option'
+    'additional_option',
+    'notification'
 ]
 
 MIDDLEWARE = [
@@ -142,12 +143,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.CustomUser'  # Adjust the app name if necessary
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# EMAIL CONFIGURATIONS
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'avionicsqf@gmail.com'
+EMAIL_HOST_PASSWORD = 'zochakahgfehnxdq'  # Use your generated App Password
+DEFAULT_FROM_EMAIL = 'avionicsqf@gmail.com'
+
+
 
 """ REquired for manager for tax and shipping and additional charges"""
 
 CHARGES = {
     "tax":0.01,
-    "shipping": 10.0,
+    "shipping": 0,
     "additional": 5.0
 }
 

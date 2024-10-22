@@ -1,11 +1,10 @@
-from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import render, redirect
 from .forms import UserSignUpForm, UserLoginForm
 from django.contrib.auth import  authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import  HttpResponse, JsonResponse
 from django.contrib import messages
-# Create your views here.
+import requests
 
 def signup(request):
     if request.user.is_authenticated :
@@ -16,10 +15,9 @@ def signup(request):
             if form.is_valid():
                 user = form.save(commit=False)
                 user.is_staff = False
-                if 'image' in request.FILES:
-                    user.image = request.FILES['image']
                 user.save()
-                return HttpResponsePermanentRedirect("/login")
+                messages.success(request, "Registered Successfully")
+                return redirect('login')
             else:
                 for field, errors in form.errors.items():
                     for error in errors:
@@ -44,7 +42,9 @@ def userlogin(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 if user.is_superuser == True:
-                    raise Exception("Admin cannot login to user login")
+                    messages.add_message(request, messages.WARNING, "Admin cannot login to user login")
+                    return redirect("/")
+                messages.add_message(request, messages.WARNING, "Logged in successfully.")
                 login(request, user)
                 return redirect("/")
             else:
@@ -65,4 +65,3 @@ def userlogout(request):
     logout(request)
     print(request.user)
     return redirect("/")
-

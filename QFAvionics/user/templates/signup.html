@@ -13,9 +13,10 @@
             <h2 class="text-center"> Registration Form </h2>
             {{ form.as_p }}
             {% csrf_token %}
-            <button class="btn btn-primary container fw-bolder" type="submit"> Submit </button>
+            <button class="btn btn-primary container fw-bolder" disabled type="submit"> Register </button>
         </form>
     
     </div>
+
 
     {% endblock %}

@@ -14,4 +14,5 @@ urlpatterns = [
     path("user/profile/", userprofile, name="profile"),
     path("product/", include("product.urls")),
     path("cart/", include("shopcart.urls")),
+    path("notificaiton/", include("notification.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
