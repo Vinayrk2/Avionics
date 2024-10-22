@@ -47,3 +47,8 @@ def home(request):
         
     return render(request, "home.html", {'categories':categories, 'products':products_dict, 'comp_services':services})
 
+def aboutpage(request):
+    return render(request, "about.html", {})
+
+def contactpage(request):
+    return render(request, "contact.html", {})
