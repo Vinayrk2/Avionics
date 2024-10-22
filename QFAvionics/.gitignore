@@ -36,7 +36,7 @@ env/
 */migrations/*.pyc
 
 # Ignore database files
-# db.sqlite3
+db.sqlite3
 
 # Ignore static files
 /staticfiles/
