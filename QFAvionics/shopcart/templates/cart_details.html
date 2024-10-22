@@ -29,6 +29,7 @@
                             <div class="col-md-8">
                                 <h5 class="card-title">{{product.name}}</h5>
                                 <p class="card-text text-muted">{{product.category}}</p>
+                                <p class="card-text">Price: ${{product.price}} per unit</p>
                                 <div class="row g-2 mb-3">
 
                                     <div class="col-auto">
@@ -76,10 +77,10 @@
                             <span>Subtotal</span>
                             <span>${{sub_total}}</span>
                         </div>
-                        <div class="d-flex justify-content-between mb-2">
+                        {% comment %} <div class="d-flex justify-content-between mb-2">
                             <span>Estimated Shipping & Handling</span>
                             <span>${{shipping_charge}}</span>
-                        </div>
+                        </div> {% endcomment %}
                         <div class="d-flex justify-content-between mb-3">
                             <span>Estimated Tax</span>
                             <span>${{tax}}</span>
@@ -88,8 +89,10 @@
                             <span>Total</span>
                             <span>${{total}}</span>
                         </div>
-                        <a href="#"><button class="btn btn-dark w-100 mb-3">Checkout</button></a>
-                        
+                        <form  action="{% url 'send_detail' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-dark w-100 mb-3">Send Order Summary</button>
+                        </form>
                     </div>
                 </div>
             </div>
