@@ -1,4 +1,79 @@
 {% extends "master.html" %}
 {% block content %}
-    Contact Us Page
+{% load static %}
+<style>
+    .container {
+        margin: 10vh auto;       
+    }
+    
+
+    /* body {
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    } */
+
+    .card {
+        max-width: 500px;
+        width: 100%;
+        margin: 5vh auto;
+    }
+
+    .btn-check:checked+.btn-outline-secondary {
+        background-color: #6c757d;
+        color: #fff;
+    }
+</style>
+
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form>
+                <h2 class="text-center">Contact Us</h2>
+                <div class="mb-3">
+                    <label for="emailAddress" class="form-label">Your Email Address</label>
+                    <input type="email" class="form-control" id="emailAddress" placeholder="you@example.com">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Select a topic:</label>
+                    <div class="row g-2">
+                        <!-- <div class="col-6">
+                            <input type="radio" class="btn-check" name="topic" id="topic1" autocomplete="off">
+                            <label class="btn btn-outline-secondary w-100 text-start" for="topic1">Adding or removing
+                                users</label>
+                        </div> -->
+                        
+                        <div class="col-6">
+                            <input type="radio" class="btn-check" name="topic" id="topic3" autocomplete="off">
+                            <label class="btn btn-outline-secondary w-100 text-start" for="topic3">Connection
+                                trouble</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="radio" class="btn-check" name="topic" id="topic4" autocomplete="off">
+                            <label class="btn btn-outline-secondary w-100 text-start" for="topic4">Notifications</label>
+                        </div>
+                        
+                        <div class="col-6">
+                            <input type="radio" class="btn-check" name="topic" id="topic6" autocomplete="off">
+                            <label class="btn btn-outline-secondary w-100 text-start" for="topic6">Signing in</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="customTopic" class="form-label">Or tell us what you need help with:</label>
+                    <input type="text" class="form-control" id="customTopic"
+                        placeholder='Enter a topic, like "notifications"'>
+                </div>
+
+                <button type="submit" class="btn btn-secondary">GET HELP</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}

@@ -1,10 +1,54 @@
 {% extends "master.html" %}
+
 {% block content %}
-    {{notification.title}}
-    {{notification.description}}
-    {{notification.image}}
-    {{notification.created_at}}
-    {{notification.updated_at}}
-    {{notification.notification_type}}
-    {{notification.additional_write}}
+{% load static %}
+<style>
+    .container {
+        border: 1px solid rgb(213, 217, 220);
+        border-radius: 2vh;
+    }
+
+    #article-title {
+        color: #065baa;
+        border-bottom-width: thick;
+        border-bottom-style: solid;
+        border-bottom-color: #f0eeee;
+    }
+
+    #article-image {
+        height: 45vh;
+        width: 50%;
+        margin: auto
+    }
+    .description-block{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        line-height: 2rem;
+    }
+</style>
+
+<div class="container mb-3">
+    <div class="row m-4 " id="article-title">
+        <h4> {{notification.title}}</h4>
+    </div>
+    <div class="row ">
+        <div class="col-12">
+            <div class="row mb-4" id="article-image">
+                <img src="{{notification.image.url}}" alt="Aircraft">
+            </div>
+            <div class="row">
+                <p class="description-block">
+                    {{notification.description}}
+                    {{notification.additional_write}}
+                </p>
+                <p>
+                    <h6 class="description-block">Posted At: {{notification.created_at}}</h6>
+                    <h6 class="description-block">Updated At: {{notification.updated_at}}</h6>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- {{notification.notification_type}} -->
 {% endblock %}
