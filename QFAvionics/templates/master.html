@@ -23,6 +23,10 @@
             z-index: 1000;
         }
 
+        #menu {
+            margin-left: 10px;
+        }
+
         #menu:hover #dropdown {
             display: block;
 
@@ -70,7 +74,7 @@
                 <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
                 <a href="#" class="text-white me-2"><i class="fab fa-facebook"></i></a>
                 <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
-                <select class="form-select form-select-sm d-inline-block w-auto">
+                <select class="form-select form-select-sm d-inline-block w-auto rounded-sm border-none">
                     <option>CAD $</option>
                     <option>USD $</option>
                 </select>
@@ -81,20 +85,16 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="{% static 'images/logo.png' %}" alt="QF Avionics Logo"
-                    style="max-width: min(10vh,10vw);; max-height: min(10vh,10vw);">
+                <img src="{% static 'images/logo.png' %}" alt="QF Avionics"
+                    style="max-width: min(10vh,10vw); max-height: min(10vh,10vw); position: absolute; top: 0;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-
-
-
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">HOME</a>
-
+                        <a class="nav-link md:mt-3" id="menu" href="{% url 'home' %}">HOME</a>
                     </li>
                     <li class="nav-item" id="menu">
                         <a class="nav-link" href="#">SERVICES</a>
@@ -109,15 +109,20 @@
                             <li>{{service}}</li>
                             {% endfor %}
                             {% endif %}
-
                         </ul>
                     </li>
                     <li class="nav-item" id="menu">
                         <a class="nav-link" href="#">SHOP</a>
                         <ul id="dropdown">
-                            <a href="{% url 'product-list-categorized' name='all' %}" style="text-decoration:none; color:black;"><li> All Products </li></a>
-                            {% for category in  categories %}
-                            <a href="{% url 'product-list-categorized' name=category %}" style="text-decoration:none; color:black;"><li>{{category}} </li></a>
+                            <a href="{% url 'product-list-categorized' name='all' %}"
+                                style="text-decoration:none; color:black;">
+                                <li> All Products </li>
+                            </a>
+                            {% for category in categories %}
+                            <a href="{% url 'product-list-categorized' name=category %}"
+                                style="text-decoration:none; color:black;">
+                                <li>{{category}} </li>
+                            </a>
                             {% endfor %}
                         </ul>
                     </li>
@@ -134,16 +139,17 @@
 
                     </li>
                 </ul>
-                <div class="icon-container d-flex">
+                <div class="icon-container d-flex mx-2">
                     {% if request.user.is_authenticated %}
-                    <a href="{% url 'profile' %}" class="text-dark me-3"><i class="fas fa-user"></i> {{ user.username }} </a>
+                    <a href="{% url 'profile' %}" class="text-dark me-3"><i class="fas fa-user"></i> {{ user.username }}
+                    </a>
                     {% else %}
                     <a href="{% url 'login' %}" class="text-dark me-3"><i class="fas fa-user"></i> </a>
                     {% endif %}
                     <a href="{% url 'cart_detail' %}" class="text-dark me-3"><i class="fas fa-shopping-cart"></i></a>
                     <a href="{% url 'login' %}" class="text-dark"><i class="fas fa-search"></i></a>
                 </div>
-                
+
             </div>
         </div>
     </nav>
@@ -153,15 +159,15 @@
         {% for message in messages %}
         <div class="alert alert-primary notification" role="alert">
             {{ message }}
-          </div>
-        
+        </div>
+
         {% endfor %}
     </ul>
     {% endif %}
     {% block content %}
 
     {% endblock %}
-    
+
     <footer class="footer">
         <div class="container-fluid">
             <div class="row">
@@ -190,7 +196,9 @@
                         <li>Terms of Service</li> {% endcomment %}
                         {% if links %}
                         {% for link in links %}
-                        <a href="{{link.url}}"><li>{{link.name}}</li></a>
+                        <a href="{{link.url}}">
+                            <li>{{link.name}}</li>
+                        </a>
                         {% endfor %}
                         {% endif %}
                     </ul>
@@ -211,11 +219,14 @@
                     <p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
                     <form>
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control border border-danger" placeholder="Enter your email">
+                            <input type="email" class="form-control border border-danger"
+                                placeholder="Enter your email">
                             <button class="btn btn-outline-danger" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
-                                  </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
+                                </svg>
                             </button>
                         </div>
                     </form>
