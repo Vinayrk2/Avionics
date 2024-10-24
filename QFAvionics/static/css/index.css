@@ -1,5 +1,5 @@
 .top-bar {
-    background-color: #1a5f7a;
+    background-color: #090841;
     color: white;
     padding: 5px 0;
     font-size: 0.9em;
@@ -67,14 +67,14 @@ margin-bottom: 2rem;
 
 
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
 }
 .signup-section {
     background-color: #f8f9fa;
     padding: 60px 0;
 }
 .footer {
-    background-color: #1c4e5e;
+    background-color: #090841;
     color: white;
     padding: 40px 0;
 }
@@ -124,5 +124,3 @@ body {
     align-items: center;
     height: 40px;
 }
-
-/* nirmal styling for homepage */
