@@ -6,10 +6,10 @@ def product_view(request, id):
     product = Product.objects.filter(id=id).first()
     if product:
         context = {
-            "product": product.to_dict(request)
+            "product": product.to_dict(request),
+            "related_products":product.get_related_products(request)
         }
         context["product"]["images"] = product.images.all()
-        context["product"]["image"] = product.get_image()
         return render(request, 'product.html', context)
     else:
         messages.add_message(request, messages.WARNING, "Sorry! The product is not available")        
@@ -31,5 +31,7 @@ def product_by_category(request,name):
         temp = product.to_dict(request)
         temp["image"] = product.get_image().url
         products_dict.append(temp)
+        
+    
             
     return render(request, 'product_by_category.html',{"products":products_dict, "name":name})

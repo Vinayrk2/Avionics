@@ -3,14 +3,22 @@ from django.db import models
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
+    part_number = models.DecimalField(blank=True, null=True, unique=True, max_digits=20, decimal_places=0)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    weight = models.DecimalField(max_digits=10, decimal_places=2)
     stock_quantity = models.PositiveIntegerField(default=0)  
     category = models.ForeignKey('Category', blank=True, on_delete=models.CASCADE)
-    is_available = models.BooleanField(default=True)  # New field for active status
+    is_available = models.BooleanField(default=True)  
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    features = models.JSONField()
+    
+    def get_related_products(self,request):
+        product_temp = Product.objects.filter(category=self.category).exclude(id=self.id)[:10]
+        products = []
+        for product in product_temp:
+            products.append(product.to_dict(request))
+        return products
     
     def __str__(self):
         return self.name
@@ -30,8 +38,6 @@ class Product(models.Model):
             self.description = description
         if price is not None:
             self.price = price
-        if weight is not None:
-            self.weight = weight
         self.save()
 
     def apply_discount(self, percentage):
@@ -53,13 +59,13 @@ class Product(models.Model):
             'name': self.name,
             'description': self.description,
             # 'price': str(self.price),  # Convert to string for JSON serialization
-            'weight': str(self.weight),  # Convert to string for JSON serialization
             'stock_quantity': self.stock_quantity,
             'category': self.category if self.category else None,  # Use category ID or None
             'is_available': self.is_available,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
-            'id':self.pk
+            'id':self.pk,
+            'image': self.get_image(),
             # 'images': [image.id for image in self.images.all()]  # List of image IDs
         }
         
