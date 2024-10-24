@@ -18,6 +18,7 @@
 
     .news-content {
         padding: 15px;
+        
     }
 
     .news-title {
@@ -42,6 +43,7 @@
         text-decoration: underline;
         color: #6c757d;
     }
+    
 </style>
 
 <div class="container mt-4 mb-4">
@@ -57,7 +59,9 @@
                 <img src="{{notification.image.url}}" alt="Aircraft">
                 <div class="news-content">
                     <h2 class="news-title">{{notification.title}}</h2>
-                    <p> {{notification.description}}</p>
+                    <p class="description"> 
+                     
+                        {{notification.description}}</p>
 
                     <p class="news-date">
                         {{notification.created_at}}
@@ -69,7 +73,40 @@
             </div>
         </div>
 
+        <div class="col">
+            <div class="news-item">
+                <img src="{{notification.image.url}}" alt="Cockpit">
+                <div class="news-content">
+                    <h2 class="news-title">{{notification.title}}</h2>
+                    <p class="description">{{notification.description}}</p>
+
+                    <p class="news-date">{{notification.created_at}}</p>
+                    <a href="{% url 'view-perticular-news' id=notification.id%}" class="learn-more">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="news-item">
+                <img src="{{notification.image.url}}" alt="Flight Deck">
+                <div class="news-content">
+                    <h2 class="news-title">{{notification.title}}</h2>
+                    <p class="description">{{notification.description}}</p>
+
+                    <p class="news-date">{{notification.created_at}}</p>
+                    <a href="{% url 'view-perticular-news' id=notification.id%}" class="learn-more">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+    
+
+
+
+
+
         {% endfor %}
+
+       
 
         {% else %}
         <p>No notifications.</p>
@@ -77,4 +114,15 @@
         {% endif %}
     </div>
 </div>
+<script>
+    let description = document.getElementsByClassName('description')
+    console.log(description);
+    for(let i=0;i<description.length;i++){
+        if(description[i].innerText.length > 95){
+            description[i].innerText=description[i].innerText.slice(0,95);
+            console.log(description[i]);
+        }
+    }
+
+</script>
 {% endblock %}
