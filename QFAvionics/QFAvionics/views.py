@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from product.models import Category, Product
+from additional_option.models import Service
+from django.contrib import messages
 
 def home(request):
     categories = Category.objects.all()[:4]
@@ -52,3 +54,11 @@ def aboutpage(request):
 
 def contactpage(request):
     return render(request, "contact.html", {})
+
+def service(request, servicename):
+    service_perticular = Service.objects.filter(name=servicename).first()
+    if service_perticular:
+        return render(request, "service.html", {'service':service_perticular})
+    else:
+        messages.add_message(request,  messages.INFO, 'Service not found')
+        return redirect("home")
