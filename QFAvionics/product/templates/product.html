@@ -29,7 +29,6 @@
             <div class="col-md-6">
                 <h1 class="mb-3">{{product.name}}</h1>
                 <p>Our Part #: {{product.description}}</p>
-                <p>Weight: {{product.weight}}</p>
                 <p class="price">Our Price: {{product.price}}</p>
                 <p>Category:{{product.category.name}}</p>
 
@@ -51,77 +50,39 @@
     <main class="container mt-4"></main>
     <h2 class="mb-3">Related Items</h2>
     <div class="row row-cols-1 row-cols-md-5 g-4">
+
+        {% if related_products %}
+        {% for product in related_products %}
         <div class="col">
             <div class="card h-100">
-                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x500/products/46848/110176/SGP156377_1_inset1__15873.1617249280.jpg?c=1"
+                <img src="{{product.image.url}}"
                     class="card-img-top" alt="Amphenol NEXUS TJ-105">
                 <div class="card-body">
-                    <h5 class="card-title">Amphenol NEXUS TJ-105</h5>
-                    <p class="card-text">Black/Red Plastic In-Line Molded Contact 4-Conductor Telephone Jack</p>
-                    <a href="#" class="btn btn-link p-0">View Details</a>
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <p class="card-text">{{product.category.name}}</p>
+                    <p class="card-text">{{product.description}}</p>
+                    <p class="card-text">${{product.price}}</p>
+                    <a href="{% url 'product-view' id=product.id %}" class="btn btn-link p-0">View Details</a>
                 </div>
+                {%  if product.stock_quantity < 10 %}
                 <div class="card-footer bg-white">
-                    <small class="text-danger">Quote Item:</small>
+                    <small class="text-danger">Stock : {{product.stock_quantity}}</small>
                 </div>
+                {% elif  product.stock_quantity < 50 %}
+
+                <div class="card-footer bg-white">
+                    <small class="text-warning">Stock : {{product.stock_quantity}}</small>
+                </div>
+                {% else %}
+                <div class="card-footer bg-white">
+                    <small class="text-success">Stock : {{product.stock_quantity}}</small>
+                </div>
+                {% endif %}
             </div>
         </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x500/products/46848/110176/SGP156377_1_inset1__15873.1617249280.jpg?c=1"
-                    class="card-img-top" alt="Amphenol NEXUS TJ-101">
-                <div class="card-body">
-                    <h5 class="card-title">Amphenol NEXUS TJ-101</h5>
-                    <p class="card-text">Black Plastic In-Line Molded Contact 4-Conductor Telephone Jack</p>
-                    <a href="#" class="btn btn-link p-0">View Details</a>
-                </div>
-                <div class="card-footer bg-white">
-                    <small class="text-success">In-Stock: 48 Units available.</small>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x500/products/46848/110176/SGP156377_1_inset1__15873.1617249280.jpg?c=1"
-                    class="card-img-top" alt="Amphenol NEXUS TJ-120">
-                <div class="card-body">
-                    <h5 class="card-title">Amphenol NEXUS TJ-120</h5>
-                    <p class="card-text">Black Plastic In-Line Molded Contact 4-Conductor Flanged Rear-Mounted Telephone
-                        Jack</p>
-                    <a href="#" class="btn btn-link p-0">View Details</a>
-                </div>
-                <div class="card-footer bg-white">
-                    <small class="text-success">In-Stock: 40 Units available.</small>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x500/products/46848/110176/SGP156377_1_inset1__15873.1617249280.jpg?c=1"
-                    class="card-img-top" alt="Amphenol NEXUS TJ-106">
-                <div class="card-body">
-                    <h5 class="card-title">Amphenol NEXUS TJ-106</h5>
-                    <p class="card-text">Black Plastic Molded Contact 6-Conductor Biaxial Shielded Telephone Jack</p>
-                    <a href="#" class="btn btn-link p-0">View Details</a>
-                </div>
-                <div class="card-footer bg-white">
-                    <small class="text-warning">On Order: 7 Units on order & due in ± 9-12 days</small>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn11.bigcommerce.com/s-jifykode7m/images/stencil/500x659/products/61747/110170/SGP156375_1_main__88525.1617249270.jpg?c=1"
-                    class="card-img-top" alt="Amphenol NEXUS TP-102">
-                <div class="card-body">
-                    <h5 class="card-title">Amphenol NEXUS TP-102</h5>
-                    <p class="card-text">Black Plastic Molded Contact 4-Conductor Telephone Plug</p>
-                    <a href="#" class="btn btn-link p-0">View Details</a>
-                </div>
-                <div class="card-footer bg-white">
-                    <small class="text-success">In-Stock: 90 Units available.</small>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
+        {% endif %}
+
     </div>
     </main>
 </div>
