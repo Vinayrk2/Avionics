@@ -19,7 +19,7 @@ class Notification(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     notification_type = models.CharField(max_length=50,  blank=False, null=False, choices=notification_type_choices,  default='news')
-    additional_write = models.TextField(default='', blank=True, null=True,  max_length=1000)
+    additional_write = models.TextField(default='', blank=True, null=True)
 
     def __str__(self):
         return self.title

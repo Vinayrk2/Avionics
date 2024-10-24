@@ -63,42 +63,11 @@
                         {{notification.created_at}}
 
                     </p>
-
                     <a href="{% url 'view-perticular-news' id=notification.id%}" class="learn-more"> View Details </a>
+
                 </div>
             </div>
         </div>
-
-        <div class="col">
-            <div class="news-item">
-                <img src="{{notification.image.url}}" alt="Cockpit">
-                <div class="news-content">
-                    <h2 class="news-title">{{notification.title}}</h2>
-                    <p>{{notification.description}}</p>
-
-                    <p class="news-date">{{notification.created_at}}</p>
-                    <a href="{% url 'view-perticular-news' id=notification.id%}" class="learn-more">Learn More</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="news-item">
-                <img src="{{notification.image.url}}" alt="Flight Deck">
-                <div class="news-content">
-                    <h2 class="news-title">{{notification.title}}</h2>
-                    <p>{{notification.description}}</p>
-
-                    <p class="news-date">{{notification.created_at}}</p>
-                    <a href="{% url 'view-perticular-news' id=notification.id%}" class="learn-more">Learn More</a>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
 
         {% endfor %}
 
