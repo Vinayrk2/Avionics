@@ -2,7 +2,30 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid">
+<style>
+     .scroll-container {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .scroll-item {
+      min-width: 300px; /* Adjust the width as needed */
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+      margin-right: 10px;
+      border-radius: 10px;
+    }
+</style>
+
+<div class="container-fluid mt-5">
     <div id="carouselExample" class="carousel slide"
         style="box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;">
         <div class="carousel-inner" style="height:max(35vh,35vw)">
@@ -31,7 +54,7 @@
 <div>
     <div class="container-fluid mt-5">
         <div class="row mb-5 text-center">
-            <h1 class="display-5 fw-bold text-body-emphasis" style="letter-spacing: 1px;"> WHAT WE DO<code class="display-4">?</code></h1>
+            <h1 class="display-5 fw-bold text-body-emphasis" style="letter-spacing: 1px;"> WHAT WE DO❓</h1>
             <p class="lead px-3">
                 QF Avionics, established in 1979, is a premier independent provider of aviation maintenance, repair, and overhaul (MRO) services in Canada. With over 40 years of experience, the company has built a strong reputation for delivering top-tier solutions across all aviation sectors, including commercial, military, and general aviation. QF Avionics sets the standard for reliability and innovation, ensuring aircraft remain in peak operational condition.
             </p>
@@ -65,16 +88,16 @@
         </div>
     </div>
 
-    <hr class="my-2" style="height: 1px;" />
-
     {% load custom_filters %}
-    <div class="container mt-5">
-        <h2 class="text-center mb-4 fw-bolder">SHOP EQUIPMENT BY CATEGORY</h2>
-        <div class="row mt-2 d-flex justify-content-center">
+    <div class="container-fluid mt-5">
+        <h2 class="text-center mb-4 fw-bolder">Our Product Categories</h2>
+        <div class="scroll-container">
+            <div class="scroll-item item1 bg-danger" style="overflow: hidden; background-image: image-set('{% static 'images/logo.png' %}');"><p class="fs-3 rounded w-100 h-100 d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.651);">Communication</p></div>
+          </div>
+        <!-- <div class="mt-2 d-flex justify-content-center">
             {% if categories %}
             {% for category in categories %}
-            {% if categories|length < 4 %} <div class="col-md-{{categories|length|card_size}} mb-4"
-                style="box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; background-color: aqua;">
+            {% if categories|length < 4 %} <div class="col-md-{{categories|length|card_size}} mb-4">
                 {% else %}
                 <div class="col-md-3 mb-4">
                     {% endif %}
@@ -89,29 +112,30 @@
                 {% endfor %}
                 {% endif %}
         </div>
-    </div>
+    </div> -->
+    
 
 
     <hr class="my-2" style="height: 1px;" />
 
     <div>
-        <div class="row mt-5"></div>
-        <div class="container mt-5">
+        <div class="container-fluid mt-5">
             <h1 class="text-center fw-bolder">Featured Collection</h1>
             <div class="row h-auto">
                 {% if products %}
                 {% for product in products %}
-                <div class="col-md-3 card-shop"
-                    style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; border-radius:3px;">
+                <div class="col-md-3 col-sm-6 col-12 my-2">
+                    <div class="p-3 rounded" style="background-color: rgb(241, 241, 241);">
                     <a href="{% url 'product-view' id=product.id %}"
                         style="text-decoration:none; color:black; font-weight:bolder;">
                         <img src="{{product.image}}" alt="Online Store" class="service-image"
-                            style="max-height:60%; object-fit:cover;">
+                            style="max-height:60%; object-fit:cover; mix-blend-mode: darken;">
                         <h6 class="service-title fw-bolder"> {{product.name}} </h5>
                             <p class="service-description fw-light">{{product.description}}</p>
-                            <p class="service-description fw-light">{{product.category}}</p>
-                            <p class="service-description fw-bolder">Price : ${{product.price}}</p>
+                            <p class="fw-light text-secondary" style="margin-top: -10px; float: right;">{{product.category}}</p>
+                            <p class="fw-bolder fs-5" style="color: green; margin-bottom: -7px;">${{product.price}}</p>
                     </a>
+                    </div>
                 </div>
                 {% endfor %}
                 {% endif %}
