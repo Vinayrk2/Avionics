@@ -35,3 +35,7 @@ def product_by_category(request,name):
     
             
     return render(request, 'product_by_category.html',{"products":products_dict, "name":name})
+
+def search_result(request):
+    query = request.GET.get("q")
+    
