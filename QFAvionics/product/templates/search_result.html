@@ -1,17 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Listing Page</title>
-</head>
-<body>
-    {% if products %}
-        {% for product in products %}
-            {{product.name}}
-            {{product.part_number}}
-            {{product.category.name}}
-        {% endfor %}
-    {% endif %}
-</body>
-</html>
+{% extends "master.html" %}
+
+{% block  content %}
+
+<div class="container-fluid mt-3" >
+    <div class="row d-flex  justify-content-center">
+
+        <!-- Sidebar -->
+
+        <!-- Main Content -->
+        <div class="col-md-10">
+            <p>Showing products of {{name}} category. </p>
+
+            <h2>Results</h2>
+            <div class="row" >
+                <!-- Product 1 -->
+                {% if products %}
+                {% for product in products %}
+                <div class="col-md-4">
+                    <a href="{% url 'product-view' id=product.id %}">
+                    <div class="product-card">
+                        <img src="{{product.image}}"
+                            alt="Cyber Acoustics Stereo USB" class="img-fluid product-image d-block m-auto">
+                        <h3>{{product.name}}</h3>
+
+                        <!-- <div class="mb-2">
+                            <span class="badge badge-festival">Great Canadian Festival</span>
+                        </div> -->
+                        <div>
+                            <span class="category">In {{product.category}}</span><br>
+                            <span class="price" style="color:#28a745">${{product.price}}</span>
+                        </div>
+                        <a href="{% url 'cart_add' id=product.id %}"><button class="btn btn-warning fw-bolder mt-1 border"> ➕ Add to cart</button></a>
+                    </div>
+                </a>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="col-md-4">
+                    <div class="fw-bolder" style="height: 50vh;"> Sorry! No Products Available For {{name}}</div>
+
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
+{% endblock %}
