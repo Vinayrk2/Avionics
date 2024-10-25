@@ -231,7 +231,7 @@
                         <li>5G Radar Altimeters</li> {% endcomment %}
                         {% if services %}
                         {% for service in services %}
-                        <li>{{service.name}}</li>
+                        <a href="{% url 'service' id=service.id %}"><li>{{service.name}}</li></a>
                         {% endfor %}
                         {% endif %}
                     </ul>
