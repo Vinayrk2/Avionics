@@ -45,13 +45,23 @@
             background-color: #dc3545;
             color: white;
         }
-        
+
+        .categorybtn {
+            color: #070736;
+            border: 1px solid #070736;
+            padding: 5px;
+        }
     </style>
-    
-    <div class="container-fluid bg-primary px-5 h-10 d-flex align-items-center justify-content-start">
+
+<a class="categorybtn d-sm-none mx-2 text-decoration-none">Categories <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-sign-turn-right" viewBox="0 0 16 16">
+    <path d="M5 8.5A2.5 2.5 0 0 1 7.5 6H9V4.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L9.41 8.658A.25.25 0 0 1 9 8.466V7H7.5A1.5 1.5 0 0 0 6 8.5V11H5z"/>
+    <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.48 1.48 0 0 1 0-2.098zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134Z"/>
+  </svg></a>
+    <div id="categorybox" class="container-fluid mt-2 px-2 py-4 py-sm-0 h-10 d-flex flex-column-reverse flex-sm-row position-absolute align-items-center justify-content-start text-nowrap overflow-scroll"
+    style="background-color: #070736; z-index: 20;">
         {% if categories %}
             {% for category in categories %}
-            <span class="w-10 mx-2 no-link"><a href="{% url 'product-list-categorized' name=category %}"> {{category}} </a></span>
+            <span class="mx-3 no-link"><a href="{% url 'product-list-categorized' name=category %}"> {{category}}</a></span>
             {% endfor %}
             {% else %}
             <span class="w-10 mx-2 no-link"> Sorry! No Categories Available Right Now...</span>
@@ -63,33 +73,33 @@
         <div class="row d-flex  justify-content-center">
 
             <!-- Sidebar -->
+            <p class="mt-sm-5 pt-sm-3">Showing products of {{name}} category. </p>
 
             <!-- Main Content -->
-            <div class="col-md-10">
-                <p>Showing products of {{name}} category. </p>
-
-                <h2>Results</h2>
-                <div class="row" >
+            <div class="col-md-11 d-flex justify-content-center mt-3">
+                <div class="row">
                     <!-- Product 1 -->
                     {% if products %}
                     {% for product in products %}
-                    <div class="col-md-4">
-                        <a href="{% url 'product-view' id=product.id %}">
-                        <div class="product-card">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="p-3 my-2 rounded" style="background-color: rgb(238, 238, 238);">
+                        <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
+                        <div>
                             <img src="{{product.image}}"
-                                alt="Cyber Acoustics Stereo USB" class="img-fluid product-image d-block m-auto">
-                            <h3>{{product.name}}</h3>
+                                alt="Cyber Acoustics Stereo USB" class="img-fluid rounded" style="mix-blend-mode: darken;">
+                            <h5  style="color: #020231;">{{product.name}}</h5>
 
                             <!-- <div class="mb-2">
                                 <span class="badge badge-festival">Great Canadian Festival</span>
                             </div> -->
                             <div>
-                                <span class="category">In {{product.category}}</span><br>
-                                <span class="price" style="color:#28a745">${{product.price}}</span>
+                                <span class="category text-secondary">In {{product.category}}</span><br>
+                                <span class="price" style="color:#1f7c36">${{product.price}}</span>
                             </div>
                             {% comment %} <a href="{% url 'cart_add' id=product.id %}"><button class="btn btn-warning fw-bolder mt-1 border"> ➕ Add to cart</button></a> {% endcomment %}
                         </div>
                     </a>
+                    </div>
                     </div>
                     {% endfor %}
                     {% else %}
@@ -103,5 +113,35 @@
             </div>
         </div>
     </div>
+
+    <script>
+        let categorybox = document.querySelector('#categorybox');
+        let categorybtn = document.querySelector('.categorybtn');
+        let a = 0;
+
+        if(window.innerWidth <= 500) {
+            categorybox.style.left = "-100vw";
+            categorybox.style.transition = "0.3s";
+            a = 1;
+
+        categorybtn.addEventListener("click", () => {
+            // categorybox.style.width = "65%";
+
+            if(a == 0) {
+            categorybox.style.left = "-100vw";
+            categorybox.style.transition = "0.3s";
+            a = 1;
+            } else {
+                categorybox.style.left = "0vw";
+                categorybox.style.transition = "0.3s";
+                a = 0;
+            }
+        })
+    } else {
+        categorybox.style.left = "0vw";
+                categorybox.style.transition = "0.3s";
+                a = 0;
+    }
+    </script>
 
 {% endblock %}
