@@ -6,6 +6,12 @@
     <title>Product Listing Page</title>
 </head>
 <body>
-    
+    {% if products %}
+        {% for product in products %}
+            {{product.name}}
+            {{product.part_number}}
+            {{product.category.name}}
+        {% endfor %}
+    {% endif %}
 </body>
 </html>

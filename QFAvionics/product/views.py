@@ -38,4 +38,12 @@ def product_by_category(request,name):
 
 def search_result(request):
     query = request.GET.get("q")
-    
+    if query == "":
+        messages.add_message(request, messages.WARNING, "Please enter a search query")        
+        return redirect("home")
+    elif query is None:
+        messages.add_message(request, messages.WARNING, "Please enter a search query")        
+        return redirect("home")
+    elif query:
+        products = Product.objects.filter(name__icontains=query) | Product.objects.filter(part_number__icontains=query) | Product.objects.filter(category_name__icontains=query)
+    return render(request, "search_result.html", {'products':products})
