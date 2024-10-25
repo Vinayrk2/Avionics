@@ -7,5 +7,6 @@ from user.views import signup,userlogin, userlogout
 
 urlpatterns = [
     path("view/<int:id>/", views.product_view, name="product-view"),
-    path("category/<str:name>/", views.product_by_category, name="product-list-categorized")
+    path("category/<str:name>/", views.product_by_category, name="product-list-categorized"),
+    path("search/", views.search_result,  name="search"),
 ] 
