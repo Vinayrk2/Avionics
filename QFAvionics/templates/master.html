@@ -124,8 +124,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <!-- search box -->
          <div id="searchbox" class="d-flex justify-content-center position-absolute">
-            <form id="searchform" class="d-flex" action="" method="">
-                <input id="searchinput" type="text">&nbsp;
+            <form id="searchform" class="d-flex" action="{% url 'search'  %}" method="get">
+                <input id="searchinput" type="text" name="q">&nbsp;
                 <button id="searchbtn" type="submit">Search</button>
                   <svg id="searchcancel" xmlns="http://www.w3.org/2000/svg" width="22" height="22" style="margin: -30px -7px 0px 0px; cursor: pointer;" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
@@ -155,7 +155,7 @@
                             <li>5G Radar Alimeters</li> {% endcomment %}
                             {% if services %}
                             {% for service in services %}
-                            <li>{{service}}</li>
+                            <a href="{% url 'service' id=service.id %}"><li>{{service.name}}</li></a>
                             {% endfor %}
                             {% endif %}
                         </ul>
@@ -231,7 +231,7 @@
                         <li>5G Radar Altimeters</li> {% endcomment %}
                         {% if services %}
                         {% for service in services %}
-                        <li>{{service}}</li>
+                        <li>{{service.name}}</li>
                         {% endfor %}
                         {% endif %}
                     </ul>
