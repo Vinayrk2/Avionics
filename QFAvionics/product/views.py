@@ -45,5 +45,10 @@ def search_result(request):
         messages.add_message(request, messages.WARNING, "Please enter a search query")        
         return redirect("home")
     elif query:
-        products = Product.objects.filter(name__icontains=query) | Product.objects.filter(part_number__icontains=query) | Product.objects.filter(category_name__icontains=query)
-    return render(request, "search_result.html", {'products':products})
+        product_dict = []
+        products = Product.objects.filter(name__icontains=query) | Product.objects.filter(part_number__icontains=query) | Product.objects.filter(category__name__icontains=query)
+        for product in products:
+            pr = product.to_dict(request)
+            pr["image"] = product.get_image().url
+            product_dict.append(pr)
+    return render(request, "search_result.html", {'products':product_dict})
