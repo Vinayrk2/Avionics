@@ -77,8 +77,10 @@ def cart_clear(request):
 def cart_detail(request):
     total = 0
     for key,item in request.session.get("cart").items():
+        if request.session.get("currency") == "USD":
+            item["price"] = round(float(item["price"]) * 1.39,2)
         total += float(item["price"]) * float(item["quantity"])
-    
+
     shipping_charge = round(settings.CHARGES["shipping"],2)
     tax = round(settings.CHARGES["tax"]*total,2)
     
@@ -103,6 +105,8 @@ def send_mail_page(request):
         total = 0
         tax = settings.CHARGES["tax"]
         for key,item in request.session.get("cart").items():
+            if request.session.get("currency") == "USD":
+                item["price"] = round(float(item["price"]) * 1.39,2)
             total += float(item["price"]) * float(item["quantity"])
         order_summary = {
             "total": round(total+tax,2),

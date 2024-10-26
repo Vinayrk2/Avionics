@@ -2,15 +2,16 @@ from django.shortcuts import render
 from .models import Service
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import json
+from cart.cart import Cart
+
+
 
 def service(request, id):
     service = Service.objects.filter(id=id).first()
     return render(request, 'service.html', {'service':service})
 
 
-import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt  # Disable CSRF for simplicity; use CSRF tokens in production
 def set_currency(request):
@@ -19,6 +20,7 @@ def set_currency(request):
             # Load the JSON data from the request body
             data = json.loads(request.body)
             currency = data.get("currency")
+
             print("Received currency:", currency)  # Debugging output
 
             if currency in ["USD", "CAD"]:

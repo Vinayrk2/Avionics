@@ -46,6 +46,7 @@ def userlogin(request):
                     return redirect("/")
                 messages.add_message(request, messages.WARNING, "Logged in successfully.")
                 login(request, user)
+                request.session["currency"] = "CAD"
                 return redirect("/")
             else:
                 raise Exception("Invalid User")

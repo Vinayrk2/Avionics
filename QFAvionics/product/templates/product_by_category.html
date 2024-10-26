@@ -95,7 +95,7 @@
                             </div> -->
                             <div>
                                 <span class="category text-secondary">In {{product.category}}</span><br>
-                                <span class="price" style="color:#1f7c36">$<span class="currency_value">{{product.price}} CAD</span></span>
+                                <span class="price" style="color:#1f7c36">${{product.price}} {{product.currency}}</span>
                             </div>
                             {% comment %} <a href="{% url 'cart_add' id=product.id %}"><button class="btn btn-warning fw-bolder mt-1 border"> ➕ Add to cart</button></a> {% endcomment %}
                         </div>
