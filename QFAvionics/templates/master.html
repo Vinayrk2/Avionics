@@ -291,6 +291,7 @@
     <script>
         let searchcancel = document.querySelector('#searchcancel');
         let searchopen = document.querySelector('#searchopen');
+        let flag = 0
         
         searchopen.addEventListener("click", () => {
             console.log("click")
@@ -306,28 +307,56 @@
         document.querySelector("#currency-value").addEventListener('change',(e)=>{
             let selected = e.target.value;
             let currency_Calc_param = 1
-            switch(selected){
-                case 'USD':
-                    currency_Calc_param = 1.39
-                    break;
-                case 'CAD':
-                    currency_Calc_param = 1
-                    break;
-                default:
-                    window.alert("Please Enter Valid Input")
-            }
-            document.querySelectorAll(".currency_value").forEach((value, key)=>{
-                console.log(value.innerText)
-                if(parseInt(value.innerText)==NaN)
-                    return
-                else{
-                    value.innerText = Math.round(parseInt(value.innerText) * currency_Calc_param)
-                    value.innerText += ' '+selected
+            
+            // switch(selected){
+            //     case 'USD':
+            //         currency_Calc_param = 1.39
+            //         sessionStorage.setItem('current-avi-currency','USD')
+            //         break;
+            //         case 'CAD':
+            //         currency_Calc_param = 1-(39/139)
+            //         sessionStorage.setItem('current-avi-currency','CAD')
+            //         break;
+            //     default:
+            //         window.alert("Please Enter Valid Input")
+            // }
+            // document.querySelectorAll(".currency_value").forEach((value, key)=>{
+            //     console.log(value.innerText)
+            //     if(parseInt(value.innerText)==NaN)
+            //         return
+            //     else{
+            //         value.innerText = Math.round(parseInt(value.innerText) * currency_Calc_param)
+            //         value.innerText += ' '+selected
 
+            //     }
+            // })
+
+            setCurrency(selected);    
+        })
+        
+        function setCurrency(currency) {
+            console.log(currency)
+            fetch("/set_currency/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ "currency": currency })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Currency set to " + data.currency);
+                } else {
+                    alert("Failed to set currency: " + data.error);
                 }
             })
-        })
-
+            .catch(error => {
+                console.error("Error setting currency:", error);
+                alert("An error occurred while setting the currency.");
+            });
+        }
+        
         window.addEventListener('load',()=>{
             document.querySelectorAll(".alert").forEach((value,key)=>{
                 setTimeout(()=>{
@@ -335,6 +364,11 @@
                 },1500)
             })
         })
+
+         window.addEventListener('DOMContentLoaded',()=>{
+            if(sessionStorage.getItem('current-avi-currency'))
+            document.querySelector("#currency-value").value = sessionStorage.getItem('current-avi-currency') || 'CAD';
+        }) 
     </script>
 </body>
 

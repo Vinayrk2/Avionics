@@ -76,7 +76,11 @@ class Product(models.Model):
         }
         
         if request.user.is_authenticated:
-            obj['price'] = self.price
+            if request.session.get("currency"):
+                if  request.session["currency"] == "USD":
+                    obj['price'] = round(float(self.price) * 1.39,2)
+                elif request.session["currency"] == "CAD":
+                    obj['price'] = round(float(self.price),2)
         else:
             obj['price'] = 'login to view the price'
         return obj
