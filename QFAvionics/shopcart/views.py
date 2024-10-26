@@ -118,7 +118,8 @@ def send_mail_page(request):
         html_message = render_to_string('emailtemplate.html', {
             'user': user,
             'products': products,
-            'order': order_summary
+            'order': order_summary,
+            'currency':  request.session.get("currency")
         })
         
         flag = send_mail(

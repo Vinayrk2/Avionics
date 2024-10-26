@@ -29,7 +29,7 @@
                             <div class="col-md-8">
                                 <h5 class="card-title">{{product.name}}</h5>
                                 <p class="card-text text-muted">{{product.category}}</p>
-                                <p class="card-text">Price : <span class="fw-bold">${{product.price}} {{product.currency}}</span> per unit</p>
+                                <p class="card-text">Price : <span class="fw-bold">${{product.price}} {{request.session.currency}}</span> per unit</p>
                                 <div class="row g-2 mb-3">
 
                                     <div class="col-auto">
