@@ -1,11 +1,17 @@
 from django.db import models
 
 
+CURRENCY_CHOICES = [
+    ('USD', 'USD'),
+    ('CAD', 'CAD'),
+]
+
 class Product(models.Model):
     name = models.CharField(max_length=255)
     part_number = models.DecimalField(blank=True, null=True, unique=True, max_digits=20, decimal_places=0)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    # currency = models.CharField(max_length=3,  choices=CURRENCY_CHOICES, default='CAD')
     stock_quantity = models.PositiveIntegerField(default=0)  
     category = models.ForeignKey('Category', blank=True, on_delete=models.CASCADE)
     is_available = models.BooleanField(default=True)  
@@ -70,7 +76,16 @@ class Product(models.Model):
         }
         
         if request.user.is_authenticated:
-            obj['price'] = self.price
+            if request.session.get("currency"):
+                if  request.session.get("currency") == "USD":
+                    obj['price'] = round(float(self.price) * 1.39,2)
+                    obj['currency'] = "USD"
+                else:
+                    obj['price'] = round(float(self.price),2)
+                    obj['currency'] = "CAD"
+            else:
+                obj['price'] = round(float(self.price),2)
+                obj['currency'] = "CAD"
         else:
             obj['price'] = 'login to view the price'
         return obj

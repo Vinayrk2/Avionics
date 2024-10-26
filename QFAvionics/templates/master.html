@@ -62,8 +62,7 @@
 
         /* search box style */
         #searchbox {
-            top: 0px;
-            visibility: hidden;
+            top: -100vh;
             background-color: rgba(0, 0, 0, 0.151);
             width: 100%;
             z-index: 10;
@@ -92,7 +91,7 @@
         }
 
         #searchbtn {
-            background-color: #090841;;
+            background-color: #090841;
             border-radius: 5px;
             padding: 0px 10px;
             color: white;
@@ -114,10 +113,15 @@
                 <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-instagram fs-6"></i></a>
                 <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-youtube fs-6"></i></a>
                 <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-linkedin fs-6"></i></a>
-                <select class="form-select" aria-label="Default select example" style="height: 35px; width: 105px;">
-                    <option value="USD">💲USD</option>
+                <select class="form-select" id="currency-value" aria-label="Default select example" style="height: 35px; width: 105px;">
+                    {% if request.session.currency == "USD" %}
+                    <option value="USD" selected>💲USD</option>
                     <option value="CAD">💲CAD</option>
-                  </select>
+                    {% else %}
+                    <option value="USD">💲USD</option>
+                    <option value="CAD" selected>💲CAD</option>
+                    {% endif %}
+                </select>
             </div>
         </div>
     </div>
@@ -133,7 +137,7 @@
                   </svg>
             </form>
          </div>
-        <div class="container-fluid">
+        <div class="container-fluid border-bottom">
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="{% static 'images/logo.png' %}" alt="QF Avionics"
                     style="max-width: min(50px,50px); max-height: min(10vh,10vw);">
@@ -202,21 +206,21 @@
             </div>
         </div>
     </nav>
-
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-        <div class="alert alert-primary notification" role="alert">
+        <div class="alert alert-primary" style="margin-top:70px;" role="alert">
             {{ message }}
         </div>
-
+    
         {% endfor %}
     </ul>
     {% endif %}
+    
     {% block content %}
-
+    
     {% endblock %}
-    </main>
+</main>
 
     <footer class="footer">
         <div class="container-fluid">
@@ -224,12 +228,6 @@
                 <div class="col-md-3 mb-4">
                     <h5>Services</h5>
                     <ul>
-                        {% comment %} <li>Air-Frame Rewiring</li>
-                        <li>Fixed Wing</li>
-                        <li>Glass Cockpits</li>
-                        <li>Laser Wire Marking</li>
-                        <li>Rotorcraft</li>
-                        <li>5G Radar Altimeters</li> {% endcomment %}
                         {% if services %}
                         {% for service in services %}
                         <a href="{% url 'service' id=service.id %} " class="text-decoration-none text-white"><li>{{service.name}}</li></a>
@@ -240,10 +238,6 @@
                 <div class="col-md-3 mb-4">
                     <h5>Customer Care</h5>
                     <ul>
-                        {% comment %} <li>Contact Us</li>
-                        <li>Privacy Policy</li>
-                        <li>Shipping Policy</li>
-                        <li>Terms of Service</li> {% endcomment %}
                         {% if links %}
                         {% for link in links %}
                         <a href="{{link.url}}"  class="text-decoration-none text-white">
@@ -282,35 +276,61 @@
                     </form>
                 </div>
             </div>
-            <!-- <div class="row mt-4">
-                <div class="col-auto">
-                    <select class="form-select language-selector">
-                        <option selected><span class="currency-option">
-                                <svg class="currency-flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path fill="#D80027" d="M0 0h512v512H0z" />
-                                    <path fill="#FFF" d="M256 0v512h256V0z" />
-                                </svg>
-                                CAD $
-                            </span></option>
-                        <option>USD $</option>
-                    </select>
-                </div>
-            </div> -->
         </div>
     </footer>
 
     <script>
         let searchcancel = document.querySelector('#searchcancel');
         let searchopen = document.querySelector('#searchopen');
-
+        
         searchopen.addEventListener("click", () => {
             console.log("click")
-            searchbox.style.visibility = "visible";
+            searchbox.style.top = "0vh";
+            searchbox.style.transition = "0.3s";
         })
 
         searchcancel.addEventListener("click", () => {
-            searchbox.style.visibility = "hidden";
+            searchbox.style.top = "-100vh";
+            searchbox.style.transition = "0.3s";
         })
+
+        document.querySelector("#currency-value").addEventListener('change',(e)=>{
+            let selected = e.target.value;
+
+            setCurrency(selected);    
+        })
+        
+        function setCurrency(currency) {
+            console.log(currency)
+            fetch("/set_currency/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ "currency": currency })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload()
+                } else {
+                    alert("Failed to set currency: " + data.error);
+                }
+            })
+            .catch(error => {
+                console.error("Error setting currency:", error);
+                alert("An error occurred while setting the currency.");
+            });
+        }
+        
+        window.addEventListener('load',()=>{
+            document.querySelectorAll(".alert").forEach((value,key)=>{
+                setTimeout(()=>{
+                    value.style.display = 'none'
+                },1500)
+            })
+        })
+
     </script>
 </body>
 

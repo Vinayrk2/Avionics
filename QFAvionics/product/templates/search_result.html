@@ -28,7 +28,7 @@
                         </div> -->
                         <div>
                             <span class="category">In {{product.category}}</span><br>
-                            <span class="price" style="color:#28a745">${{product.price}}</span>
+                            <span class="price" style="color:#28a745">$<span class="currency_value">{{product.price}} CAD</span></span>
                         </div>
                         <a href="{% url 'cart_add' id=product.id %}"><button class="btn btn-warning fw-bolder mt-1 border"> ➕ Add to cart</button></a>
                     </div>

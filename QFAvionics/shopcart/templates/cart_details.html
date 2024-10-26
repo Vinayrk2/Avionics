@@ -1,35 +1,35 @@
 {% extends "master.html" %}
 
 {% block content %}
+{% load static %}
 
-    <div class="container-fluid mt-4">
+    <div class="container-fluid" style="margin-top: 70px;">
 
         <div class="row">
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-10"> 
-                    <h2 class="mb-4">Items</h2> 
+                    <div class="col-10">
                     </div>
                     {% if request.session.cart %}
-                    <div class="col-2">
-                        <a href="{% url 'cart_clear' %}"><button type="button" class="btn btn-primary">Clear Cart</button></a>
+                    <div class="col-12">
+                        <a href="{% url 'cart_clear' %}"><button type="button" class="btn w-100 border bg-light fs-5 fw-bold text-danger"><i class="fa-solid fa-trash-can"></i> Clear Cart</button></a>
                     </div>
                     {% endif %}
                 </div>
 
                 {% if request.session.cart %}
                 {% for key,product  in request.session.cart.items %}
-                <div class="card mb-4">
+                <div class="card mb-4 mt-3">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
                                 <img src="{{product.image}}" alt="NikeCourt Air Max Volley"
-                                    class="img-fluid rounded">
+                                    class="img-fluid rounded" style="mix-blend-mode: darken;">
                             </div>
                             <div class="col-md-8">
                                 <h5 class="card-title">{{product.name}}</h5>
                                 <p class="card-text text-muted">{{product.category}}</p>
-                                <p class="card-text">Price: ${{product.price}} per unit</p>
+                                <p class="card-text">Price : <span class="fw-bold">${{product.price}}</span> per unit</p>
                                 <div class="row g-2 mb-3">
 
                                     <div class="col-auto">
@@ -49,29 +49,25 @@
                                         </div>
                                     </div>
                                    
-                                    <a href="{% url 'item_clear' id=product.product_id %}" class="container"><button type="button" class="btn btn-light">Remove Item</button></a>
+                                    <a href="{% url 'item_clear' id=product.product_id %}" class="container"><button type="button" class="btn bg-light">Remove Item</button></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-                <h5>Pickup</h5>
-                <p><a href="https://www.google.ca/maps/search/QF+Avionics+Center+LtdHangar+%2311+Airport+Drive,+Springbook,ABT4S+2E8Canada/@52.1779893,-113.8879949,16z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI0MTAxNi4wIKXMDSoASAFQAw%3D%3D"
-                        class="text-muted" target="_blank">Find a Store</a></p>
                 {% else %}
-                    <div class="text-center fw-bold w-100"> No items in the cart. </div>
-
+                    <div class="text-center fw-bold mt-3" style="width: 97vw;">
+                        <img class="w-25 h-25" src="{% static 'images/nocontant.png' %}"; style="mix-blend-mode: darken;">
+                        <h4>No items available in cart !</h4>
+                    </div>
                 {% endif %}
-
-
-    
             </div>
 
             {% if request.session.cart %}
-            <div class="col-md-4">
+            <div class="col-md-4 mt-md-5 pt-md-2">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body bg-light">
                         <h2 class="card-title mb-4">Summary</h2>
                         <div class="d-flex justify-content-between mb-2">
                             <span>Subtotal</span>
@@ -91,7 +87,7 @@
                         </div>
                         <form  action="{% url 'send_detail' %}" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-dark w-100 mb-3">Send Order Summary</button>
+                            <button type="submit" class="btn w-100 mb-3 text-white" style="background-color: #090841;;">Send Order Summary</button>
                         </form>
                     </div>
                 </div>
