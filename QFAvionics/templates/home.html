@@ -92,27 +92,29 @@
     <div class="container-fluid mt-5">
         <h2 class="text-center mb-4 fw-bolder">Our Product Categories</h2>
         <div class="scroll-container">
-            <div class="scroll-item item1 bg-danger" style="overflow: hidden; background-image: image-set('{% static 'images/logo.png' %}')"><p class="fs-3 rounded w-100 h-100 d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.651);">Communication</p></div>
-          </div>
-        <!-- <div class="mt-2 d-flex justify-content-center">
             {% if categories %}
             {% for category in categories %}
+            <a href="{% url 'product-list-categorized' name=category.name %}">
+            <div class="scroll-item item1 bg-danger" style="overflow: hidden; background-image: image-set('{{category.image}}')">
+                <p class="fs-3 rounded w-100 h-100 d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.651);">{{category.name}}</p>
+            </div>
+        </a>
+            {% endfor %}
+            {% endif %}
+          </div>
+        {% comment %} <!-- <div class="mt-2 d-flex justify-content-center">
             {% if categories|length < 4 %} <div class="col-md-{{categories|length|card_size}} mb-4">
                 {% else %}
                 <div class="col-md-3 mb-4">
                     {% endif %}
-                    <a href="{% url 'product-list-categorized' name=category.name %}"
                         style="text-decoration:none; color:black; font-weight:bolder;">
                         <div class="category-box">
                             <img src="{{ category.image }}" alt="Communications Equipment" class="equipment-image" style="">
                             <h2 class="mb-0 text-center" style="margin-top: -50px; opacity: 10;">{{category.name}}</h2>
                         </div>
-                    </a>
                 </div>
-                {% endfor %}
-                {% endif %}
         </div>
-    </div> -->
+    </div> --> {% endcomment %}
     
 
 
@@ -143,7 +145,7 @@
         </div>
     </div>
         <hr class="my-2" style="height: 1px;" />
-
+        {% if request.user.is_authenticated %}
         <saction class="px-4 py-5 my-5 text-center">
             <h1 class="display-6 fw-bold text-body-emphasis">SIGNUP OR LOGIN</h1>
             <div class="col-lg-6 mx-auto my-4">
@@ -157,5 +159,6 @@
               </div>
             </div>
         </saction>
+        {% endif %}
         
         {% endblock content%}
