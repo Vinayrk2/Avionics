@@ -1,7 +1,6 @@
 {% extends "master.html" %}
 
 {% block content %}
-{% load static %}
 
     <div class="container-fluid" style="margin-top: 70px;">
 
@@ -57,11 +56,12 @@
                 </div>
                 {% endfor %}
                 {% else %}
-                    <div class="text-center fw-bold mt-3" style="width: 97vw;">
-                        <img class="w-25 h-25" src="{% static 'images/nocontant.png' %}"; style="mix-blend-mode: darken;">
-                        <h4>No items available in cart !</h4>
-                    </div>
+                    <div class="text-center fw-bold w-100"> No items in the cart. </div>
+
                 {% endif %}
+
+
+    
             </div>
 
             {% if request.session.cart %}
