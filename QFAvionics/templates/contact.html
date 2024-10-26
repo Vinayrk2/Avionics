@@ -35,11 +35,15 @@
  #mainbox {
     flex: 1;
  }
+
+ .form-label {
+    margin-bottom: 0px;
+ }
 </style>
 
 <main id="mainbox">
-<div class="container">
-    <div class="card shadow-sm">
+<div class="container pt-1 mt-5">
+    <div class="card shadow-sm bg-light">
         <div class="card-body">
             <form>
                 <h2 class="text-center">Contact Us</h2>
@@ -47,45 +51,23 @@
                     <label for="emailAddress" class="form-label">Your Email Address</label>
                     <input type="email" class="form-control" id="emailAddress" placeholder="you@example.com">
                 </div>
-
                 <div class="mb-3">
-                    <label class="form-label">Select a topic:</label>
-                    <div class="row g-2">
-                        <!-- <div class="col-6">
-                            <input type="radio" class="btn-check" name="topic" id="topic1" autocomplete="off">
-                            <label class="btn btn-outline-secondary w-100 text-start" for="topic1">Adding or removing
-                                users</label>
-                        </div> -->
-                        
-                        <div class="col-6">
-                            <input type="radio" class="btn-check" name="topic" id="topic3" autocomplete="off">
-                            <label class="btn btn-outline-secondary w-100 text-start" for="topic3">Connection
-                                trouble</label>
-                        </div>
-                        <div class="col-6">
-                            <input type="radio" class="btn-check" name="topic" id="topic4" autocomplete="off">
-                            <label class="btn btn-outline-secondary w-100 text-start" for="topic4">Notifications</label>
-                        </div>
-                        
-                        <div class="col-6">
-                            <input type="radio" class="btn-check" name="topic" id="topic6" autocomplete="off">
-                            <label class="btn btn-outline-secondary w-100 text-start" for="topic6">Signing in</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="customTopic" class="form-label">Or tell us what you need help with:</label>
+                    <label for="customTopic" class="form-label">Topic of Problem</label>
                     <input type="text" class="form-control" id="customTopic"
                         placeholder='Enter a topic, like "notifications"'>
                 </div>
+                <div class="mb-3">
+                    <label for="customTopic" class="form-label">Tell about your problem</label>
+                    <textarea class="form-control" id="customTopic" rows="5"
+                        placeholder='Detailed discription of your product'></textarea>
+                </div>
 
-                <button type="submit" class="btn btn-secondary">GET HELP</button>
+                <button type="submit" class="btn text-white" style="background-color: #090841;">Send Complaint</button>
+                <button type="reset" class="btn" style="border: 1px solid #090841;">Reset Form</button>
             </form>
         </div>
     </div>
 </div>
 </main>
-
 
 {% endblock %}
