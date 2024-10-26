@@ -113,10 +113,10 @@
                 <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-instagram fs-6"></i></a>
                 <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-youtube fs-6"></i></a>
                 <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-linkedin fs-6"></i></a>
-                <select class="form-select" aria-label="Default select example" style="height: 35px; width: 105px;">
+                <select class="form-select" id="currency-value" aria-label="Default select example" style="height: 35px; width: 105px;">
                     <option value="USD">💲USD</option>
-                    <option value="CAD">💲CAD</option>
-                  </select>
+                    <option value="CAD" selected>💲CAD</option>
+                </select>
             </div>
         </div>
     </div>
@@ -201,21 +201,21 @@
             </div>
         </div>
     </nav>
-
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-        <div class="alert alert-primary notification" role="alert">
+        <div class="alert alert-primary" style="margin-top:70px;" role="alert">
             {{ message }}
         </div>
-
+    
         {% endfor %}
     </ul>
     {% endif %}
+    
     {% block content %}
-
+    
     {% endblock %}
-    </main>
+</main>
 
     <footer class="footer">
         <div class="container-fluid">
@@ -223,12 +223,6 @@
                 <div class="col-md-3 mb-4">
                     <h5>Services</h5>
                     <ul>
-                        {% comment %} <li>Air-Frame Rewiring</li>
-                        <li>Fixed Wing</li>
-                        <li>Glass Cockpits</li>
-                        <li>Laser Wire Marking</li>
-                        <li>Rotorcraft</li>
-                        <li>5G Radar Altimeters</li> {% endcomment %}
                         {% if services %}
                         {% for service in services %}
                         <a href="{% url 'service' id=service.id %} " class="text-decoration-none text-white"><li>{{service.name}}</li></a>
@@ -239,10 +233,6 @@
                 <div class="col-md-3 mb-4">
                     <h5>Customer Care</h5>
                     <ul>
-                        {% comment %} <li>Contact Us</li>
-                        <li>Privacy Policy</li>
-                        <li>Shipping Policy</li>
-                        <li>Terms of Service</li> {% endcomment %}
                         {% if links %}
                         {% for link in links %}
                         <a href="{{link.url}}"  class="text-decoration-none text-white">
@@ -301,7 +291,7 @@
     <script>
         let searchcancel = document.querySelector('#searchcancel');
         let searchopen = document.querySelector('#searchopen');
-
+        
         searchopen.addEventListener("click", () => {
             console.log("click")
             searchbox.style.top = "0vh";
@@ -311,6 +301,39 @@
         searchcancel.addEventListener("click", () => {
             searchbox.style.top = "-100vh";
             searchbox.style.transition = "0.3s";
+        })
+
+        document.querySelector("#currency-value").addEventListener('change',(e)=>{
+            let selected = e.target.value;
+            let currency_Calc_param = 1
+            switch(selected){
+                case 'USD':
+                    currency_Calc_param = 1.39
+                    break;
+                case 'CAD':
+                    currency_Calc_param = 1
+                    break;
+                default:
+                    window.alert("Please Enter Valid Input")
+            }
+            document.querySelectorAll(".currency_value").forEach((value, key)=>{
+                console.log(value.innerText)
+                if(parseInt(value.innerText)==NaN)
+                    return
+                else{
+                    value.innerText = Math.round(parseInt(value.innerText) * currency_Calc_param)
+                    value.innerText += ' '+selected
+
+                }
+            })
+        })
+
+        window.addEventListener('load',()=>{
+            document.querySelectorAll(".alert").forEach((value,key)=>{
+                setTimeout(()=>{
+                    value.style.display = 'none'
+                },1500)
+            })
         })
     </script>
 </body>
