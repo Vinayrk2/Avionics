@@ -62,8 +62,7 @@
 
         /* search box style */
         #searchbox {
-            top: 0px;
-            visibility: hidden;
+            top: -100vh;
             background-color: rgba(0, 0, 0, 0.151);
             width: 100%;
             z-index: 10;
@@ -133,7 +132,7 @@
                   </svg>
             </form>
          </div>
-        <div class="container-fluid">
+        <div class="container-fluid border-bottom">
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="{% static 'images/logo.png' %}" alt="QF Avionics"
                     style="max-width: min(50px,50px); max-height: min(10vh,10vw);">
@@ -305,11 +304,13 @@
 
         searchopen.addEventListener("click", () => {
             console.log("click")
-            searchbox.style.visibility = "visible";
+            searchbox.style.top = "0vh";
+            searchbox.style.transition = "0.3s";
         })
 
         searchcancel.addEventListener("click", () => {
-            searchbox.style.visibility = "hidden";
+            searchbox.style.top = "-100vh";
+            searchbox.style.transition = "0.3s";
         })
     </script>
 </body>
