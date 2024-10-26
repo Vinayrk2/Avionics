@@ -6,7 +6,8 @@
     .container {
         border: 1px solid rgb(213, 217, 220);
         border-radius: 2vh;
-        margin-top: 8vh;
+        margin-top: 10vh;
+        /* padding: 5vh; */
     }
 
     #article-title {
@@ -16,14 +17,24 @@
         border-bottom-color: #f0eeee;
     }
 
-    #article-image {
-        height: 45vh;
+    img .article-image {
+        height: 40vh;
         width: 50%;
+        /* aspect-ratio: 1 / 1; */
         margin: auto
     }
-    
 
-    .description-block{
+    /* @media screen(max-width:800px) {
+        #article-image {
+            width: 50%;
+        }
+    } */
+
+
+
+
+
+    .description-block {
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         line-height: 2rem;
     }
@@ -33,19 +44,20 @@
     <div class="row m-4 " id="article-title">
         <h4> {{notification.title}}</h4>
     </div>
-    <div class="row ">
+    <div class="row">
         <div class="col-12">
-            <div class="row mb-4" id="article-image">
-                <img src="{{notification.image.url}}" alt="Aircraft" class=" ">
+            <div class="row mb-4" class="">
+                <img src="{{notification.image.url}}" alt="Aircraft" class="article-image ">
             </div>
             <div class="row">
+
                 <p class="description-block">
                     {{notification.description}}
                     {{notification.additional_write}}
                 </p>
                 <p>
-                    <h6 class="description-block">Posted At: {{notification.created_at}}</h6>
-                    <h6 class="description-block">Updated At: {{notification.updated_at}}</h6>
+                <h6 class="description-block">Posted At: {{notification.created_at}}</h6>
+                <h6 class="description-block">Updated At: {{notification.updated_at}}</h6>
                 </p>
             </div>
         </div>

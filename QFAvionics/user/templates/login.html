@@ -1,8 +1,19 @@
 {% extends "master.html" %}
     {% block content %}
+    {% load static}
+   <style>
+    /* @media (min-width:550px) {
+       .container{
+         width:90vw;
+       } 
+       button{
+        width:80vw;
+       }
+    } */
 
+   </style>
     
-    <div class="container my-5"  style="margin-top: 0.5vh; width:min(50vh,50vw);">
+    <div class="container my-5 border-3 border-light bg-light rounded" style="width:min(50vh,50vw);">
         <form action="{% url 'login' %}" method="post" >
             <h2 class="text-center"> Login  </h2>
             {% if message %}
@@ -10,7 +21,7 @@
             {% endif %}
             {{ form.as_p }}
             {% csrf_token %}
-            <button class="btn btn-primary container" type="submit"> Login </button>
+            <button class="btn btn-primary container mb-2" type="submit"> Login </button>
         </form>
     
     </div>
