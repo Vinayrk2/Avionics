@@ -147,8 +147,8 @@
                         <a class="nav-link md:mt-3" id="menu" href="{% url 'home' %}"><i class="fa-solid fa-house"></i> HOME</a>
                     </li>
                     <li class="nav-item" id="menu">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-layer-group"></i> SERVICES</a>
-                        <ul id="dropdown">
+                        <a class="nav-link text-decoration-none" href="#"><i class="fa-solid fa-layer-group"></i> SERVICES</a>
+                        <ul id="dropdown" class="text-decoration-none">
                             {% comment %} <li>Airframe Wiring</li>
                             <li>Fixed Wings</li>
                             <li>Glass Cockpits</li>
@@ -156,7 +156,7 @@
                             <li>5G Radar Alimeters</li> {% endcomment %}
                             {% if services %}
                             {% for service in services %}
-                            <a href="{% url 'service' id=service.id %}"><li>{{service.name}}</li></a>
+                            <a href="{% url 'service' id=service.id %}" class="text-decoration-none text-dark"><li>{{service.name}}</li></a>
                             {% endfor %}
                             {% endif %}
                         </ul>
@@ -232,7 +232,7 @@
                         <li>5G Radar Altimeters</li> {% endcomment %}
                         {% if services %}
                         {% for service in services %}
-                        <a href="{% url 'service' id=service.id %}"><li>{{service.name}}</li></a>
+                        <a href="{% url 'service' id=service.id %} " class="text-decoration-none text-white"><li>{{service.name}}</li></a>
                         {% endfor %}
                         {% endif %}
                     </ul>
@@ -246,7 +246,7 @@
                         <li>Terms of Service</li> {% endcomment %}
                         {% if links %}
                         {% for link in links %}
-                        <a href="{{link.url}}">
+                        <a href="{{link.url}}"  class="text-decoration-none text-white">
                             <li>{{link.name}}</li>
                         </a>
                         {% endfor %}
