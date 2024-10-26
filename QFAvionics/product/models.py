@@ -79,8 +79,10 @@ class Product(models.Model):
             if request.session.get("currency"):
                 if  request.session["currency"] == "USD":
                     obj['price'] = round(float(self.price) * 1.39,2)
+                    obj['currency'] = "USD"
                 elif request.session["currency"] == "CAD":
                     obj['price'] = round(float(self.price),2)
+                    obj['currency'] = "CAD"
         else:
             obj['price'] = 'login to view the price'
         return obj

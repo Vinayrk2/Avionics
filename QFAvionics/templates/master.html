@@ -114,8 +114,13 @@
                 <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-youtube fs-6"></i></a>
                 <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-linkedin fs-6"></i></a>
                 <select class="form-select" id="currency-value" aria-label="Default select example" style="height: 35px; width: 105px;">
+                    {% if request.session.currency == "USD" %}
+                    <option value="USD" selected>💲USD</option>
+                    <option value="CAD">💲CAD</option>
+                    {% else %}
                     <option value="USD">💲USD</option>
                     <option value="CAD" selected>💲CAD</option>
+                    {% endif %}
                 </select>
             </div>
         </div>
@@ -271,27 +276,12 @@
                     </form>
                 </div>
             </div>
-            <!-- <div class="row mt-4">
-                <div class="col-auto">
-                    <select class="form-select language-selector">
-                        <option selected><span class="currency-option">
-                                <svg class="currency-flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path fill="#D80027" d="M0 0h512v512H0z" />
-                                    <path fill="#FFF" d="M256 0v512h256V0z" />
-                                </svg>
-                                CAD $
-                            </span></option>
-                        <option>USD $</option>
-                    </select>
-                </div>
-            </div> -->
         </div>
     </footer>
 
     <script>
         let searchcancel = document.querySelector('#searchcancel');
         let searchopen = document.querySelector('#searchopen');
-        let flag = 0
         
         searchopen.addEventListener("click", () => {
             console.log("click")
@@ -306,30 +296,6 @@
 
         document.querySelector("#currency-value").addEventListener('change',(e)=>{
             let selected = e.target.value;
-            let currency_Calc_param = 1
-            
-            // switch(selected){
-            //     case 'USD':
-            //         currency_Calc_param = 1.39
-            //         sessionStorage.setItem('current-avi-currency','USD')
-            //         break;
-            //         case 'CAD':
-            //         currency_Calc_param = 1-(39/139)
-            //         sessionStorage.setItem('current-avi-currency','CAD')
-            //         break;
-            //     default:
-            //         window.alert("Please Enter Valid Input")
-            // }
-            // document.querySelectorAll(".currency_value").forEach((value, key)=>{
-            //     console.log(value.innerText)
-            //     if(parseInt(value.innerText)==NaN)
-            //         return
-            //     else{
-            //         value.innerText = Math.round(parseInt(value.innerText) * currency_Calc_param)
-            //         value.innerText += ' '+selected
-
-            //     }
-            // })
 
             setCurrency(selected);    
         })
@@ -346,7 +312,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert("Currency set to " + data.currency);
+                    window.location.reload()
                 } else {
                     alert("Failed to set currency: " + data.error);
                 }
@@ -365,10 +331,6 @@
             })
         })
 
-         window.addEventListener('DOMContentLoaded',()=>{
-            if(sessionStorage.getItem('current-avi-currency'))
-            document.querySelector("#currency-value").value = sessionStorage.getItem('current-avi-currency') || 'CAD';
-        }) 
     </script>
 </body>
 
