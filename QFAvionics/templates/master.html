@@ -114,8 +114,13 @@
                 <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-youtube fs-6"></i></a>
                 <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-linkedin fs-6"></i></a>
                 <select class="form-select" id="currency-value" aria-label="Default select example" style="height: 35px; width: 105px;">
+                    {% if request.session.currency == "USD" %}
+                    <option value="USD" selected>💲USD</option>
+                    <option value="CAD">💲CAD</option>
+                    {% else %}
                     <option value="USD">💲USD</option>
                     <option value="CAD" selected>💲CAD</option>
+                    {% endif %}
                 </select>
             </div>
         </div>
@@ -271,20 +276,6 @@
                     </form>
                 </div>
             </div>
-            <!-- <div class="row mt-4">
-                <div class="col-auto">
-                    <select class="form-select language-selector">
-                        <option selected><span class="currency-option">
-                                <svg class="currency-flag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path fill="#D80027" d="M0 0h512v512H0z" />
-                                    <path fill="#FFF" d="M256 0v512h256V0z" />
-                                </svg>
-                                CAD $
-                            </span></option>
-                        <option>USD $</option>
-                    </select>
-                </div>
-            </div> -->
         </div>
     </footer>
 
@@ -305,29 +296,33 @@
 
         document.querySelector("#currency-value").addEventListener('change',(e)=>{
             let selected = e.target.value;
-            let currency_Calc_param = 1
-            switch(selected){
-                case 'USD':
-                    currency_Calc_param = 1.39
-                    break;
-                case 'CAD':
-                    currency_Calc_param = 1
-                    break;
-                default:
-                    window.alert("Please Enter Valid Input")
-            }
-            document.querySelectorAll(".currency_value").forEach((value, key)=>{
-                console.log(value.innerText)
-                if(parseInt(value.innerText)==NaN)
-                    return
-                else{
-                    value.innerText = Math.round(parseInt(value.innerText) * currency_Calc_param)
-                    value.innerText += ' '+selected
 
+            setCurrency(selected);    
+        })
+        
+        function setCurrency(currency) {
+            console.log(currency)
+            fetch("/set_currency/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ "currency": currency })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload()
+                } else {
+                    alert("Failed to set currency: " + data.error);
                 }
             })
-        })
-
+            .catch(error => {
+                console.error("Error setting currency:", error);
+                alert("An error occurred while setting the currency.");
+            });
+        }
+        
         window.addEventListener('load',()=>{
             document.querySelectorAll(".alert").forEach((value,key)=>{
                 setTimeout(()=>{
@@ -335,6 +330,7 @@
                 },1500)
             })
         })
+
     </script>
 </body>
 
