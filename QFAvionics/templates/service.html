@@ -1,10 +1,32 @@
 {% extends "master.html" %}
 {% block content %}
+{% load static %}
+<style>
+    .container{
+        height: auto;
+        width: auto;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        border: 1px solid grey;
+    }
+    .row img{
+        max-height: 50vh;
+        max-width: 50vh;
+        margin: auto;
+    }
+</style>
 
-{{service.name}}
-{{service.image}}
+<div class="container">
+    <div class="row mb-3">
+        <img src="{{service.image.url}}" alt="">
+    </div>
+    <div class="row">
+        <p>
+            {{service.description}}
+        </p>
+    </div>
+</div>
+<!-- {{service.image}} -->
 {{service.status}}
-{{service.description}}
 {{service.service_type}}
 
 {% endblock %}
