@@ -16,7 +16,10 @@ class ProductAdmin(admin.ModelAdmin):
     class Media:
         # \static\js\product_admin.js
         js = ('js/productadmin.js',)
-
+        css = {
+            'all': ('css/index.css',)
+        }
+        
 # admin.site.register(Product, ProductAdmin)
 
 admin.site.register([Category])
