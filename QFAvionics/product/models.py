@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 CURRENCY_CHOICES = [
@@ -78,7 +79,7 @@ class Product(models.Model):
         if request.user.is_authenticated:
             if request.session.get("currency"):
                 if  request.session.get("currency") == "USD":
-                    obj['price'] = round(float(self.price) * 0.72,2)
+                    obj['price'] = round(float(self.price) * settings.CURRENCY_EXCHANGE_RATE,2)
                     obj['currency'] = "USD"
                 else:
                     obj['price'] = round(float(self.price),2)
