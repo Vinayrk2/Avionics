@@ -61,6 +61,7 @@
     <div id="categorybox" class="container-fluid mt-2 px-2 py-4 py-sm-0 h-10 d-flex flex-column-reverse flex-sm-row position-absolute align-items-center justify-content-start text-nowrap overflow-scroll"
     style="background-color: #070736; z-index: 20;">
         {% if categories %}
+            <span class="mx-3 no-link"><a href="{% url 'product-list-categorized' name='all' %}"> All Products </a></span>
             {% for category in categories %}
             <span class="mx-3 no-link"><a href="{% url 'product-list-categorized' name=category %}"> {{category}}</a></span>
             {% endfor %}
