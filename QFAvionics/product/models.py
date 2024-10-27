@@ -93,7 +93,7 @@ class Product(models.Model):
         
 
 class DefaultImage():
-    url = "https://bonwazadile.websites.co.in/e-store/img/defaults/product-default.png"
+    url = "/static/images/defult.png"
     
         
 
