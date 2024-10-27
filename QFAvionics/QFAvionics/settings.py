@@ -132,6 +132,8 @@ USE_TZ = True
 
 DATE_FORMAT = 'Y-m-d'
 
+CURRENCY_EXCHANGE_RATE = 0.72
+
 
 # Static files (CSS, JavaScript, Images)
 STATICFILES_DIRS = [
