@@ -97,6 +97,45 @@
             color: white;
             border: none;
         }
+
+        .iframe-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .iframe-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+        }
+        .iframe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .iframe-body {
+            flex-grow: 1;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+        }
+        
     </style>
 
 </head>
@@ -240,9 +279,34 @@
                     <ul class="text-secondary">
                         {% if links %}
                         {% for link in links %}
-                        <a href="{{link.url}}" target="_blank" class="text-decoration-none text-secondary">
+
+
+                        <!-- <a href="{{link.url}}" target="_blank" class="text-decoration-none text-secondary">
                             <li>{{link.name}}</li>
-                        </a>
+                        </a> -->
+                            <div class="mb-3">
+                                <a href="{{link.url}}" class=" text-secondary text-decoration-none me-2" data-bs-toggle="modal" data-bs-target="#iframeModal" onclick="document.getElementById('externalWebsite').src='{{link.url}}'">
+                                    <li>{{link.name}}</li>
+                                </a>
+                                
+                            </div>
+                    
+                        <div class="modal fade" id="iframeModal" tabindex="-1" aria-labelledby="iframeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-halfscreen modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <!-- <h5 class="modal-title" id="iframeModalLabel">External Website</h5> -->
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body p-0">
+                                        <iframe id="externalWebsite" src="" title="External Website" sandbox="allow-scripts allow-same-origin">
+                                          
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         {% endfor %}
                         {% endif %}
                     </ul>
