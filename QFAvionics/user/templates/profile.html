@@ -35,8 +35,8 @@
                     <label for="floatingstuusername">Mobile No</label>
                 </div>
                 <div class="form-floating">
-                    <input disabled type="date" class="form-control rounded mt-3" id="floatingmobile" placeholder="adam_123" name="mobile" value="22/10/2023" required>
-                    <label for="floatingstuusername">Joining Date</label>
+                    <input disabled type="text" class="form-control rounded mt-3" id="floatingmobile" placeholder="adam_123" name="mobile" value="{{user.date_joined|date:"Y-m-d"}}"  required>
+                    <label for="floatingstuusername">Joining Date : </label>
                 </div>
                 <a href="{% url 'logout' %}" class="btn btn-outline-danger text-decoration-none fs-5 w-100 my-3">Logout</a>
             </form>

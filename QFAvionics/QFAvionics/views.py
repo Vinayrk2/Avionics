@@ -5,7 +5,7 @@ from django.contrib import messages
 
 def home(request):
     categories = Category.objects.all()[:4]
-    products = Product.objects.all()[:6]
+    products = Product.objects.all()[:4]
     services = [{
         "image":"images/warehouse.webp",
         "name": "ONLINE STORE",

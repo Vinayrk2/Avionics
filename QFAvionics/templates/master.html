@@ -236,11 +236,11 @@
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <h5>Customer Care</h5>
+                    <h5>Important Links</h5>
                     <ul>
                         {% if links %}
                         {% for link in links %}
-                        <a href="{{link.url}}"  class="text-decoration-none text-white">
+                        <a href="{{link.url}}" target="_blank" class="text-decoration-none text-white">
                             <li>{{link.name}}</li>
                         </a>
                         {% endfor %}
