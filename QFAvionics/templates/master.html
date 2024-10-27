@@ -181,8 +181,8 @@
                 <img src="{% static 'images/logo.png' %}" alt="QF Avionics"
                     style="max-width: min(50px,50px); max-height: min(10vh,10vw);">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" style="border: none; margin-right: -10px;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <img src="{% static 'images/toggle.png' %}">
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
@@ -232,7 +232,7 @@
 
                     </li>
                 </ul>
-                <div class="icon-container d-flex mx-2">
+                <div class="icon-container d-flex mx-1 mt-2 mt-md-0 mb-3 mb-md-0">
                     {% if request.user.is_authenticated %}
                     <a href="{% url 'profile' %}" class="text-dark me-3 text-decoration-none border px-3 py-1 rounded"><i class="fas fa-user fs-6"></i> {{ user.username }}
                     </a>
