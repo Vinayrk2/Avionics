@@ -106,7 +106,7 @@ def send_mail_page(request):
         tax = settings.CHARGES["tax"]
         for key,item in request.session.get("cart").items():
             if request.session.get("currency") == "USD":
-                item["price"] = round(float(item["price"]) * 1.39,2)
+                item["price"] = round(float(item["price"]) * 0.72,2)
             total += float(item["price"]) * float(item["quantity"])
         order_summary = {
             "total": round(total+tax,2),
