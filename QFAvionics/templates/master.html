@@ -226,21 +226,21 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3 mb-4">
-                    <h5>Services</h5>
+                    <h5><i class="fa-solid fa-layer-group fs-6"></i> Services</h5>
                     <ul>
                         {% if services %}
                         {% for service in services %}
-                        <a href="{% url 'service' id=service.id %} " class="text-decoration-none text-white"><li>{{service.name}}</li></a>
+                        <a href="{% url 'service' id=service.id %} " class="text-decoration-none text-secondary"><li>{{service.name}}</li></a>
                         {% endfor %}
                         {% endif %}
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <h5>Important Links</h5>
-                    <ul>
+                    <h5><i class="fa-solid fa-link fs-6"></i> Important Links</h5>
+                    <ul class="text-secondary">
                         {% if links %}
                         {% for link in links %}
-                        <a href="{{link.url}}" target="_blank" class="text-decoration-none text-white">
+                        <a href="{{link.url}}" target="_blank" class="text-decoration-none text-secondary">
                             <li>{{link.name}}</li>
                         </a>
                         {% endfor %}
@@ -248,7 +248,8 @@
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <h5>Location</h5>
+                    <h5><i class="fa-solid fa-location-dot fs-6"></i> Location</h5>
+                    <div class="text-secondary">
                     <p>Address:<br>
                         QF Avionics Center LtdHangar #11<br>
                         Airport Drive, Springbook,ABT4S<br>
@@ -257,15 +258,16 @@
                         Red Deer Regional Airport, CYQF, YQF</p>
                     <p>Phone:<br>
                         +1 (403) 886-4306</p>
+                        </div>
                 </div>
                 <div class="col-md-3">
-                    <h5>Sign up and save</h5>
-                    <p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+                    <h5><i class="fa-solid fa-floppy-disk fs-6"></i> Sign up and save</h5>
+                    <p class="text-secondary">Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
                     <form>
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control border border-danger"
+                            <input type="email" class="form-control border border-secondary"
                                 placeholder="Enter your email">
-                            <button class="btn btn-outline-danger" type="submit">
+                            <button class="btn btn-outline-secondary px-3" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-envelope-fill" viewBox="0 0 16 16">
                                     <path
