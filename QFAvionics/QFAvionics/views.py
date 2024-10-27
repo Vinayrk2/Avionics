@@ -2,6 +2,9 @@ from django.shortcuts import redirect, render
 from product.models import Category, Product
 from additional_option.models import Service
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.conf import settings
 
 def home(request):
     categories = Category.objects.all()[:4]
@@ -53,7 +56,38 @@ def aboutpage(request):
     return render(request, "about.html", {})
 
 def contactpage(request):
-    return render(request, "contact.html", {})
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('description')
+        subject = request.POST.get("subject")
+        
+        html_message = render_to_string('emailcomplaint.html', {
+            'name': name,
+            'email': email,
+            'message': message,
+            'subject': subject
+        })
+        flag = send_mail(
+            subject=subject,
+            message=message, 
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[settings.EMAIL_HOST_USER],
+            html_message=html_message,
+            fail_silently=False,
+        )
+        if flag:
+            messages.success(request, "Your message has been sent successfully!")
+            return redirect("/")
+        else:
+            messages.add_message(request,  messages.ERROR, 'Failed to send mail, try again later')
+            return redirect("/")
+        
+    # else:
+    #     messages.add_message(request,  messages.INFO, 'Invalid Operation')
+    #     return redirect("/")
+    else:
+        return render(request, "contact.html", {})
 
 def service(request, servicename):
     service_perticular = Service.objects.filter(name=servicename).first()
