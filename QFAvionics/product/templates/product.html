@@ -38,6 +38,15 @@
                     <a href="{% url 'cart_add' id=product.id %}"><button class="btn me-2 py-2 px-4 text-white" style="background-color: #090841;">+ ADD TO CART</button></a>
                 </div>
             </div>
+
+            <div> 
+                <h2 class="mb-3 fw-bold">Product Features</h2>
+            {% if product.features %}
+                {% for key,value in product.features.items %}
+                    <p>{{key}} : {{value}} </p>
+                {% endfor %}
+            {% endif %}
+            </div>
         </div>
     </main>
 </div>

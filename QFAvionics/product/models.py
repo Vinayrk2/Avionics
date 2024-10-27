@@ -73,6 +73,7 @@ class Product(models.Model):
             'updated_at': self.updated_at.isoformat(),
             'id':self.pk,
             'image': self.get_image(),
+            'features': self.features
             # 'images': [image.id for image in self.images.all()]  # List of image IDs
         }
         
