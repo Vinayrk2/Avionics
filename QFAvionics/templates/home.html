@@ -89,8 +89,8 @@
     </div>
 
     {% load custom_filters %}
-    <div class="container-fluid mt-5">
-        <h2 class="text-center mb-4 fw-bolder">Our Product Categories</h2>
+    <div class="container-fluid mt-5 p-2 p-lg-5">
+        <h1 class="text-center fw-bolder">Our Product Categories</h1>
         <div class="scroll-container">
             {% if categories %}
             {% for category in categories %}
@@ -115,10 +115,6 @@
                 </div>
         </div>
     </div> --> {% endcomment %}
-    
-
-
-    <hr class="my-2" style="height: 1px;" />
 
     <div>
         <div class="container-fluid mt-5">
@@ -127,10 +123,10 @@
                 {% if products %}
                 {% for product in products %}
                 <div class="col-md-3 col-sm-6 col-12 my-2">
-                    <div class="card h-100">
+                    <div class="card h-100 rounded">
                         <div class="card-img-top-wrapper">
                             <a href="{% url 'product-view' id=product.id %}">
-                                <img src="{{product.image}}" alt="Product Name" class="card-img-top">
+                                <img src="{{product.image}}" alt="Product Name" class="card-img-top p-3">
                             </a>
                         </div>
                         <div class="card-body d-flex flex-column bg-light">
@@ -148,7 +144,6 @@
             </div>
         </div>
     </div>
-        <hr class="my-2" style="height: 1px;" />
         {% if not request.user.is_authenticated %}
         <saction class="px-4 py-5 my-5 text-center">
             <h1 class="display-6 fw-bold text-body-emphasis">SIGNUP OR LOGIN</h1>
