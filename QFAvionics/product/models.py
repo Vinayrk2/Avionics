@@ -80,7 +80,7 @@ class Product(models.Model):
         if request.user.is_authenticated:
             if request.session.get("currency"):
                 if  request.session.get("currency") == "USD":
-                    obj['price'] = round(float(self.price) * settings.CURRENCY_EXCHANGE_RATE,2)
+                    obj['price'] = round(float(self.price) * float(settings.CURRENCY_EXCHANGE_RATE),2)
                     obj['currency'] = "USD"
                 else:
                     obj['price'] = round(float(self.price),2)

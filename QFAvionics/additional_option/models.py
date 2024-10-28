@@ -26,7 +26,7 @@ class SiteSettings(models.Model):
     phone_number_1 = models.IntegerField(blank=True, null=True, default='14038864326')
     phone_number_2 = models.IntegerField(blank=True, null=True)
     bussiness_email = models.EmailField(max_length=70, blank=False, default='info@qfavionics.com', null=False, help_text="Email on which receive the email")
-    currency_rate = models.IntegerField(null=False, blank=False, default=0.72)
+    currency_rate = models.DecimalField(null=False, blank=False, default=0.72, decimal_places=2, max_digits=3)
     address = models.TextField(default="QF Avionics Center LtdHangar #11 Airport Drive, Springbook,ABT4S 2E8Canada", blank=True, null=True)
     airport = models.TextField(default="Red Deer Regional Airport, CYQF, YQF", blank=True, null=True)
 
@@ -50,13 +50,19 @@ class SiteSettings(models.Model):
         verbose_name_plural = "Site Settings"
         
     def save(self, *args, **kwargs):
-        # Ensure only one instance exists by setting a fixed primary key
+
         self.pk = 1
 
-        # Clear the cached settings before saving the new settings
         cache.delete('site_settings')
+        
+        # print("Deleted cache")
 
-        # Call the original save method to save the instance
+        # settings = self.load()
+        
+        # print("Setting the cache")
+        
+        # cache.set('site_settings', settings, timeout=300)
+        
         super().save(*args, **kwargs)
 
     @classmethod
