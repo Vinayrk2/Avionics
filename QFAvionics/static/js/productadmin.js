@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateButton.onclick = () => {
             features[fieldInput.value] = valueInput.value;
             updateJsonField();
-            updateButton.removeAttribute("disabled")
+            updateButton.setAttribute("disabled",true)
         };
         updateButton.setAttribute("disabled",true)
         wrapper.appendChild(updateButton);

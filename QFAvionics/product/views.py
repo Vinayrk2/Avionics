@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Product, Category
 from django.contrib import messages
+from notification.models import Notification
 
 def product_view(request, id):
     product = Product.objects.filter(id=id).first()
@@ -51,4 +52,6 @@ def search_result(request):
             pr = product.to_dict(request)
             pr["image"] = product.get_image().url
             product_dict.append(pr)
-    return render(request, "search_result.html", {'products':product_dict,  "query":query})
+        news = Notification.objects.filter(title__icontains=query) |  Notification.objects.filter(description__icontains=query)
+
+    return render(request, "search_result.html", {'products':product_dict,  "query":query, 'news':news})

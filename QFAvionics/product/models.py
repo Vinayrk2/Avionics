@@ -18,7 +18,7 @@ class Product(models.Model):
     is_available = models.BooleanField(default=True)  
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    features = models.JSONField()
+    features = models.JSONField(default=dict)
     
     def get_related_products(self,request):
         product_temp = Product.objects.filter(category=self.category).exclude(id=self.id)[:10]

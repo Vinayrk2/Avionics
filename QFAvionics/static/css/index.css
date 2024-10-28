@@ -145,5 +145,5 @@ body {
 }
 
 button:disabled{
-    background-color:black;
+    background-color:#999999;
 }
