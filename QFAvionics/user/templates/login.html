@@ -13,7 +13,9 @@
 
    </style>
     
-    <div class="container my-5 border-3 border-light bg-light rounded" style="width:min(50vh,50vw);">
+    <div class="row mt-5 mx-0 w-100 d-flex justify-content-center">
+        <div class="p-2">
+    <div class="col-sm-8 col-md-6 py-3 container-fluid border bg-light rounded p-md-5" style="">
         <form action="{% url 'login' %}" method="post" >
             <h2 class="text-center"> Login  </h2>
             {% if message %}
@@ -23,6 +25,7 @@
             {% csrf_token %}
             <button class="btn btn-primary container mb-2" type="submit"> Login </button>
         </form>
-    
+    </div>
+    </div>
     </div>
     {% endblock %}
