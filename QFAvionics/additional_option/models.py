@@ -21,11 +21,11 @@ class Link(models.Model):
     
 
 class SiteSettings(models.Model):
-    site_name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=70, blank=False, null=False)
-    phone_number_1 = models.IntegerField(blank=True, null=True)
+    site_name = models.CharField(max_length=100, default="QFAvionics")
+    email = models.EmailField(max_length=70, blank=False, null=False,  default='info@qfavionics.com')
+    phone_number_1 = models.IntegerField(blank=True, null=True, default='14038864326')
     phone_number_2 = models.IntegerField(blank=True, null=True)
-    bussiness_email = models.EmailField(max_length=70, blank=False, null=False, help_text="Email on which receive the email")
+    bussiness_email = models.EmailField(max_length=70, blank=False, default='info@qfavionics.com', null=False, help_text="Email on which receive the email")
     currency_rate = models.IntegerField(null=False, blank=False, default=0.72)
     address = models.TextField(default="QF Avionics Center LtdHangar #11 Airport Drive, Springbook,ABT4S 2E8Canada", blank=True, null=True)
     airport = models.TextField(default="Red Deer Regional Airport, CYQF, YQF", blank=True, null=True)
