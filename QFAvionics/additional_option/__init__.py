@@ -1,0 +1,1 @@
+default_app_config = 'additional_option.apps.AdditionalOptionConfig'
