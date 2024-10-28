@@ -21,23 +21,36 @@
 
         <!-- Main Content -->
         <div class="col-md-11">
-            <p>Showing results for "{{query}}". </p>
-
+            <p>Showing similar results for "{{query}}".  </p>
+            
+            {% if news %}
+            <div class="w-100 d-flex align-items-center justify-content-between">
+                <h4 style="font-family: sans-serif; font-weight:bolder;">News:</h4>
+                <div>({{products|length}} news found)</div>
+            </div>
+            
+            
             <div class="scroll-container d-flex" style="overflow-x: scroll;">
+                {% for value in news %}
                 <a href="" class="text-decoration-none m-2">
-                    <div class="scroll-item item1" style="background-image: url({% static 'images/homeimg3.png'%});">
-                        <p class="p-3 text-center fw-bolder text-white align-items-center fs-3 rounded w-100"
-                            style="background-color: rgba(0, 0, 0, 0.507); height: 110%; letter-spacing: 0.5px; line-height: 120%;">there
-                            is earthqueck filled in expedita delectus commodi. Quisquam officia fuga perspiciatis! olam Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam tempora ex exercitationem quibusdam ratione esse illum voluptatem ea! Corporis velit beatae consequuntur nam quos placeat eveniet, quaerat hic minima aspernatur!
-                            and 2a?</p>
+                    <div class="scroll-item item1" style="background-image: url('{{value.image.url}}'); position:relative;">
+                        <p class="p-3 text-center fw-bolder text-white align-items-center rounded w-100 "
+                        style="background-color: rgba(0, 0, 0, 0.807); height: 50%; letter-spacing: 0.5px; font-size:80%; line-height: 150%; position:absolute; bottom:-10%;">{{value.title}}</p>
                     </div>
                 </a>
+                {% endfor %}
             </div>
-
-            <h2>Results</h2>
+            <hr class="my-3" />
+            {% endif %}
+            
             <div class="row">
                 <!-- Product 1 -->
                 {% if products %}
+                <div class="w-100 d-flex align-items-center justify-content-between">
+                    <h4 style="font-family: sans-serif; font-weight:bolder;">Products:</h4>
+                    <div>({{products|length}} products found)</div>
+                </div>
+                
                 {% for product in products %}
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2">
                     <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
