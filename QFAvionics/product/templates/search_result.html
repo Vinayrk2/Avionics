@@ -9,7 +9,7 @@
 
         <!-- Main Content -->
         <div class="col-md-10">
-            <p>Showing products of {{name}} category. </p>
+            <p>Showing results for "{{query}}". </p>
 
             <h2>Results</h2>
             <div class="row" >
@@ -39,7 +39,7 @@
                 {% endfor %}
                 {% else %}
                 <div class="col-md-4">
-                    <div class="fw-bolder" style="height: 50vh;"> Sorry! No Products Available For {{name}}</div>
+                    <div class="fw-bolder" style="height: 50vh;"> Sorry! No Results Available For {{query}}</div>
 
                 </div>
                 {% endif %}

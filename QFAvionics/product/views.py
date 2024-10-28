@@ -51,4 +51,4 @@ def search_result(request):
             pr = product.to_dict(request)
             pr["image"] = product.get_image().url
             product_dict.append(pr)
-    return render(request, "search_result.html", {'products':product_dict})
+    return render(request, "search_result.html", {'products':product_dict,  "query":query})
