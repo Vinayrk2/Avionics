@@ -286,7 +286,7 @@
                     <h5><i class="fa-solid fa-layer-group fs-6"></i> Services</h5>
                     <ul>
                         {% if services %}
-                        {% for service in services %}
+                        {% for service in services|slice:":8" %}
                         <a href="{% url 'service' id=service.id %} " class="text-decoration-none text-secondary"><li>{{service.name}}</li></a>
                         {% endfor %}
                         {% endif %}
