@@ -1,41 +1,69 @@
 {% extends "master.html" %}
+{% load static %}
+{% block content %}
 
-{% block  content %}
+<style>
+    .scroll-item {
+        width: 360px;
+        height: 230px;
+        overflow: hidden;
+        background-size: cover;
+        border-radius: 20px;
+        box-shadow: 0.5px 0.5px 5px 0.5px gray;
+        background-position: center;
+    }
+</style>
 
-<div class="container-fluid mt-5 pt-4" >
+<div class="container-fluid mt-5 pt-4">
     <div class="row d-flex  justify-content-center">
 
         <!-- Sidebar -->
 
         <!-- Main Content -->
-        <div class="col-md-10">
+        <div class="col-md-11">
             <p>Showing results for "{{query}}". </p>
 
+            <div class="scroll-container d-flex" style="overflow-x: scroll;">
+                <a href="" class="text-decoration-none m-2">
+                    <div class="scroll-item item1" style="background-image: url({% static 'images/homeimg3.png'%});">
+                        <p class="p-3 text-center fw-bolder text-white align-items-center fs-3 rounded w-100"
+                            style="background-color: rgba(0, 0, 0, 0.507); height: 110%; letter-spacing: 0.5px; line-height: 120%;">there
+                            is earthqueck filled in expedita delectus commodi. Quisquam officia fuga perspiciatis! olam Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam tempora ex exercitationem quibusdam ratione esse illum voluptatem ea! Corporis velit beatae consequuntur nam quos placeat eveniet, quaerat hic minima aspernatur!
+                            and 2a?</p>
+                    </div>
+                </a>
+            </div>
+
             <h2>Results</h2>
-            <div class="row" >
+            <div class="row">
                 <!-- Product 1 -->
                 {% if products %}
                 {% for product in products %}
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2">
-                        <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
+                    <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
                         <div class="card h-100" style="background-color: rgb(245, 245, 245);">
                             <div class="card-img-top-wrapper p-3">
-                                    <img src="{{product.image}}" alt="Product Name" class="card-img-top rounded" style="mix-blend-mode: darken;">
+                                <img src="{{product.image}}" alt="Product Name" class="card-img-top rounded"
+                                    style="mix-blend-mode: darken;">
                             </div>
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title fw-bolder text-dark">{{product.name}}</h5>
                                 <p class="card-text flex-grow-1 text-secondary">{{product.description}}</p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-success fw-bolder fs-5">$ {{product.price}} <span style="font-size: 14px;">{{product.currency}}</span></span>
+                                    <span class="text-success fw-bolder fs-5">$ {{product.price}} <span
+                                            style="font-size: 14px;">{{product.currency}}</span></span>
                                     <span class="text-secondary" style="font-size: 13px;">{{product.category}}</span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <a href="{% url 'cart_add' id=product.id %}"><button class="btn mt-3 py-2 px-3 text-white" style="background-color: #090841; font-size: 12px;">+ ADD TO CART</button></a>
+                                    <a href="{% url 'cart_add' id=product.id %}"><button
+                                            class="btn mt-3 py-2 px-3 text-white"
+                                            style="background-color: #090841; font-size: 12px;">+ ADD TO
+                                            CART</button></a>
                                 </div>
                             </div>
                         </div>
-                        </a>
-                    </div>
+                    </a>
+                </div>
                 {% endfor %}
                 {% else %}
                 <div class="col-md-4">
@@ -50,5 +78,5 @@
 </div>
 
 
-    
+
 {% endblock %}
