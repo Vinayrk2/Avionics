@@ -52,7 +52,7 @@
                     aria-controls="panelsStayOpen-collapseOne">
                     <div class="row">
                         <p>
-                            Product Description
+                            {{service.name}}
                         </p>
                     </div>
                 </button>
@@ -73,23 +73,13 @@
                         <p class="title mt-5">Specifications</p>
 
                         <p>
+                            {% if  service.specifications %}
+                            {% for key, value in  service.specifications.items %}
                             <li>
-                                Dual 6.5” flight displays that are easy to read
+                                {{value}}
                             </li>
-                            <li>
-                                See clearly in dark VFR night, DVE or inadvertent IMC with HSVT™
-                            </li>
-                            <li> Helicopter Terrain Awareness Warning System (HTAWS) support
-
-                            </li>
-                            <li>
-                                Weather, traffic, and charting all in your primary field of view
-
-                            </li>
-                            <li>
-                                Video input for FLIR or other camera display
-
-                            </li>
+                            {% endfor %}
+                            {% endif %}
                         </p>
                     </div>
 
@@ -124,12 +114,13 @@
             </h2>
             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
                 <div class="accordion-body">
-                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the
-                    collapse plugin adds the appropriate classes that we use to style each element. These classes
-                    control the overall appearance, as well as the showing and hiding via CSS transitions. You can
-                    modify any of this with custom CSS or overriding our default variables. It's also worth noting that
-                    just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit
-                    overflow.
+                    {% if  service.specifications %}
+                    {% for key, value in  service.technical_information.items %}
+                    <li>
+                        {{value}}
+                    </li>
+                    {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>
