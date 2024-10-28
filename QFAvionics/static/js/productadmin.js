@@ -1,4 +1,4 @@
-const btnClasses = 'button default'
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const featureContainer = document.createElement("div");
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Button to add a new field-value pair
     const addFeatureButton = document.createElement("button");
-    addFeatureButton.textContent = "Add Feature";
+    addFeatureButton.textContent = "Add";
     addFeatureButton.type = "button";
     addFeatureButton.classList.add('defaultadmin');
 

@@ -8,6 +8,8 @@ class Service(models.Model):
     status = models.BooleanField(default=True)
     description = models.TextField(default='')
     service_type = models.CharField(default='', max_length=40, blank=False, null=False)
+    specifications = models.JSONField(default=dict)
+    technical_information = models.JSONField(default=dict)
 
     def __str__(self):
         return self.name
