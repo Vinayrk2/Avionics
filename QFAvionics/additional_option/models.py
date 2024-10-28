@@ -55,13 +55,13 @@ class SiteSettings(models.Model):
 
         cache.delete('site_settings')
         
-        print("Deleted cache")
+        # print("Deleted cache")
 
-        settings = self.load()
+        # settings = self.load()
         
-        print("Setting the cache")
+        # print("Setting the cache")
         
-        cache.set('site_settings', settings, timeout=300)
+        # cache.set('site_settings', settings, timeout=300)
         
         super().save(*args, **kwargs)
 
