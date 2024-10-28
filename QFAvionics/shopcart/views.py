@@ -141,3 +141,13 @@ def send_mail_page(request):
         return redirect("/")
 
     return render(request, "emailsuccess.html", {})
+
+def get_total_items(request):
+    cart = Cart(request)
+    cartitems = cart.cart
+    total = 0
+    
+    for key, value in cartitems.items():
+        total += value["quantity"]    
+    
+    return total
