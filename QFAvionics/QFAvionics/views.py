@@ -12,12 +12,12 @@ def home(request):
     services = [{
         "image":"images/warehouse.webp",
         "name": "ONLINE STORE",
-        "description":"Use this section to explain a set of product features, to link to a series of pages, or to answer common questions about your products. Add images for emphasis."
+        "description":"We provide several online services such as viewing our products, receiving news on business etc."
     },
     {
      "image":"images/warehouse.webp",
         "name": "EQUIPMENT INSTALLATION",
-        "description":"Use this section to explain a set of product features, to link to a series of pages, or to answer common questions about your products. Add images for emphasis."   
+        "description":"Equipment Installation means any actions that are necessary to attach the equipment to the building including, but not limited to bolting or welding.."   
     },
     {
      "image":"images/warehouse.webp",
@@ -28,13 +28,13 @@ def home(request):
     {
      "image":"images/warehouse.webp",
         "name": "LINE MAINTENANCE",
-        "description":"Use this section to explain a set of product features, to link to a series of pages, or to answer common questions about your products. Add images for emphasis."   
+        "description":"Line maintenance is the routine and preventive maintenance that is performed on an aircraft before, between, or after flights. It includes tasks such as checking the oil levels, tire pressures etc."   
     },
     
     {
      "image":"images/warehouse.webp",
         "name": "RETROFITS",
-        "description":"Use this section to explain a set of product features, to link to a series of pages, or to answer common questions about your products. Add images for emphasis"   
+        "description":"A retrofit is the process of adding new or modified parts or equipment to something that was previously constructed or manufactured. Retrofits can be done for a variety of reasons, for improve energy efficiency."   
     },
     
     {
