@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.cache import cache
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 # Create your models here.
 class Service(models.Model):
@@ -31,6 +33,9 @@ class SiteSettings(models.Model):
     currency_rate = models.DecimalField(null=False, blank=False, default=0.72, decimal_places=2, max_digits=3)
     address = models.TextField(default="QF Avionics Center LtdHangar #11 Airport Drive, Springbook,ABT4S 2E8Canada", blank=True, null=True)
     airport = models.TextField(default="Red Deer Regional Airport, CYQF, YQF", blank=True, null=True)
+    email_app_password = models.TextField(max_length=30,  default="zochakahgfehnxdq", blank=True, null=True)
+    tax = models.DecimalField(decimal_places=2,  max_digits=5, default=0.15, null=False, blank=False)
+
 
     def __str__(self):
         return "Website Settings"
@@ -52,19 +57,7 @@ class SiteSettings(models.Model):
         verbose_name_plural = "Site Settings"
         
     def save(self, *args, **kwargs):
-
-        self.pk = 1
-
-        cache.delete('site_settings')
-        
-        # print("Deleted cache")
-
-        # settings = self.load()
-        
-        # print("Setting the cache")
-        
-        # cache.set('site_settings', settings, timeout=300)
-        
+        self.pk = 1        
         super().save(*args, **kwargs)
 
     @classmethod
@@ -72,3 +65,8 @@ class SiteSettings(models.Model):
         # Create a default instance if none exists
         obj, created = cls.objects.get_or_create(pk=1)
         return obj
+    
+@receiver(post_save, sender=SiteSettings)
+def clear_site_settings_cache(sender, **kwargs):
+    print("Clearing site settings")
+    cache.delete('site_settings')

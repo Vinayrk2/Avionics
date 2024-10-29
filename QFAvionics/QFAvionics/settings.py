@@ -69,7 +69,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'QFAvionics.header_context.header_options',
-                'cart.context_processor.cart_total_amount'
+                'cart.context_processor.cart_total_amount',
+                'additional_option.middleware.setting_middleware',
             ],
         },
     },
