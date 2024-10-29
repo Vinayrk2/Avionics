@@ -110,6 +110,7 @@
             align-items: center;
             z-index: 1000;
         }
+
         .iframe-content {
             background-color: white;
             border-radius: 8px;
@@ -119,6 +120,7 @@
             display: flex;
             flex-direction: column;
         }
+
         .iframe-header {
             display: flex;
             justify-content: space-between;
@@ -126,158 +128,178 @@
             padding: 1rem;
             border-bottom: 1px solid #dee2e6;
         }
+
         .iframe-body {
             flex-grow: 1;
             overflow: hidden;
         }
+
         iframe {
             width: 100%;
             height: 80vh;
             border: none;
         }
-        
-        @media (max-width: 991.98px) {
-    #companyname {
-        font-size: 20px;
-        position: absolute;
-        margin: 110px 0px 0px 50px;
-        color: #090841;
-        z-index: 400;
-    }
 
-    @media (max-width: 575px) {
-        #companyname {
-            margin: 135px 0px 0px 45px;
+        @media (max-width: 991.98px) {
+            #companyname {
+                font-size: 20px;
+                position: absolute;
+                margin: 110px 0px 0px 50px;
+                color: #090841;
+                z-index: 400;
+            }
+
+            @media (max-width: 575px) {
+                #companyname {
+                    margin: 135px 0px 0px 45px;
+                }
+            }
         }
-    }
-}
     </style>
 
 </head>
 
 <body>
     <main id="mainbox" class="mb-5">
-    <div class="top-bar">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <div>
-                <span class="me-3"><i class="fas fa-phone"></i> +1 (403) 886-4326</span>
-                <span class="me-3" id="emailButton" style="cursor: pointer;"><i class="fas fa-envelope"></i> info@qfavionics.com</span>
-            </div>
-            <h3 id="companyname" style="letter-spacing: 1px;">QF Avionics</h3>
-            <div class="d-sm-flex">
-                <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-instagram fs-6"></i></a>
-                <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-youtube fs-6"></i></a>
-                <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-linkedin fs-6"></i></a>
-                <select class="form-select" id="currency-value" aria-label="Default select example" style="height: 35px; width: 105px;">
-                    {% if request.session.currency == "USD" %}
-                    <option value="USD" selected>💲USD</option>
-                    <option value="CAD">💲CAD</option>
-                    {% else %}
-                    <option value="USD">💲USD</option>
-                    <option value="CAD" selected>💲CAD</option>
-                    {% endif %}
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <nav class="position-absolute navbar navbar-expand-lg navbar-light bg-white w-100" style="z-index: 200;">
-        <!-- search box -->
-         <div id="searchbox" class="d-flex justify-content-center position-absolute">
-            <form id="searchform" class="d-flex" action="{% url 'search'  %}" method="get">
-                <input id="searchinput" type="text" name="q" placeholder="Enter Keyword . . .">&nbsp;
-                <button id="searchbtn" type="submit">Search</button>
-                  <svg id="searchcancel" xmlns="http://www.w3.org/2000/svg" width="22" height="22" style="margin: -30px -7px 0px 0px; cursor: pointer;" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                  </svg>
-            </form>
-         </div>
-        <div class="container-fluid border-bottom">
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="{% static 'images/logo.png' %}" alt="QF Avionics"
-                    style="max-width: min(50px,50px); max-height: min(10vh,10vw);">
-            </a>
-            <button class="navbar-toggler" style="border: none; margin-right: -10px;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <img src="{% static 'images/toggle.png' %}">
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link md:mt-3" id="menu" href="{% url 'home' %}"><i class="fa-solid fa-house"></i> HOME</a>
-                    </li>
-                    <li class="nav-item" id="menu">
-                        <a class="nav-link text-decoration-none"><i class="fa-solid fa-layer-group"></i> SERVICES</a>
-                        <ul id="dropdown" class="text-decoration-none">
-                            {% comment %} <li>Airframe Wiring</li>
-                            <li>Fixed Wings</li>
-                            <li>Glass Cockpits</li>
-                            <li>Rotorcraft</li>
-                            <li>5G Radar Alimeters</li> {% endcomment %}
-                            {% if services %}
-                            {% for service in services %}
-                            <a href="{% url 'service' id=service.id %}" class="text-decoration-none text-dark"><li>{{service.name}}</li></a>
-                            {% endfor %}
-                            {% endif %}
-                        </ul>
-                    </li>
-                    <li class="nav-item" id="menu">
-                        <a class="nav-link"><i class="fa-solid fa-bag-shopping"></i> SHOP</a>
-                        <ul id="dropdown">
-                            <a href="{% url 'product-list-categorized' name='all' %}"
-                                style="text-decoration:none; color:black;">
-                                <li> All Products </li>
-                            </a>
-                            {% for category in categories %}
-                            <a href="{% url 'product-list-categorized' name=category %}"
-                                style="text-decoration:none; color:black;">
-                                <li>{{category}} </li>
-                            </a>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                    <li class="nav-item" id="menu">
-                        <a class="nav-link" href="{% url 'view-news' %}"><i class="fa-solid fa-newspaper"></i> NEWS</a>
-
-                    </li>
-                    <li class="nav-item" id="menu">
-                        <a class="nav-link" href="{% url 'aboutpage' %}"><i class="fa-solid fa-address-card"></i> ABOUT</a>
-
-                    </li>
-                    <li class="nav-item" id="menu">
-                        <a class="nav-link" href="{% url 'contactpage' %}"><i class="fa-solid fa-address-book"></i> CONTACT</a>
-
-                    </li>
-                </ul>
-                <div class="icon-container d-flex mx-1 mt-2 mt-md-0 mb-3 mb-md-0">
-                    {% if request.user.is_authenticated %}
-                    <a href="{% url 'profile' %}" class="text-dark me-3 text-decoration-none border px-3 py-1 rounded"><i class="fas fa-user fs-6"></i> {{ user.username }}
-                    </a>
-                    {% else %}
-                    <a href="{% url 'login' %}" class="text-dark me-3 fs-6"><i class="fas fa-user fs-6"></i> </a>
-                    {% endif %}
-                    <div>
-                    <a href="{% url 'cart_detail' %}" class="text-dark me-3"><span class="position-absolute bg-white" style="font-size: 12px; border-radius: 100%; margin-top: -10px; margin-left: 11px;">{{no_of_items}}</span><i class="fas fa-shopping-cart fs-6"></i></a>
-                    </div>
-                    <a id="searchopen" class="text-dark"><i class="fas fa-search fs-6"></i></a>
+        <div class="top-bar">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="me-3"><i class="fas fa-phone"></i> +1 (403) 886-4326</span>
+                    <span class="me-3" id="emailButton" style="cursor: pointer;"><i class="fas fa-envelope"></i>
+                        info@qfavionics.com</span>
+                </div>
+                <h3 id="companyname" style="letter-spacing: 1px;">QF Avionics</h3>
+                <div class="d-sm-flex">
+                    <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-instagram fs-6"></i></a>
+                    <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-youtube fs-6"></i></a>
+                    <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-linkedin fs-6"></i></a>
+                    <select class="form-select" id="currency-value" aria-label="Default select example"
+                        style="height: 35px; width: 105px;">
+                        {% if request.session.currency == "USD" %}
+                        <option value="USD" selected>💲USD</option>
+                        <option value="CAD">💲CAD</option>
+                        {% else %}
+                        <option value="USD">💲USD</option>
+                        <option value="CAD" selected>💲CAD</option>
+                        {% endif %}
+                    </select>
                 </div>
             </div>
         </div>
-    </nav>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <div class="alert alert-primary" style="margin-top:70px;" role="alert">
-            {{ message }}
-        </div>
-    
-        {% endfor %}
-    </ul>
-    {% endif %}
-    
-    {% block content %}
-    
-    {% endblock %}
-</main>
+
+        <nav class="position-absolute navbar navbar-expand-lg navbar-light bg-white w-100" style="z-index: 200;">
+            <!-- search box -->
+            <div id="searchbox" class="d-flex justify-content-center position-absolute">
+                <form id="searchform" class="d-flex" action="{% url 'search'  %}" method="get">
+                    <input id="searchinput" type="text" name="q" placeholder="Enter Keyword . . .">&nbsp;
+                    <button id="searchbtn" type="submit">Search</button>
+                    <svg id="searchcancel" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                        style="margin: -30px -7px 0px 0px; cursor: pointer;" fill="currentColor" class="bi bi-x-lg"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                    </svg>
+                </form>
+            </div>
+            <div class="container-fluid border-bottom">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="QF Avionics"
+                        style="max-width: min(50px,50px); max-height: min(10vh,10vw);">
+                </a>
+                <button class="navbar-toggler" style="border: none; margin-right: -10px;" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <img src="{% static 'images/toggle.png' %}">
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link md:mt-3" id="menu" href="{% url 'home' %}"><i
+                                    class="fa-solid fa-house"></i> HOME</a>
+                        </li>
+                        <li class="nav-item" id="menu">
+                            <a class="nav-link text-decoration-none"><i class="fa-solid fa-layer-group"></i>
+                                SERVICES</a>
+                            <ul id="dropdown" class="text-decoration-none">
+                                {% comment %} <li>Airframe Wiring</li>
+                                <li>Fixed Wings</li>
+                                <li>Glass Cockpits</li>
+                                <li>Rotorcraft</li>
+                                <li>5G Radar Alimeters</li> {% endcomment %}
+                                {% if services %}
+                                {% for service in services %}
+                                <a href="{% url 'service' id=service.id %}" class="text-decoration-none text-dark">
+                                    <li>{{service.name}}</li>
+                                </a>
+                                {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li class="nav-item" id="menu">
+                            <a class="nav-link"><i class="fa-solid fa-bag-shopping"></i> SHOP</a>
+                            <ul id="dropdown">
+                                <a href="{% url 'product-list-categorized' name='all' %}"
+                                    style="text-decoration:none; color:black;">
+                                    <li> All Products </li>
+                                </a>
+                                {% for category in categories %}
+                                <a href="{% url 'product-list-categorized' name=category %}"
+                                    style="text-decoration:none; color:black;">
+                                    <li>{{category}} </li>
+                                </a>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li class="nav-item" id="menu">
+                            <a class="nav-link" href="{% url 'view-news' %}"><i class="fa-solid fa-newspaper"></i>
+                                NEWS</a>
+
+                        </li>
+                        <li class="nav-item" id="menu">
+                            <a class="nav-link" href="{% url 'aboutpage' %}"><i class="fa-solid fa-address-card"></i>
+                                ABOUT</a>
+
+                        </li>
+                        <li class="nav-item" id="menu">
+                            <a class="nav-link" href="{% url 'contactpage' %}"><i class="fa-solid fa-address-book"></i>
+                                CONTACT</a>
+
+                        </li>
+                    </ul>
+                    <div class="icon-container d-flex mx-1 mt-2 mt-md-0 mb-3 mb-md-0">
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'profile' %}"
+                            class="text-dark me-3 text-decoration-none border px-3 py-1 rounded"><i
+                                class="fas fa-user fs-6"></i> {{ user.username }}
+                        </a>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="text-dark me-3 fs-6"><i class="fas fa-user fs-6"></i> </a>
+                        {% endif %}
+                        <div>
+                            <a href="{% url 'cart_detail' %}" class="text-dark me-3"><span
+                                    class="position-absolute bg-white"
+                                    style="font-size: 12px; border-radius: 100%; margin-top: -10px; margin-left: 11px;">{{no_of_items}}</span><i
+                                    class="fas fa-shopping-cart fs-6"></i></a>
+                        </div>
+                        <a id="searchopen" class="text-dark"><i class="fas fa-search fs-6"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-primary" style="margin-top:70px;" role="alert">
+                {{ message }}
+            </div>
+
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% block content %}
+
+        {% endblock %}
+    </main>
 
     <footer class="footer">
         <div class="container-fluid">
@@ -287,7 +309,9 @@
                     <ul>
                         {% if services %}
                         {% for service in services|slice:":8" %}
-                        <a href="{% url 'service' id=service.id %} " class="text-decoration-none text-secondary"><li>{{service.name}}</li></a>
+                        <a href="{% url 'service' id=service.id %} " class="text-decoration-none text-secondary">
+                            <li>{{service.name}}</li>
+                        </a>
                         {% endfor %}
                         {% endif %}
                     </ul>
@@ -299,31 +323,15 @@
                         {% for link in links %}
 
 
-                        <!-- <a href="{{link.url}}" target="_blank" class="text-decoration-none text-secondary">
+                        <a href="{{link.url}}" target="_blank" class="text-decoration-none text-secondary">
+                            <li>{{link.name}}</li>
+                        </a>
+                        <!-- <a href="{{link.url}}" class=" text-secondary text-decoration-none me-2">
                             <li>{{link.name}}</li>
                         </a> -->
-                            <div class="mb-3">
-                                <a href="{{link.url}}" class=" text-secondary text-decoration-none me-2" data-bs-toggle="modal" data-bs-target="#iframeModal" onclick="document.getElementById('externalWebsite').src='{{link.url}}'">
-                                    <li>{{link.name}}</li>
-                                </a>
-                                
-                            </div>
-                    
-                        <div class="modal fade" id="iframeModal" tabindex="-1" aria-labelledby="iframeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-halfscreen modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <!-- <h5 class="modal-title" id="iframeModalLabel">External Website</h5> -->
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body p-0">
-                                        <iframe id="externalWebsite" src="" title="External Website" sandbox="allow-scripts allow-same-origin">
-                                          
-                                        </iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
+
 
                         {% endfor %}
                         {% endif %}
@@ -332,19 +340,20 @@
                 <div class="col-md-3 mb-4">
                     <h5><i class="fa-solid fa-location-dot fs-6"></i> Location</h5>
                     <div class="text-secondary">
-                    <p>Address:<br>
-                        QF Avionics Center LtdHangar #11<br>
-                        Airport Drive, Springbook,ABT4S<br>
-                        2E8Canada</p>
-                    <p>Airport:<br>
-                        Red Deer Regional Airport, CYQF, YQF</p>
-                    <p>Phone:<br>
-                        +1 (403) 886-4306</p>
-                        </div>
+                        <p>Address:<br>
+                            QF Avionics Center LtdHangar #11<br>
+                            Airport Drive, Springbook,ABT4S<br>
+                            2E8Canada</p>
+                        <p>Airport:<br>
+                            Red Deer Regional Airport, CYQF, YQF</p>
+                        <p>Phone:<br>
+                            +1 (403) 886-4306</p>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <h5><i class="fa-solid fa-floppy-disk fs-6"></i> Sign up and save</h5>
-                    <p class="text-secondary">Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+                    <p class="text-secondary">Subscribe to get special offers, free giveaways, and once-in-a-lifetime
+                        deals.</p>
                     <form>
                         <div class="input-group mb-3">
                             <input type="email" class="form-control border border-secondary"
@@ -366,7 +375,7 @@
     <script>
         let searchcancel = document.querySelector('#searchcancel');
         let searchopen = document.querySelector('#searchopen');
-        
+
         searchopen.addEventListener("click", () => {
             console.log("click")
             searchbox.style.top = "0vh";
@@ -378,12 +387,12 @@
             searchbox.style.transition = "0.3s";
         })
 
-        document.querySelector("#currency-value").addEventListener('change',(e)=>{
+        document.querySelector("#currency-value").addEventListener('change', (e) => {
             let selected = e.target.value;
 
-            setCurrency(selected);    
+            setCurrency(selected);
         })
-        
+
         function setCurrency(currency) {
             console.log(currency)
             fetch("/set_currency/", {
@@ -393,38 +402,38 @@
                 },
                 body: JSON.stringify({ "currency": currency })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.reload()
-                } else {
-                    alert("Failed to set currency: " + data.error);
-                }
-            })
-            .catch(error => {
-                console.error("Error setting currency:", error);
-                alert("An error occurred while setting the currency.");
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.reload()
+                    } else {
+                        alert("Failed to set currency: " + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error setting currency:", error);
+                    alert("An error occurred while setting the currency.");
+                });
         }
-        
-        window.addEventListener('load',()=>{
-            document.querySelectorAll(".alert").forEach((value,key)=>{
-                setTimeout(()=>{
+
+        window.addEventListener('load', () => {
+            document.querySelectorAll(".alert").forEach((value, key) => {
+                setTimeout(() => {
                     value.style.display = 'none'
-                },1500)
+                }, 1500)
             })
         })
 
-// email open setup
-    document.getElementById("emailButton").addEventListener("click", function() {
-        const email = "info@qfavionics.com";
-        const subject = "Contact To Distributor";
-        const body = "type your message here";
-        
-        const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        
-        window.location.href = mailtoLink;
-    });
+        // email open setup
+        document.getElementById("emailButton").addEventListener("click", function () {
+            const email = "info@qfavionics.com";
+            const subject = "Contact To Distributor";
+            const body = "type your message here";
+
+            const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            window.location.href = mailtoLink;
+        });
     </script>
 </body>
 
