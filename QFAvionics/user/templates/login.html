@@ -17,13 +17,15 @@
         <div class="p-2">
     <div class="col-sm-8 col-md-6 py-3 container-fluid border bg-light rounded p-md-5" style="">
         <form action="{% url 'login' %}" method="post" >
-            <h2 class="text-center"> Login  </h2>
+            <h2 class="text-center">Login</h2>
             {% if message %}
             <p style="color: red">{{ message }}</p>
             {% endif %}
             {{ form.as_p }}
             {% csrf_token %}
-            <button class="btn btn-primary container mb-2" type="submit"> Login </button>
+            <a href="" class="text-decoration-none text-danger"> Forgot Password ?</a>
+            <button class="btn btn-primary container my-2" type="submit"> Login </button>
+            <a href="{% url 'signup' %}" class="btn btn-outline-primary container fw-bolder mb-2" type="submit">Register Now</a>
         </form>
     </div>
     </div>
