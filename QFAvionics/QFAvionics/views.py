@@ -34,7 +34,7 @@ def home(request):
     {
      "image":"images/warehouse.webp",
         "name": "RETROFITS",
-        "description":"A retrofit is the process of adding new or modified parts or equipment to something that was previously constructed or manufactured. Retrofits can be done for a variety of reasons, for improve energy efficiency."   
+        "description":"A retrofit is the process of adding new or modified parts or equipment to something that was previously constructed or manufactured. Retrofits can be done for a variety of reasons,for improve energy efficiency."   
     },
     
     {
