@@ -1,18 +1,90 @@
 <style>
-body, html {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
- }
+    body,
+    html {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        
+        /* width: 100%; */
+    }
 
- #mainbox {
-    flex: 1;
- }
- </style>
+    #mainbox {
+        flex: 1;
+
+    }
+
+    .container {
+        margin-top: 10vh;
+        /* border: 1px solid black; */
+        border-radius: 1vh;
+        width: fit-content;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+</style>
 
 {% extends "master.html" %}
 {% block content %}
+
 <main id="mainbox">
-    About Us Page
-    </main>
+    <!-- <div class="container"> -->
+
+        <div class="container p-0 mt-5">
+            <main>
+                <section class="row">
+                    <div class="col-12 text-center py-5">
+                        <h1 class="display-4 fw-bold mb-4">ABOUT US</h1>
+                        <p class="lead px-3 px-md-5 mb-4">
+                            Serving all of Western Canada, we offer sales of new and used equipment as well as installations on both commercial and private planes. We specialize in avionics line maintenance, retrofits and component repairs. We’re a Transport Canada approved organization and have been in business since 1979, serving all sectors of the aviation industry.
+                        </p>
+                        <!-- <p class="lead px-3 px-md-5">
+                            With over 20,000 associates in 35 countries around the world, we bring GPS navigation and
+                            wearable technology to the automotive, aviation, marine, outdoor and fitness markets. We
+                            think every day is an opportunity to innovate and a chance to beat yesterday.
+                        </p> -->
+                    </div>
+                </section>
+
+                <section class="row bg-0 py-5">
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <div class="card h-100 border-3-dark rounded-0">
+                            <div class="card-body">
+                                <h2 class="card-title text-center mb-4 fs-2 fw-bold">MISSION</h2>
+                                <p class="card-text">
+                                    To be an enduring company by creating superior products for automotive, aviation,
+                                    marine,
+                                    outdoor, and sports that are an essential part of our customers' lives.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <div class="card h-100 border-3-dark rounded-0">
+                            <div class="card-body">
+                                <h2 class="card-title text-center mb-4 fs-2 fw-bold">VISION</h2>
+                                <p class="card-text">
+                                    The Aviation Gateway and Key Economic Driver for Central Alberta
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-3-dark rounded-0">
+                            <div class="card-body">
+                                <h2 class="card-title text-center mb-4 fs-2 fw-bold">VALUES</h2>
+                                <p class="card-text">
+                                    The foundation of our culture is honesty, integrity, and respect for associates,
+                                    customers,
+                                    and business partners. Each associate is fully committed to serving customers and
+                                    fellow
+                                    associates through outstanding performance and accomplishing what we say we will do.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    <!-- </div> -->
+
+</main>
 {% endblock %}
