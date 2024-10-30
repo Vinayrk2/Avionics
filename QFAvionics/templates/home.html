@@ -63,20 +63,20 @@
 
     <div class="container my-5">
         <div class="row px-1 gx-4 gy-4 d-flex justify-content-center">
-            {% if comp_services %}
-            {% for service in comp_services %}
+            {% if whatwedo %}
+            {% for section in whatwedo %}
             <div class="col-md-4">
                 <div class="card rounded-0"
                     style="box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em; overflow: hidden;">
                     <div class="row no-gutters" style="height:100%;">
                         <div class="col-12" style="height: 30vh;">
-                            <img src="{% static 'images/warehouse.webp' %}" alt="Online Store" class="card-img"
+                            <img src="{{section.image}}" alt="Online Store" class="card-img"
                                 style="height: 100%; object-fit: cover;">
                         </div>
                         <div class="col-12">
                             <div class="card-body d-flex flex-column justify-content-center">
-                                <h2 class="card-title fs-3" style="height: 70px; width: 109%; margin: -85px 0px 0px -16px; background-color: rgba(3, 7, 44, 0.726); padding-left: 10px; color: rgb(223, 223, 223);">{{service.name}}</h2>
-                                <p class="card-text" style="height: 100px;">{{service.description}}
+                                <h2 class="card-title fs-3" style="height: 70px; width: 109%; margin: -85px 0px 0px -16px; background-color: rgba(3, 7, 44, 0.726); padding-left: 10px; color: rgb(223, 223, 223);">{{section.title}}</h2>
+                                <p class="card-text" style="height: 100px;">{{section.description}}
                                 </p>
                             </div>
                         </div>

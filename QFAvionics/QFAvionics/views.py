@@ -1,49 +1,52 @@
 from django.shortcuts import redirect, render
 from product.models import Category, Product
-from additional_option.models import Service
+from additional_option.models import Service, HomeSection
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 from additional_option.models import AboutContent
 
+
 def home(request):
     categories = Category.objects.all()[:4]
     products = Product.objects.all()[:4]
-    services = [{
-        "image":"images/warehouse.webp",
-        "name": "ONLINE STORE",
-        "description":"We provide several online services such as viewing our products, receiving news on business etc."
-    },
-    {
-     "image":"images/warehouse.webp",
-        "name": "EQUIPMENT INSTALLATION",
-        "description":"Equipment Installation means any actions that are necessary to attach the equipment to the building including, but not limited to bolting or welding.."   
-    },
-    {
-     "image":"images/warehouse.webp",
-        "name": "SERVICES",
-        "description":"We provide a comprehensive range of value-driven helicopter and fixed-wing maintenance, repair and overhaul services"   
-    },
+    # services = [{
+    #     "image":"images/warehouse.webp",
+    #     "name": "ONLINE STORE",
+    #     "description":"We provide several online services such as viewing our products, receiving news on business etc."
+    # },
+    # {
+    #  "image":"images/warehouse.webp",
+    #     "name": "EQUIPMENT INSTALLATION",
+    #     "description":"Equipment Installation means any actions that are necessary to attach the equipment to the building including, but not limited to bolting or welding.."   
+    # },
+    # {
+    #  "image":"images/warehouse.webp",
+    #     "name": "SERVICES",
+    #     "description":"We provide a comprehensive range of value-driven helicopter and fixed-wing maintenance, repair and overhaul services"   
+    # },
     
-    {
-     "image":"images/warehouse.webp",
-        "name": "LINE MAINTENANCE",
-        "description":"Line maintenance is the routine and preventive maintenance that is performed on an aircraft before, between, or after flights. It includes tasks such as checking the oil levels, tire pressures etc."   
-    },
+    # {
+    #  "image":"images/warehouse.webp",
+    #     "name": "LINE MAINTENANCE",
+    #     "description":"Line maintenance is the routine and preventive maintenance that is performed on an aircraft before, between, or after flights. It includes tasks such as checking the oil levels, tire pressures etc."   
+    # },
     
-    {
-     "image":"images/warehouse.webp",
-        "name": "RETROFITS",
-        "description":"A retrofit is the process of adding new or modified parts or equipment to something that was previously constructed or manufactured. Retrofits can be done for a variety of reasons,for improve energy efficiency."   
-    },
+    # {
+    #  "image":"images/warehouse.webp",
+    #     "name": "RETROFITS",
+    #     "description":"A retrofit is the process of adding new or modified parts or equipment to something that was previously constructed or manufactured. Retrofits can be done for a variety of reasons,for improve energy efficiency."   
+    # },
     
-    {
-     "image":"images/warehouse.webp",
-        "name": "MAINTENANCE, REPAIR & OVERHAUL (MRO)",
-        "description":"We provide best-in-class helicopter and fixed-wing MRO services for several of the most commonly operated light, medium and heavy helicopter models."   
-    }
-    ]
+    # {
+    #  "image":"images/warehouse.webp",
+    #     "name": "MAINTENANCE, REPAIR & OVERHAUL (MRO)",
+    #     "description":"We provide best-in-class helicopter and fixed-wing MRO services for several of the most commonly operated light, medium and heavy helicopter models."   
+    # }
+    # ]
+    whatwedo = HomeSection.objects.filter(pk=1).first().items.all()
+    
     products_dict = []
     
     for product in products:
@@ -51,7 +54,7 @@ def home(request):
         temp["image"] = product.get_image().url
         products_dict.append(temp)
         
-    return render(request, "home.html", {'categories':categories, 'products':products_dict, 'comp_services':services})
+    return render(request, "home.html", {'categories':categories, 'products':products_dict, 'whatwedo':whatwedo })
 
 def aboutpage(request):
     about = AboutContent.objects.filter(pk=1).first()

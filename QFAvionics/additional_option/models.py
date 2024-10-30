@@ -2,6 +2,7 @@ from django.db import models
 from django.core.cache import cache
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Service(models.Model):
@@ -105,3 +106,74 @@ class AboutSection(models.Model):
     def save(self, *args, **kwargs):
         self.about = AboutContent.objects.filter(pk=1).first()        
         super().save(*args, **kwargs)
+        
+# class HomeSection(models.Model):
+#     class Meta:
+#         verbose_name = "What We Do"
+#         verbose_name_plural = "What We Do"
+        
+#     title_1 = models.TextField(max_length=50, blank=False,  default='ONLINE STORE', null=False)
+#     description_1 = models.TextField(max_length=210, blank=False, default='We provide several online services such as viewing our products, receiving news on business etc.', null=False)
+#     image_1 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
+#     title_2 = models.TextField(max_length=50, blank=False,  default='EQUIPMENT INSTALLATION', null=False)
+#     description_2 = models.TextField(max_length=210, blank=False, default='Equipment Installation means any actions that are necessary to attach the equipment to the building including, but not limited to bolting or welding.', null=False)
+#     image_2 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
+#     title_3 = models.TextField(max_length=50, blank=False,  default='SERVICES', null=False)
+#     description_3 = models.TextField(max_length=210, blank=False, default='We provide a comprehensive range of value-driven helicopter and fixed-wing maintenance, repair and overhaul services.', null=False)
+#     image_3 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
+#     title_4 = models.TextField(max_length=50, blank=False,  default='LINE MAINTENANCE', null=False)
+#     description_4 = models.TextField(max_length=210, blank=False, default='Line maintenance is the routine and preventive maintenance that is performed on an aircraft before, between, or after flights. It includes tasks such as checking the oil levels, tire pressures etc.', null=False)
+#     image_4 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
+#     title_5 = models.TextField(max_length=50, blank=False,  default='RETROFITS', null=False)
+#     description_5 = models.TextField(max_length=210, blank=False, default='A retrofit is the process of adding new or modified parts or equipment to something that was previously constructed or manufactured. Retrofits can be done for a variety of reasons,for improve energy efficiency.', null=False)
+#     image_5 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
+#     title_6 = models.TextField(max_length=50, blank=False,  default='MAINTENANCE, REPAIR & OVERHAUL (MRO)', null=False)
+#     description_6 = models.TextField(max_length=210, blank=False, default='We provide best-in-class helicopter and fixed-wing MRO services for several of the most commonly operated light, medium and heavy helicopter models.', null=False)
+#     image_6 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
+    
+#     def save(self, *args, **kwargs):
+#         self.pk = 1        
+#         super().save(*args, **kwargs)
+        
+# class HomeSections(models.Model):
+#     class Meta:
+#         verbose_name = "Home Section"
+#         verbose_name_plural = "Home Sections"
+    
+#     home = models.ForeignKey('HomeSection', on_delete=models.CASCADE, blank=False,  null=False, related_name='sections')
+#     title = models.TextField(max_length=50, blank=False, null=False)
+#     description = models.TextField(max_length=210, blank=False, null=False)
+#     image = models.ImageField(blank=True, upload_to='static/images/whatwedo')
+    
+
+
+class HomeSection(models.Model):
+    class Meta:
+        verbose_name = "What We Do"
+        verbose_name_plural = "What We Do"
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return "Home Section"
+
+class HomeSectionItem(models.Model):
+    home = models.ForeignKey(HomeSection, on_delete=models.CASCADE, related_name='items')
+    title = models.CharField(max_length=100, blank=False, null=False)
+    description = models.TextField(max_length=210, blank=False, null=False)
+    image = models.ImageField(blank=True, upload_to='static/images/whatwedo')
+
+    class Meta:
+        verbose_name = "Home Section Item"
+        verbose_name_plural = "Home Section Items"
+
+    def save(self, *args, **kwargs):
+        # Limit the number of items to 6
+        if self.home.items.count() >= 6 and not self.pk:
+            raise ValidationError("You can only add up to 6 items for the Home Section.")
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
