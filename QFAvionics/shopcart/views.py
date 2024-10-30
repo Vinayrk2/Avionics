@@ -82,7 +82,7 @@ def cart_detail(request):
         total += float(item["price"]) * float(item["quantity"])
 
     shipping_charge = round(settings.CHARGES["shipping"],2)
-    tax = round(settings.CHARGES["tax"]*total,2)
+    tax = round(float(settings.CHARGES["tax"])*float(total),2)
     
     context = {
         "total": round(total+tax+shipping_charge,2),
