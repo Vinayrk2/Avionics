@@ -5,11 +5,11 @@ def setting_middleware(get_response):
     # One-time setup to set the currency rate in settings
     def set_currency_rate():
         setting = get_setting()
-        settings.CURRENCY_EXCHANGE_RATE = setting.currency_rate
+        settings.CURRENCY_EXCHANGE_RATE = float(setting.currency_rate)
         # settings.DEFAULT_FROM_EMAIL = setting.bussiness_email
         # settings.EMAIL_HOST_USER = setting.bussiness_email
         # settings.EMAIL_HOST_PASSWORD = setting.email_app_password
-        settings.CHARGES["tax"] = setting.tax
+        settings.CHARGES["tax"] = float(setting.tax)
 
     set_currency_rate()
     

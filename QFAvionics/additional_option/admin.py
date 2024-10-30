@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Service, Link
-from .models import SiteSettings
-from .adminform import ServiceForm
+from .models import SiteSettings, AboutSection, AboutContent
+from .adminform import ServiceForm, AboutSectionForm
 
 admin.site.register(SiteSettings)
 
@@ -17,4 +17,20 @@ class ProductAdmin(admin.ModelAdmin):
         css = {
             'all': ('css/index.css',)
         }
+        
+
+admin.site.register(AboutContent)
+        
+@admin.register(AboutSection)
+class AboutSectionAdmin(admin.ModelAdmin):
+    form = AboutSectionForm
+    
+    class Media:
+        # \static\js\product_admin.js
+        js = ('js/about_section.js',)
+        css = {
+            'all': ('css/index.css',)
+        }
+        
 admin.site.register(Link)
+# admin.site.register(AboutSection)

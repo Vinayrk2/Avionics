@@ -77,6 +77,8 @@ def cart_clear(request):
 def cart_detail(request):
     total = 0
     for key,item in request.session.get("cart").items():
+        product = Product.objects.get(pk=item["product_id"])
+        item["price"] = product.price
         if request.session.get("currency") == "USD":
             item["price"] = round(float(item["price"]) * float(settings.CURRENCY_EXCHANGE_RATE),2)
         total += float(item["price"]) * float(item["quantity"])

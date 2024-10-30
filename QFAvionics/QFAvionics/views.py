@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
+from additional_option.models import AboutContent
 
 def home(request):
     categories = Category.objects.all()[:4]
@@ -53,7 +54,10 @@ def home(request):
     return render(request, "home.html", {'categories':categories, 'products':products_dict, 'comp_services':services})
 
 def aboutpage(request):
-    return render(request, "about.html", {})
+    about = AboutContent.objects.filter(pk=1).first()
+    sections = about.sections.all()
+    
+    return render(request, "about.html", {'content':about, 'sections':sections})
 
 def contactpage(request):
     if request.method == "POST":
