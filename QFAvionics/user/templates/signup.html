@@ -17,7 +17,7 @@
             {{ form.as_p }}
             {% csrf_token %}
             <button class="btn btn-primary container fw-bolder mb-2" type="submit"> Register </button>
-            <a href="{% url 'login' %}" class="btn btn-outline-primary container fw-bolder mb-2" type="submit">LogIn</a>
+            <p> Already Have An Account ? <a href="{% url 'login' %}">LogIn Here</a></p>
         </form>
     </div>
     </div>

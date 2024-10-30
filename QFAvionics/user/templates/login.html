@@ -1,6 +1,6 @@
 {% extends "master.html" %}
     {% block content %}
-    {% load static}
+    {% load static %}
    <style>
     /* @media (min-width:550px) {
        .container{
@@ -23,9 +23,9 @@
             {% endif %}
             {{ form.as_p }}
             {% csrf_token %}
-            <a href="" class="text-decoration-none text-danger"> Forgot Password ?</a>
+            {% comment %} <a href="{% url 'forgot-password' %}" class="text-decoration-none text-danger"> Forgot Password ?</a> {% endcomment %}
             <button class="btn btn-primary container my-2" type="submit"> Login </button>
-            <a href="{% url 'signup' %}" class="btn btn-outline-primary container fw-bolder mb-2" type="submit">Register Now</a>
+            <p> Create a new account? <a href="{% url 'signup' %}">Register Now</a></p>
         </form>
     </div>
     </div>

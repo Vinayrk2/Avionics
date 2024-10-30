@@ -100,12 +100,16 @@ class DefaultImage():
 
 class Image(models.Model):
     image = models.ImageField(upload_to="static/product/images/")
-    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='images', blank=True)  # Link image to product
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='images', blank=True) 
 
 
 class Category(models.Model):
     name = models.TextField(blank=False, default="", max_length=100)
     image = models.ImageField(upload_to="static/product/category/", blank=True)
+    
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
     
     def __str__(self):
         return self.name
