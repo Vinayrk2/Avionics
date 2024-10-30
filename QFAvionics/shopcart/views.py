@@ -103,15 +103,15 @@ def send_mail_page(request):
         products = cart.cart    
         
         total = 0
-        tax = settings.CHARGES["tax"]
+        tax = float(settings.CHARGES["tax"])
         for key,item in request.session.get("cart").items():
             if request.session.get("currency") == "USD":
                 item["price"] = round(float(item["price"]) * float(settings.CURRENCY_EXCHANGE_RATE),2)
             total += float(item["price"]) * float(item["quantity"])
         order_summary = {
-            "total": round(total+tax,2),
-            "subtotal": round(total,2),
-            "tax": tax
+            "total": round(float(total)+float(tax),2),
+            "subtotal": round(float(total),2),
+            "tax": float(tax)
         }
         subject = "Order Details"
         message = "Thank you for your order! we will contact you ASAP."  # Fallback plain text message
