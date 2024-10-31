@@ -3,7 +3,7 @@ from django.urls import path, include
 from .views import home, aboutpage, contactpage, service
 from django.conf import settings
 from django.conf.urls.static import static
-from user.views import signup,userlogin, userlogout, userprofile
+from user.views import signup,userlogin, userlogout, userprofile, verify_email
 from additional_option.views import service, set_currency
 from django.contrib.auth import views as auth_views
 
@@ -25,4 +25,5 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('verify/<uidb64>/<token>/', verify_email, name='verify_email'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
