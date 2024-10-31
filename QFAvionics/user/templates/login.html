@@ -23,7 +23,7 @@
             {% endif %}
             {{ form.as_p }}
             {% csrf_token %}
-            {% comment %} <a href="{% url 'forgot-password' %}" class="text-decoration-none text-danger"> Forgot Password ?</a> {% endcomment %}
+            <a href="{% url 'password_reset' %}" class="text-decoration-none text-danger"> Forgot Password ?</a>
             <button class="btn btn-primary container my-2" type="submit"> Login </button>
             <p> Create a new account? <a href="{% url 'signup' %}">Register Now</a></p>
         </form>
