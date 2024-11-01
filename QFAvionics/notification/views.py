@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Notification
+from .models import News
 from django.contrib import messages
 
 def notifications(request):
-    notifications = Notification.objects.all()[:10]
+    notifications = News.objects.all()[:10]
     return render(request, 'notifications.html', {'notifications':notifications})
 
 # def view_details(request, id):

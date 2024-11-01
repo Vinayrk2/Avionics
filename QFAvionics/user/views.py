@@ -55,7 +55,7 @@ def userlogin(request):
             user = authenticate(request, username=username, password=password)
             print(user)
             if user is None:
-                user = CustomUser.objects.get(email=username)
+                user = CustomUser.objects.filter(email=username).first()
                 print("user found with email")
                 if user:
                     if user.check_password(password):   

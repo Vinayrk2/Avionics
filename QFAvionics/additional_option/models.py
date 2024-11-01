@@ -24,6 +24,10 @@ class Link(models.Model):
     def __str__(self):
         return self.name
     
+    class Meta:
+        verbose_name = 'Important Link'
+        verbose_name_plural = 'Important Links'
+    
 
 class SiteSettings(models.Model):
     site_name = models.CharField(max_length=100, default="QFAvionics")
@@ -76,7 +80,7 @@ def clear_site_settings_cache(sender, **kwargs):
 class AboutContent(models.Model):
     class Meta:
         verbose_name = "About Content"
-        verbose_name_plural = "About Contents"
+        verbose_name_plural = "About Description"
         
     main_description = models.TextField(default='Serving all of Western Canada, we offer sales of new and used equipment as well as installations on both commercial and private planes. We specialize in avionics line maintenance, retrofits and component repairs. We’re a Transport Canada approved organization and have been in business since 1979, serving all sectors of the aviation industry.', blank=False, null=False)
     field1 = models.CharField(max_length=20, default='Mission', blank=False, help_text='first card name')
@@ -96,7 +100,7 @@ class AboutContent(models.Model):
 class AboutSection(models.Model):
     class Meta:
         verbose_name = "About Section"
-        verbose_name_plural = "About Sections"
+        verbose_name_plural = "About Page Sections"
     
     about = models.ForeignKey('AboutContent', on_delete=models.CASCADE, related_name='sections', blank=True, null=True) 
     title = models.CharField(max_length=50, blank=False, default='', null=False)
@@ -106,47 +110,11 @@ class AboutSection(models.Model):
     def save(self, *args, **kwargs):
         self.about = AboutContent.objects.filter(pk=1).first()        
         super().save(*args, **kwargs)
-        
-# class HomeSection(models.Model):
-#     class Meta:
-#         verbose_name = "What We Do"
-#         verbose_name_plural = "What We Do"
-        
-#     title_1 = models.TextField(max_length=50, blank=False,  default='ONLINE STORE', null=False)
-#     description_1 = models.TextField(max_length=210, blank=False, default='We provide several online services such as viewing our products, receiving news on business etc.', null=False)
-#     image_1 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
-#     title_2 = models.TextField(max_length=50, blank=False,  default='EQUIPMENT INSTALLATION', null=False)
-#     description_2 = models.TextField(max_length=210, blank=False, default='Equipment Installation means any actions that are necessary to attach the equipment to the building including, but not limited to bolting or welding.', null=False)
-#     image_2 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
-#     title_3 = models.TextField(max_length=50, blank=False,  default='SERVICES', null=False)
-#     description_3 = models.TextField(max_length=210, blank=False, default='We provide a comprehensive range of value-driven helicopter and fixed-wing maintenance, repair and overhaul services.', null=False)
-#     image_3 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
-#     title_4 = models.TextField(max_length=50, blank=False,  default='LINE MAINTENANCE', null=False)
-#     description_4 = models.TextField(max_length=210, blank=False, default='Line maintenance is the routine and preventive maintenance that is performed on an aircraft before, between, or after flights. It includes tasks such as checking the oil levels, tire pressures etc.', null=False)
-#     image_4 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
-#     title_5 = models.TextField(max_length=50, blank=False,  default='RETROFITS', null=False)
-#     description_5 = models.TextField(max_length=210, blank=False, default='A retrofit is the process of adding new or modified parts or equipment to something that was previously constructed or manufactured. Retrofits can be done for a variety of reasons,for improve energy efficiency.', null=False)
-#     image_5 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
-#     title_6 = models.TextField(max_length=50, blank=False,  default='MAINTENANCE, REPAIR & OVERHAUL (MRO)', null=False)
-#     description_6 = models.TextField(max_length=210, blank=False, default='We provide best-in-class helicopter and fixed-wing MRO services for several of the most commonly operated light, medium and heavy helicopter models.', null=False)
-#     image_6 = models.ImageField(blank=True, upload_to='static/images/whatwedo')
-    
-#     def save(self, *args, **kwargs):
-#         self.pk = 1        
-#         super().save(*args, **kwargs)
-        
-# class HomeSections(models.Model):
-#     class Meta:
-#         verbose_name = "Home Section"
-#         verbose_name_plural = "Home Sections"
-    
-#     home = models.ForeignKey('HomeSection', on_delete=models.CASCADE, blank=False,  null=False, related_name='sections')
-#     title = models.TextField(max_length=50, blank=False, null=False)
-#     description = models.TextField(max_length=210, blank=False, null=False)
-#     image = models.ImageField(blank=True, upload_to='static/images/whatwedo')
-    
 
+    def  __str__(self):
+        return self.title
 
+        
 class HomeSection(models.Model):
     class Meta:
         verbose_name = "What We Do"

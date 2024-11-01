@@ -12,12 +12,17 @@ from django.db import models
 #     ('offer_update','New Offer'),
 #     ('news','News'),
 # ]
-class Notification(models.Model):
+class News(models.Model):
     title = models.CharField(max_length=255, blank=False, null=False)
     description = models.TextField(max_length=1000, blank=False, null=False)
     image = models.ImageField(upload_to="static/notification/images/", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     url = models.URLField(blank=True, null=True, default="")
+    
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = "News"
+        verbose_name_plural = "News"

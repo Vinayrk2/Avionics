@@ -1,0 +1,13 @@
+
+.defaultadmin{
+    padding:6px 12px;
+    margin: 4px;
+    border-radius: 4px;
+    border: none;
+    background-color: #205067;
+    color:white;
+}
+
+button:disabled{
+    background-color:#999999;
+}
