@@ -12,12 +12,15 @@ class ProductAttributeInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductAttributeInline]
     form =  ProductForm
+    search_fields = ('name', 'part_number')
+    list_filter = ('category', 'stock_quantity')
+    list_display = ('name', 'category', 'price', 'stock_quantity', 'created_at')
+    
     
     class Media:
-        # \static\js\product_admin.js
         js = ('js/productadmin.js',)
         css = {
-            'all': ('css/index.css',)
+            'all': ('css/admin.css',)
         }
         
 # admin.site.register(Product, ProductAdmin)

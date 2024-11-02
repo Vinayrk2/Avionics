@@ -15,13 +15,12 @@ class Product(models.Model):
     # currency = models.CharField(max_length=3,  choices=CURRENCY_CHOICES, default='CAD')
     stock_quantity = models.PositiveIntegerField(default=0)  
     category = models.ForeignKey('Category', blank=True, on_delete=models.CASCADE)
-    is_available = models.BooleanField(default=True)  
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     features = models.JSONField(default=dict)
     
     def get_related_products(self,request):
-        product_temp = Product.objects.filter(category=self.category).exclude(id=self.id)[:10]
+        product_temp = Product.objects.filter(category=self.category).exclude(id=self.id)[:8]
         products = []
         for product in product_temp:
             products.append(product.to_dict(request))
@@ -68,7 +67,6 @@ class Product(models.Model):
             # 'price': str(self.price),  # Convert to string for JSON serialization
             'stock_quantity': self.stock_quantity,
             'category': self.category if self.category else None,  # Use category ID or None
-            'is_available': self.is_available,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
             'id':self.pk,

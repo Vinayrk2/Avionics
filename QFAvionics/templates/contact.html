@@ -49,11 +49,11 @@
                 {% csrf_token %}
                 <h2 class="text-center">Contact Us</h2>
                 <div class="mb-3">
-                    <label for="emailAddress" class="form-label">Your Name</label>
+                    <label for="emailAddress" class="form-label">Name</label>
                     <input type="text" class="form-control" name="name" placeholder="name" required>
                 </div>
                 <div class="mb-3">
-                    <label for="emailAddress" class="form-label">Your Email Address</label>
+                    <label for="emailAddress" class="form-label">Email Address</label>
                     <input type="email" class="form-control" name="email" id="emailAddress" placeholder="you@example.com" required>
                 </div>
                 <!-- <div class="mb-3">
@@ -62,13 +62,15 @@
                         placeholder='Enter a topic, like "notifications"' required>
                 </div> -->
                 <div class="mb-3">
-                    <label for="customTopic" class="form-label">Share your issues</label>
+                    <label for="customTopic" class="form-label">Description</label>
                     <textarea class="form-control" id="customTopic" rows="5" name="description"
                         placeholder='Detailed description of your product' required></textarea>
                 </div>
 
-                <button type="submit" class="btn text-white" style="background-color: #090841;">Send Complaint</button>
-                <button type="reset" class="btn" style="border: 1px solid #090841;">Reset Form</button>
+                <div class="row d-flex align-items-center justify-content-center">
+                <button type="submit" class="btn text-white col col-4 mx-1" style="background-color: #090841;">Submit</button>
+                <button type="reset" class="btn col col-4 mx-1" style="border: 1px solid #090841;">Reset </button>
+                </div>
             </form>
         </div>
     </div>
