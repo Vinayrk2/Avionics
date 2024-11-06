@@ -11,41 +11,13 @@ from additional_option.models import AboutContent
 def home(request):
     categories = Category.objects.all()[:4]
     products = Product.objects.all()[:4]
-    # services = [{
-    #     "image":"images/warehouse.webp",
-    #     "name": "ONLINE STORE",
-    #     "description":"We provide several online services such as viewing our products, receiving news on business etc."
-    # },
-    # {
-    #  "image":"images/warehouse.webp",
-    #     "name": "EQUIPMENT INSTALLATION",
-    #     "description":"Equipment Installation means any actions that are necessary to attach the equipment to the building including, but not limited to bolting or welding.."   
-    # },
-    # {
-    #  "image":"images/warehouse.webp",
-    #     "name": "SERVICES",
-    #     "description":"We provide a comprehensive range of value-driven helicopter and fixed-wing maintenance, repair and overhaul services"   
-    # },
+
+    whatwedo = HomeSection.objects.filter(pk=1)
     
-    # {
-    #  "image":"images/warehouse.webp",
-    #     "name": "LINE MAINTENANCE",
-    #     "description":"Line maintenance is the routine and preventive maintenance that is performed on an aircraft before, between, or after flights. It includes tasks such as checking the oil levels, tire pressures etc."   
-    # },
-    
-    # {
-    #  "image":"images/warehouse.webp",
-    #     "name": "RETROFITS",
-    #     "description":"A retrofit is the process of adding new or modified parts or equipment to something that was previously constructed or manufactured. Retrofits can be done for a variety of reasons,for improve energy efficiency."   
-    # },
-    
-    # {
-    #  "image":"images/warehouse.webp",
-    #     "name": "MAINTENANCE, REPAIR & OVERHAUL (MRO)",
-    #     "description":"We provide best-in-class helicopter and fixed-wing MRO services for several of the most commonly operated light, medium and heavy helicopter models."   
-    # }
-    # ]
-    whatwedo = HomeSection.objects.filter(pk=1).first().items.all()
+    if whatwedo:
+        whatwedo = whatwedo.first().items.all()
+    else:
+        whatwedo = []
     
     products_dict = []
     
@@ -57,9 +29,13 @@ def home(request):
     return render(request, "home.html", {'categories':categories, 'products':products_dict, 'whatwedo':whatwedo })
 
 def aboutpage(request):
-    about = AboutContent.objects.filter(pk=1).first()
-    sections = about.sections.all()
+    about = AboutContent.objects.filter(pk=1)
     
+    if about:
+        about = about.first()
+        sections = about.sections.all()
+    else:
+        sections = []
     return render(request, "about.html", {'content':about, 'sections':sections})
 
 def contactpage(request):

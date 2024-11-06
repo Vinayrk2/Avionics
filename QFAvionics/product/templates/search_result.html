@@ -21,8 +21,9 @@
 
         <!-- Main Content -->
         <div class="col-md-11">
+            {% if news or products %}
             <p>Showing similar results for "{{query}}".  </p>
-            
+            {% endif %}
             {% if news %}
             <div class="w-100 d-flex align-items-center justify-content-between">
                 <h4 style="font-family: sans-serif; font-weight:bolder;">News:</h4>

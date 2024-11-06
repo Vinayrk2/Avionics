@@ -142,7 +142,7 @@
                 {% endif %}
             </div>
             <div class="d-flex justify-content-center my-3">
-            <a href="#" class="btn border px-4 py-3 text-white" style="border-radius: 100px; background-color: rgb(3, 8, 53)">View More <i class="fa-solid fa-angles-down"></i></a>
+            <a href="{% url 'product-list-categorized' name='all' %}" class="btn border px-4 py-3 text-white" style="border-radius: 100px; background-color: rgb(3, 8, 53)">View Products <i class="fa-solid fa-angles-down"></i></a>
             </div>
         </div>
         {% if not request.user.is_authenticated %}
