@@ -204,6 +204,7 @@
                 <form id="searchform" class="d-flex" action="{% url 'search'  %}" method="get">
                     <input id="searchinput" type="text" name="q" placeholder="Enter Keyword . . .">&nbsp;
                     <button id="searchbtn" type="submit">Search</button>
+                    <input type="hidden" name="page" value="1">
                     <svg id="searchcancel" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                         style="margin: -30px -7px 0px 0px; cursor: pointer;" fill="currentColor" class="bi bi-x-lg"
                         viewBox="0 0 16 16">

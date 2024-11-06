@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Product, Category
 from django.contrib import messages
 from notification.models import News
+from django.core.paginator import Paginator
 
 def product_view(request, id):
     product = Product.objects.filter(id=id).first()
@@ -33,9 +34,14 @@ def product_by_category(request,name):
         temp["image"] = product.get_image().url
         products_dict.append(temp)
         
+        paginator = Paginator(products_dict, 12)
+        pagenumber = request.GET.get('page',1)
+        page_obj = paginator.get_page(pagenumber)
     
-            
-    return render(request, 'product_by_category.html',{"products":products_dict, "name":name})
+    count = {
+        'products':  len(products_dict),
+    }
+    return render(request, 'product_by_category.html',{"products":page_obj, "name":name, 'count':count})
 
 def search_result(request):
     query = request.GET.get("q")
@@ -52,6 +58,16 @@ def search_result(request):
             pr = product.to_dict(request)
             pr["image"] = product.get_image().url
             product_dict.append(pr)
-        news = News.objects.filter(title__icontains=query) |  News.objects.filter(description__icontains=query)
-
-    return render(request, "search_result.html", {'products':product_dict,  "query":query, 'news':news})
+        if request.GET.get('page') == '1':
+            news = News.objects.filter(title__icontains=query) |  News.objects.filter(description__icontains=query)
+        else:
+            news = None
+        paginator = Paginator(product_dict, 12)
+        pagenumber = request.GET.get('page',1)
+        page_obj = paginator.get_page(pagenumber)
+        
+    count = {
+        'products':  len(product_dict),
+    }
+        
+    return render(request, "search_result.html", {'products':page_obj,  "query":query, 'news':news, 'count':count})
