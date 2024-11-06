@@ -116,7 +116,6 @@
         </div>
     </div> --> {% endcomment %}
 
-    <div>
         <div class="container-fluid mt-5">
             <h1 class="text-center fw-bolder">Featured Collection</h1>
             <div class="row h-auto">
@@ -142,12 +141,14 @@
                 {% endfor %}
                 {% endif %}
             </div>
+            <div class="d-flex justify-content-center my-3">
+            <a href="#" class="btn border px-4 py-3 text-white" style="border-radius: 100px; background-color: rgb(3, 8, 53)">View More <i class="fa-solid fa-angles-down"></i></a>
+            </div>
         </div>
-    </div>
         {% if not request.user.is_authenticated %}
-        <saction class="px-4 py-5 my-5 text-center">
+        <saction class="px-4 text-center">
             <h1 class="display-6 fw-bold text-body-emphasis">SIGNUP OR LOGIN</h1>
-            <div class="col-lg-6 mx-auto my-4">
+            <div class="col-lg-6 mx-auto mt-4">
               <p class="lead mb-4">Login to the system to access the features and to get the latest updates on our products
                 and services.</p>
               <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
