@@ -294,19 +294,17 @@
                 </div>
             </div>
         </nav>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <div class="alert alert-primary"  role="alert" id="alert" style="margin-top: 10vh;">
-                {{ message }}
-            </div>
 
+        {% if messages %}
+        <ul class="messages" style="margin-top: 12vh; position: absolute; z-index: 1000; right: 15px;">
+            {% for message in messages %}
+            <div class="alert alert-primary"  role="alert" id="alert"  style="margin-top: -10px;">
+                {{ message }}</div>
             {% endfor %}
         </ul>
         {% endif %}
 
         {% block content %}
-
         {% endblock %}
     </main>
 
@@ -404,7 +402,7 @@
         window.addEventListener('load', () => {
             document.querySelectorAll(".alert").forEach((value, key) => {
                 setTimeout(() => {
-                    value.style.display = 'none'
+                   value.style.display = 'none';
                 }, 1500)
             })
         })
