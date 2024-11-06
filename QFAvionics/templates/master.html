@@ -162,7 +162,9 @@
         
         /* #mainbox{
             /* padding-bottom: 5vh; */
-        
+            .alert {
+                transition: opacity 1.5s ease-in-out;
+            }
     </style>
 
 </head>
@@ -402,12 +404,11 @@
         window.addEventListener('load', () => {
             document.querySelectorAll(".alert").forEach((value, key) => {
                 setTimeout(() => {
-                   value.style.display = 'none';
-                }, 1500)
+                   value.style.opacity = 0
+                }, 2000)
             })
         })
 
-        // email open setup
         document.getElementById("emailButton").addEventListener("click", function () {
             const email = "info@qfavionics.com";
             const subject = "Contact To Distributor";
