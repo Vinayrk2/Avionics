@@ -1,11 +1,12 @@
 from django.shortcuts import redirect, render
+from user.models import CustomUser
 from product.models import Category, Product
 from additional_option.models import Service, HomeSection
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
-from additional_option.models import AboutContent
+from additional_option.models import AboutContent, Link
 
 
 def home(request):
@@ -36,7 +37,14 @@ def aboutpage(request):
         sections = about.sections.all()
     else:
         sections = []
-    return render(request, "about.html", {'content':about, 'sections':sections})
+        
+    data = {
+        "suppliers": Link.objects.count(),
+        "users": CustomUser.objects.filter(is_staff=False).count(),
+        "products": Product.objects.count(),
+        "services": Service.objects.count()
+    }
+    return render(request, "about.html", {'content':about, 'sections':sections, 'count':data})
 
 def contactpage(request):
     if request.method == "POST":
