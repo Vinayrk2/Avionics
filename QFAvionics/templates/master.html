@@ -156,6 +156,10 @@
                 }
             }
         }
+        /* #alert{
+            box-sizing: border-box;
+            /* position: absolute; */
+        
         /* #mainbox{
             /* padding-bottom: 5vh; */
         
@@ -192,7 +196,7 @@
             </div>
         </div>
 
-        <nav class="position-absolute navbar navbar-expand-lg navbar-light bg-white w-100" style="z-index: 200;">
+        <nav class="position-absolute navbar navbar-expand-lg navbar-light bg-white w-100 " style="z-index: 200;box-sizing: border-box;">
             <!-- search box -->
             <div id="searchbox" class="d-flex justify-content-center position-absolute">
                 <form id="searchform" class="d-flex" action="{% url 'search'  %}" method="get">
@@ -293,7 +297,7 @@
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-            <div class="alert alert-primary" style="margin-top:70px;" role="alert">
+            <div class="alert alert-primary"  role="alert" id="alert" style="margin-top: 10vh;">
                 {{ message }}
             </div>
 

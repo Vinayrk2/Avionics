@@ -103,26 +103,37 @@
 
         {% for notification in notifications %}
 
-
         <div class="col">
-            <div class="news-item">
-                <img src="{{notification.image.url}}" alt="Aircraft">
-                <div class="news-content">
-                    <h2 class="news-title">{{notification.title}}</h2>
-                    <p class="description">
+            <a href="{{notification.url}}" class="text-decoration-none text-dark" target="_blank">
 
-                        {{notification.description}}
-                    </p>
+                <div class="news-item">
+                    <img src="{{notification.image.url}}" alt="Aircraft">
 
-                    <p class="news-date">
-                        {{notification.created_at}}
+                    <div class="news-content">
 
-                    </p>
-                    <a href="{{notification.url}}" class="learn-more"> Learn More </a>
+                        <h2 class="news-title">{{notification.title}}</h2>
+
+                        <p class="description">
+
+                            {{notification.description}}
+                        </p>
+
+
+                        <p class="news-date">
+                            {{notification.created_at}}
+
+                        </p>
+                        <!-- <a href="{{notification.url}}" class="learn-more"> Learn More </a> -->
+
+                    </div>
 
                 </div>
-            </div>
+            </a>
+
         </div>
+
+
+
 
 
         {% endfor %}
