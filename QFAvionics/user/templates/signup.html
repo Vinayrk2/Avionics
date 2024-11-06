@@ -13,7 +13,7 @@
         <div class="p-2">
     <div class="col-sm-8 col-md-6 py-3 container-fluid border bg-light rounded p-md-5" style="">
         <form action="{% url 'signup' %}" method="post" class="" enctype="multipart/form-data">
-            <h2 class="text-center">Registration Form</h2>
+            <h2 class="text-center">Registration</h2>
             {{ form.as_p }}
             {% csrf_token %}
             <button class="btn btn-primary container fw-bolder mb-2" type="submit"> Register </button>
