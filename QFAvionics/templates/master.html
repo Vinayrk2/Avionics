@@ -406,7 +406,7 @@
             document.querySelectorAll(".alert").forEach((value, key) => {
                 setTimeout(() => {
                    value.style.opacity = 0
-                }, 2000)
+                }, 2000*(key+1))
             })
         })
 

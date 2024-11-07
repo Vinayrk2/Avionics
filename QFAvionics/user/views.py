@@ -16,7 +16,7 @@ from django.utils.encoding import force_bytes
 
 
 def signup(request):
-    if request.user.is_authenticated :
+    if request.user.is_authenticated:
         return redirect('/')
     if request.method == 'POST':
         form = UserSignUpForm(request.POST, request.FILES)
@@ -32,9 +32,9 @@ def signup(request):
 
                 return redirect('login')
             else:
-                for field, errors in form.errors.items():
-                    for error in errors:
-                        messages.error(request, f"{field.capitalize()}: {error}")
+                # for field, errors in form.errors.items():
+                #     for error in errors:
+                #         messages.error(request, f"{field.capitalize()}: {error}")
                 
                 return render(request, "signup.html", {"form": form})
                 
@@ -56,7 +56,6 @@ def userlogin(request):
             print(user)
             if user is None:
                 user = CustomUser.objects.filter(email=username).first()
-                print("user found with email")
                 if user:
                     if user.check_password(password):   
                         user = user
@@ -69,7 +68,7 @@ def userlogin(request):
                     return redirect("/")
                 elif not user.is_active:
                     send_verification_email(user, request)
-                    raise Exception("Please Verify your email first, we have sent you email on your registered email") 
+                    messages.add_message(request, messages.WARNING, "Please Verify your email first, we have sent you email on your registered email") 
                     return redirect("login")
                     
                 messages.add_message(request, messages.WARNING, "Logged in successfully.")

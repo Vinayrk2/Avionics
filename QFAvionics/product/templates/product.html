@@ -39,14 +39,14 @@
                 </div>
             </div>
 
+            {% if product.features %}
             <div> 
                 <h2 class="mb-3 fw-bold">Product Features</h2>
-            {% if product.features %}
                 {% for key,value in product.features.items %}
                     <p>{{key}} : {{value}} </p>
                 {% endfor %}
-            {% endif %}
             </div>
+            {% endif %}
         </div>
     </main>
 </div>
