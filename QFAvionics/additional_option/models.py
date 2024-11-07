@@ -145,3 +145,14 @@ class HomeSectionItem(models.Model):
 
     def __str__(self):
         return self.title
+
+class CarasoleImage(models.Model):
+    image = models.ImageField(upload_to='static/images/carousel')
+    home = models.ForeignKey(HomeSection, on_delete=models.CASCADE, related_name='images')
+
+    class Meta:
+        verbose_name = "Home Slider Images"
+        verbose_name_plural = "Home Slider Images"
+
+    def __str__(self):
+        return "Image - " + self.pk

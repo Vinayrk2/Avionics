@@ -43,7 +43,8 @@ class HomeSectionItemInlineFormset(BaseInlineFormSet):
         if len(self.forms) > 6:
             raise ValidationError("You can only add up to 6 items for the Home Section.")
         
-
+# class CarasolImageSet(admin.ModelAdmin):
+    
 
 class HomeSectionItemInline(admin.TabularInline):
     model = HomeSectionItem
