@@ -102,6 +102,7 @@
                     </div>
                     {% endfor %}
 
+                    {% if count.products > 12 %}
                     <div class="pagination d-flex justify-content-center mt-4">
                         <ul class="pagination">
                             {% if products.has_previous %}
@@ -136,6 +137,7 @@
                             {% endif %}
                         </ul>
                     </div>
+                    {% endif %}
 
                     {% else %}
                     <div class="col-md-4">
