@@ -16,9 +16,11 @@ def home(request):
     whatwedo = HomeSection.objects.filter(pk=1)
     
     if whatwedo:
+        images = whatwedo.first().images.all()
         whatwedo = whatwedo.first().items.all()
     else:
         whatwedo = []
+        images = []
     
     products_dict = []
     
@@ -27,7 +29,7 @@ def home(request):
         temp["image"] = product.get_image().url
         products_dict.append(temp)
         
-    return render(request, "home.html", {'categories':categories, 'products':products_dict, 'whatwedo':whatwedo })
+    return render(request, "home.html", {'categories':categories, 'products':products_dict, 'whatwedo':whatwedo, 'images':images })
 
 def aboutpage(request):
     about = AboutContent.objects.filter(pk=1)

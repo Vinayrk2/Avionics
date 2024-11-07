@@ -175,15 +175,15 @@
         <div class="top-bar">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <div class="d-sm-flex" style="cursor: pointer; color: rgb(160, 160, 160);">
-                    <div class="me-3 "><i class="fas fa-phone"></i> +1 (403) 886-4306</div>
-                    <div class="me-3" id="emailButton"><i class="fas fa-envelope"></i> info@qfavionics.com</div>
+                    <div class="me-3 "><i class="fas fa-phone"></i> {{header.phone_number|default:"+1 (403) 886-4306"}}</div>
+                    <div class="me-3" id="emailButton"><i class="fas fa-envelope"></i> {{header.email|default:"info@qfavionics.com"}}</div>
                 </div>
                 <h3 id="companyname" style="letter-spacing: 1px;">QF Avionics</h3>
                 <div class="d-sm-flex">
                     <div class="d-flex justify-content-center align-items-center" style="margin-top: -6px;">
-                    <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-instagram fs-6"></i></a>
-                    <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-youtube fs-6"></i></a>
-                    <a href="#" class="text-white mt-2 me-2"><i class="fa-brands fa-linkedin fs-6"></i></a>
+                    <a href="{{footer.instagram|default_if_none:"#" }}" class="text-white mt-2 me-2"><i class="fa-brands fa-instagram fs-6"></i></a>
+                    <a href="{{footer.youtube|default_if_none:"#" }}" class="text-white mt-2 me-2"><i class="fa-brands fa-youtube fs-6"></i></a>
+                    <a href="{{footer.linkedin|default_if_none:"#" }}" class="text-white mt-2 me-2"><i class="fa-brands fa-linkedin fs-6"></i></a>
                     </div>
                     <select class="form-select" id="currency-value" aria-label="Default select example"
                         style="height: 35px; width: 105px;">
@@ -345,15 +345,15 @@
                     <h5><i class="fa-solid fa-location-dot fs-6"></i> Location</h5>
                     <div class="text-secondary">
                         <a href="https://www.google.com/maps/dir//3801+Airport+Dr,+Springbrook,+AB+T4S+2E8/@52.1763421,-113.9696467,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x537450468fc942f9:0xb14e4971aebfab17!2m2!1d-113.8872465!2d52.1763708?entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D" class="text-decoration-none text-secondary" target="_blank">
-                            #11 RedDeer Regional Airport Springbook, Albarta, Canada</a>
+                            {{footer.location}} </a>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <h5><i class="fa-solid fa-hashtag"></i> Social Media Channel</h5>
                     <p class="text-secondary">Follow to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
-                    <a href="#" class="text-secondary mt-2 me-2"><i class="fa-brands fa-instagram mx-1 fs-4"></i></a>
-                    <a href="#" class="text-secondary mt-2 me-2"><i class="fa-brands fa-youtube mx-1 fs-4"></i></a>
-                    <a href="#" class="text-secondary mt-2 me-2"><i class="fa-brands fa-linkedin mx-1 fs-4"></i></a>
+                    <a href="{{footer.instagram|default_if_none:"#" }}" class="text-secondary mt-2 me-2"><i class="fa-brands fa-instagram mx-1 fs-4"></i></a>
+                    <a href="{{footer.youtube|default_if_none:"#"}}" class="text-secondary mt-2 me-2"><i class="fa-brands fa-youtube mx-1 fs-4"></i></a>
+                    <a href="{{footer.linkedin|default_if_none:"#"}}" class="text-secondary mt-2 me-2"><i class="fa-brands fa-linkedin mx-1 fs-4"></i></a>
                 </div>
             </div>
         </div>
