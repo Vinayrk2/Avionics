@@ -53,7 +53,7 @@
                     <input type="text" class="form-control" name="name" placeholder="name" required>
                 </div>
                 {% if request.user.is_authenticated %}
-                <input type="text" class="form-control" name="username" value='{{ user.username }}' disabled placeholder="auto name" required>
+                <input type="text" class="form-control d-none" name="username" value='{{ user.username }}' disabled placeholder="auto name" required>
                 {% endif %}
                 <div class="mb-3">
                     <label for="emailAddress" class="form-abel">Email Address</label>

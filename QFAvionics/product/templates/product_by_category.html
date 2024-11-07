@@ -78,14 +78,13 @@
             <p class="mt-sm-5 pt-sm-3">Showing products of {{name}} category. </p>
 
             <!-- Main Content -->
-            <div class="col-lg-12 d-flex justify-content-center mt-3">
                 <div class="row">
                     <!-- Product 1 -->
                     {% if products %}
                     {% for product in products %}
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 my-2">
                         <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
-                        <div class="card h-100" style="background-color: rgb(245, 245, 245);">
+                        <div class="card h-100" style="background-color: rgb(245, 245, 245); margin: 0px -8px;">
                             <div class="card-img-top-wrapper p-3">
                                     <img src="{{product.image}}" alt="Product Name" class="card-img-top rounded" style="mix-blend-mode: darken;">
                             </div>
@@ -145,8 +144,6 @@
 
                     </div>
                     {% endif %}
-
-                </div>
             </div>
         </div>
     </div>
