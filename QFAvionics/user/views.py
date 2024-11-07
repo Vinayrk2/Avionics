@@ -13,7 +13,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
-
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 def signup(request):
     if request.user.is_authenticated:
@@ -123,3 +124,19 @@ def verify_email(request, uidb64, token):
         return redirect('login')
     else:
         return render(request, 'registration/verification_failed.html')
+
+@csrf_exempt
+def get_user_by_email(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        email = data.get("email")
+        try:
+            user = CustomUser.objects.get(email=email)
+            if user:
+                return JsonResponse({'code':200, 'message':'user exist'})
+            raise Exception('user not exists')
+        except:
+            return JsonResponse({'code':404, 'message':'User not exist with this email'}    )
+    else:
+        return JsonResponse({'code':500, 'message':'method not allowed'})
+    

@@ -50,12 +50,11 @@
                 <h2 class="text-center">Contact Us</h2>
                 <div class="mb-3">
                     <label for="emailAddress" class="form-label">Name</label>
-                    {% if request.user.is_authenticated %}
-                    <input type="text" class="form-control" name="name" value='{{ user.username }}' disabled placeholder="auto name" required>
-                    {% else %}
                     <input type="text" class="form-control" name="name" placeholder="name" required>
-                    {% endif %}
                 </div>
+                {% if request.user.is_authenticated %}
+                <input type="text" class="form-control" name="username" value='{{ user.username }}' disabled placeholder="auto name" required>
+                {% endif %}
                 <div class="mb-3">
                     <label for="emailAddress" class="form-abel">Email Address</label>
                     {% if request.user.is_authenticated %}

@@ -16,3 +16,5 @@ class CustomUser(AbstractUser):
         if self.pk is None or not self.password.startswith('pbkdf2_sha256$'):
             self.set_password(self.password)
         super().save(*args, **kwargs)
+        
+    

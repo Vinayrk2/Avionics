@@ -53,9 +53,14 @@ def contactpage(request):
         message = request.POST.get('description')
         subject = request.POST.get("subject")
         
+        if request.POST.get("username"):
+            username = request.POST.get("username")
+        else:
+            username = "user is not registered"
         html_message = render_to_string('emailcomplaint.html', {
             'name': name,
             'email': email,
+            "username": username,
             'message': message,
             'subject': subject
         })
