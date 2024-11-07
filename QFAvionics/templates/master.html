@@ -162,7 +162,9 @@
         
         /* #mainbox{
             /* padding-bottom: 5vh; */
-        
+            .alert {
+                transition: opacity 1.5s ease-in-out;
+            }
     </style>
 
 </head>
@@ -202,6 +204,7 @@
                 <form id="searchform" class="d-flex" action="{% url 'search'  %}" method="get">
                     <input id="searchinput" type="text" name="q" placeholder="Enter Keyword . . .">&nbsp;
                     <button id="searchbtn" type="submit">Search</button>
+                    <input type="hidden" name="page" value="1">
                     <svg id="searchcancel" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                         style="margin: -30px -7px 0px 0px; cursor: pointer;" fill="currentColor" class="bi bi-x-lg"
                         viewBox="0 0 16 16">
@@ -402,12 +405,11 @@
         window.addEventListener('load', () => {
             document.querySelectorAll(".alert").forEach((value, key) => {
                 setTimeout(() => {
-                   value.style.display = 'none';
-                }, 1500)
+                   value.style.opacity = 0
+                }, 2000)
             })
         })
 
-        // email open setup
         document.getElementById("emailButton").addEventListener("click", function () {
             const email = "info@qfavionics.com";
             const subject = "Contact To Distributor";
