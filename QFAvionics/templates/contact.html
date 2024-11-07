@@ -50,11 +50,19 @@
                 <h2 class="text-center">Contact Us</h2>
                 <div class="mb-3">
                     <label for="emailAddress" class="form-label">Name</label>
+                    {% if request.user.is_authenticated %}
+                    <input type="text" class="form-control" name="name" value='{{ user.username }}' disabled placeholder="auto name" required>
+                    {% else %}
                     <input type="text" class="form-control" name="name" placeholder="name" required>
+                    {% endif %}
                 </div>
                 <div class="mb-3">
-                    <label for="emailAddress" class="form-label">Email Address</label>
-                    <input type="email" class="form-control" name="email" id="emailAddress" placeholder="you@example.com" required>
+                    <label for="emailAddress" class="form-abel">Email Address</label>
+                    {% if request.user.is_authenticated %}
+                    <input type="email" class="form-control" name="email" id="emailAddress" value="{{user.email}}" disabled placeholder="you@example.com" required>
+                    {% else %}
+                    <input type="email" class="form-control" name="email" placeholder="you@example.com" required>
+                    {% endif %}
                 </div>
                 <!-- <div class="mb-3">
                     <label for="customTopic" class="form-label"></label>
