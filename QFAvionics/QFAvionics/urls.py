@@ -21,7 +21,11 @@ urlpatterns = [
     path("notificaiton/", include("notification.urls")),
     path("service/<int:id>/", service, name="service"),
     path("set_currency/", set_currency, name="set_currency"),
-    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(
+            html_email_template_name='registration/password_reset_email.html',  # HTML template
+            subject_template_name='registration/password_reset_subject.txt'  # Subject template
+        ),
+        name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
