@@ -1,171 +1,240 @@
 {% extends "master.html" %}
 {% block content %}
-    <style>
-        .sidebar {
-            background-color: #f8f9fa;
-            padding: 15px;
-        }
+<style>
+    .sidebar {
+        background-color: #f8f9fa;
+        padding: 15px;
+    }
 
-        .product-card {
-            border: 1px solid #ddd;
-            margin-bottom: 20px;
-            padding: 10px;
-        }
+    .product-card {
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        padding: 10px;
+    }
 
-        .product-image {
-            height: 200px;
-            object-fit: contain;
-        }
+    .product-image {
+        height: 200px;
+        object-fit: contain;
+    }
 
-        .price {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
+    .price {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
 
-        .original-price {
-            text-decoration: line-through;
-            color: #6c757d;
-        }
+    .original-price {
+        text-decoration: line-through;
+        color: #6c757d;
+    }
 
-        .discount {
-            color: #28a745;
-        }
+    .discount {
+        color: #28a745;
+    }
 
-        .badge-amazon-choice {
-            background-color: #232f3e;
-            color: white;
-        }
+    .badge-amazon-choice {
+        background-color: #232f3e;
+        color: white;
+    }
 
-        .badge-best-seller {
-            background-color: #ff9900;
-            color: white;
-        }
+    .badge-best-seller {
+        background-color: #ff9900;
+        color: white;
+    }
 
-        .badge-festival {
-            background-color: #dc3545;
-            color: white;
-        }
+    .badge-festival {
+        background-color: #dc3545;
+        color: white;
+    }
 
-        .categorybtn {
-            color: #070736;
-            border: 1px solid #070736;
-            padding: 5px;
-        }
-    </style>
-    <main class="mt-5 pt-4">
+    .categorybtn {
+        color: #070736;
+        border: 1px solid #070736;
+        padding: 5px;
+    }
 
-<a class="categorybtn d-sm-none mx-2 text-decoration-none">Categories <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-sign-turn-right" viewBox="0 0 16 16">
-    <path d="M5 8.5A2.5 2.5 0 0 1 7.5 6H9V4.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L9.41 8.658A.25.25 0 0 1 9 8.466V7H7.5A1.5 1.5 0 0 0 6 8.5V11H5z"/>
-    <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.48 1.48 0 0 1 0-2.098zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134Z"/>
-  </svg></a>
-    <div id="categorybox" class="container-fluid mt-2 px-2 py-4 py-sm-0 h-10 d-flex flex-column-reverse flex-sm-row position-absolute align-items-center justify-content-start text-nowrap overflow-scroll"
-    style="background-color: #070736; z-index: 20;">
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        /* 5 columns per row on large screens */
+        gap: 1rem;
+    }
+
+    .product-card {
+        background-color: rgb(245, 245, 245);
+    }
+
+    @media (max-width: 1200px) {
+
+        /* Extra large screens */
+        .product-grid {
+            grid-template-columns: repeat(4, 1fr);
+            /* 4 columns per row */
+        }
+    }
+
+    @media (max-width: 992px) {
+
+        /* Large screens */
+        .product-grid {
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns per row */
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        /* Medium screens */
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 columns per row */
+        }
+    }
+
+    @media (max-width: 576px) {
+
+        /* Small screens */
+        .product-grid {
+            grid-template-columns: 1fr;
+            /* 1 column per row */
+        }
+    }
+
+    /* @media (min-width:1200px){
+         #hor{
+            display: flex;
+            
+         } */
+</style>
+<main class="mt-5 pt-4">
+
+    <a class="categorybtn d-sm-none mx-2 text-decoration-none">Categories <svg xmlns="http://www.w3.org/2000/svg"
+            width="18" height="18" fill="currentColor" class="bi bi-sign-turn-right" viewBox="0 0 16 16">
+            <path
+                d="M5 8.5A2.5 2.5 0 0 1 7.5 6H9V4.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L9.41 8.658A.25.25 0 0 1 9 8.466V7H7.5A1.5 1.5 0 0 0 6 8.5V11H5z" />
+            <path fill-rule="evenodd"
+                d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.48 1.48 0 0 1 0-2.098zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134Z" />
+        </svg></a>
+    <div id="categorybox"
+        class="container-fluid mt-2 px-2 py-4 py-sm-0 h-10 d-flex flex-column-reverse flex-sm-row position-absolute align-items-center justify-content-start text-nowrap overflow-scroll"
+        style="background-color: #070736; z-index: 20;">
         {% if categories %}
-            <span class="mx-3 no-link"><a href="{% url 'product-list-categorized' name='all' %}"> All Products </a></span>
-            {% for category in categories %}
-            <span class="mx-3 no-link"><a href="{% url 'product-list-categorized' name=category %}"> {{category}}</a></span>
-            {% endfor %}
-            {% else %}
-            <span class="w-10 mx-2 no-link"> Sorry! No Categories Available Right Now...</span>
-            {% endif %}
+        <span class="mx-3 no-link"><a href="{% url 'product-list-categorized' name='all' %}"> All Products </a></span>
+        {% for category in categories %}
+        <span class="mx-3 no-link"><a href="{% url 'product-list-categorized' name=category %}"> {{category}}</a></span>
+        {% endfor %}
+        {% else %}
+        <span class="w-10 mx-2 no-link"> Sorry! No Categories Available Right Now...</span>
+        {% endif %}
     </div>
 
 
-    <div class="container-fluid mt-3" >
+    <div class="container-fluid mt-3">
         <div class="row d-flex  justify-content-center">
 
             <!-- Sidebar -->
             <p class="mt-sm-5 pt-sm-3">Showing products of {{name}} category. </p>
 
             <!-- Main Content -->
-                <div class="row">
-                    <!-- Product 1 -->
-                    {% if products %}
+            <div class="row">
+                <!-- Product 1 -->
+                {% if products %}
+                <div class="product-grid">
                     {% for product in products %}
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 my-2">
+                    <div class="product-card border-none">
                         <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
-                        <div class="card h-100" style="background-color: rgb(245, 245, 245); margin: 0px -8px;">
-                            <div class="card-img-top-wrapper p-3">
-                                    <img src="{{product.image}}" alt="Product Name" class="card-img-top rounded" style="mix-blend-mode: darken;">
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bolder text-dark">{{product.name}}</h5>
-                                <p class="card-text flex-grow-1 text-secondary">{{product.description}}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-success fw-bolder fs-5">$ {{product.price}} <span style="font-size: 14px;">{{product.currency}}</span></span>
-                                    <span class="text-secondary" style="font-size: 13px;">{{product.category}}</span>
+                            <div class="card h-100" style="background-color: rgb(245, 245, 245);">
+                                <div class="card-img-top-wrapper p-3">
+                                    <img src="{{product.image}}" alt="Product Name" class="card-img-top rounded"
+                                        style="mix-blend-mode: darken;">
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title fw-bolder text-dark">{{product.name}}</h5>
+                                    <p class="card-text flex-grow-1 text-secondary">{{product.description}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-success fw-bolder fs-5">$ {{product.price}} <span
+                                                style="font-size: 14px;">{{product.currency}}</span></span>
+                                        <span class="text-secondary"
+                                            style="font-size: 13px;">{{product.category}}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <a href="{% url 'cart_add' id=product.id %}">
+                                            <button class="btn mt-3 py-2 px-3 text-white"
+                                                style="background-color: #090841; font-size: 12px;">+ ADD TO
+                                                CART</button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </a>
                     </div>
                     {% endfor %}
+                </div>
 
-                    {% if count.products > 12 %}
-                    <div class="pagination d-flex justify-content-center mt-4">
-                        <ul class="pagination">
-                            {% if products.has_previous %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page=1">First</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
-                                </li>
-                            {% endif %}
-                    
-                            <!-- Display individual page numbers -->
-                            {% for num in products.paginator.page_range %}
-                                {% if products.number == num %}
-                                    <li class="page-item active">
-                                        <span class="page-link">{{ num }}</span>
-                                    </li>
-                                {% else %}
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                    
-                            {% if products.has_next %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ products.paginator.num_pages }}">Last</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                    {% endif %}
+                {% if count.products > 12 %}
+                <div class="pagination d-flex justify-content-center mt-4">
+                    <ul class="pagination">
+                        {% if products.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
+                        </li>
+                        {% endif %}
 
-                    {% else %}
-                    <div class="col-md-4">
-                        <div class="fw-bolder" style="height: 50vh;"> Sorry! No Products Available For {{name}}</div>
+                        <!-- Display individual page numbers -->
+                        {% for num in products.paginator.page_range %}
+                        {% if products.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
 
-                    </div>
-                    {% endif %}
+                        {% if products.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ products.paginator.num_pages }}">Last</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                {% else %}
+                <div class="col-md-4">
+                    <div class="fw-bolder" style="height: 50vh;"> Sorry! No Products Available For {{name}}</div>
+
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
-    </main>
+</main>
 
-    <script>
-        let categorybox = document.querySelector('#categorybox');
-        let categorybtn = document.querySelector('.categorybtn');
-        let a = 0;
+<script>
+    let categorybox = document.querySelector('#categorybox');
+    let categorybtn = document.querySelector('.categorybtn');
+    let a = 0;
 
-        if(window.innerWidth <= 500) {
-            categorybox.style.left = "-100vw";
-            categorybox.style.transition = "0.3s";
-            a = 1;
+    if (window.innerWidth <= 500) {
+        categorybox.style.left = "-100vw";
+        categorybox.style.transition = "0.3s";
+        a = 1;
 
         categorybtn.addEventListener("click", () => {
             categorybox.style.width = "65%";
 
-            if(a == 0) {
-            categorybox.style.left = "-100vw";
-            categorybox.style.transition = "0.3s";
-            a = 1;
+            if (a == 0) {
+                categorybox.style.left = "-100vw";
+                categorybox.style.transition = "0.3s";
+                a = 1;
             } else {
                 categorybox.style.left = "0vw";
                 categorybox.style.transition = "0.3s";
@@ -174,9 +243,9 @@
         })
     } else {
         categorybox.style.left = "0vw";
-                categorybox.style.transition = "0.3s";
-                a = 0;
+        categorybox.style.transition = "0.3s";
+        a = 0;
     }
-    </script>
+</script>
 
 {% endblock %}
