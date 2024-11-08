@@ -55,15 +55,16 @@ def userlogin(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
             user = authenticate(request, username=username, password=password)
-            print(user)
+            # print(user)
             if user is None:
                 user = CustomUser.objects.filter(email=username).first() or CustomUser.objects.filter(username=username).first()
-                
+                                
                 if user is not None:
                     if check_password(password,user.password):   
                         user = user
                     else:
                         user = None
+            print(user)
             if user is not None:
                 if user.is_superuser == True:
                     messages.add_message(request, messages.WARNING, "Admin cannot login to user login")
