@@ -34,7 +34,7 @@ def product_by_category(request,name):
         temp["image"] = product.get_image().url
         products_dict.append(temp)
         
-        paginator = Paginator(products_dict, 12)
+        paginator = Paginator(products_dict, 15)
         pagenumber = request.GET.get('page',1)
         page_obj = paginator.get_page(pagenumber)
     
@@ -62,7 +62,7 @@ def search_result(request):
             news = News.objects.filter(title__icontains=query) |  News.objects.filter(description__icontains=query)
         else:
             news = None
-        paginator = Paginator(product_dict, 12)
+        paginator = Paginator(product_dict, 15)
         pagenumber = request.GET.get('page',1)
         page_obj = paginator.get_page(pagenumber)
         
