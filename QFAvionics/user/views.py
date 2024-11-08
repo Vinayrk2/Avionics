@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import CustomUser
 from .forms import UserSignUpForm, UserLoginForm
 from django.contrib.auth import  authenticate, login, logout
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
 from django.http import  HttpResponse, JsonResponse
 from django.contrib import messages
@@ -56,18 +57,18 @@ def userlogin(request):
             user = authenticate(request, username=username, password=password)
             print(user)
             if user is None:
-                user = CustomUser.objects.filter(email=username).first()
-                if user:
-                    if user.check_password(password):   
+                user = CustomUser.objects.filter(email=username).first() or CustomUser.objects.filter(username=username).first()
+                
+                if user is not None:
+                    if check_password(password,user.password):   
                         user = user
                     else:
-                        user = None 
-            
+                        user = None
             if user is not None:
                 if user.is_superuser == True:
                     messages.add_message(request, messages.WARNING, "Admin cannot login to user login")
                     return redirect("/")
-                elif not user.is_active:
+                elif user.is_active == False:
                     send_verification_email(user, request)
                     messages.add_message(request, messages.WARNING, "Please Verify your email first, we have sent you email on your registered email") 
                     return redirect("login")
@@ -114,13 +115,14 @@ User = get_user_model()
 def verify_email(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
-        user = User.objects.get(pk=uid)
+        user = CustomUser.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
     
     if user and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
+        messages.add_message(request, messages.SUCCESS, "Email verified successfully.")
         return redirect('login')
     else:
         return render(request, 'registration/verification_failed.html')

@@ -12,9 +12,13 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username 
     
-    def save(self, *args, **kwargs):
-        if self.pk is None or not self.password.startswith('pbkdf2_sha256$'):
-            self.set_password(self.password)
-        super().save(*args, **kwargs)
+def save(self, *args, **kwargs):
+    if self.pk is None or not self.is_password_hashed():
+        self.set_password(self.password)
+    super().save(*args, **kwargs)
+
+def is_password_hashed(self):
+    # Checks if the password is already hashed
+    return self.password.startswith('pbkdf2_sha256$') or len(self.password) > 50
         
     
