@@ -39,14 +39,8 @@ def aboutpage(request):
         sections = about.sections.all()
     else:
         sections = []
-        
-    data = {
-        "suppliers": Link.objects.count(),
-        "users": CustomUser.objects.filter(is_staff=False).count(),
-        "products": Product.objects.count(),
-        "services": Service.objects.count()
-    }
-    return render(request, "about.html", {'content':about, 'sections':sections, 'count':data})
+     
+    return render(request, "about.html", {'content':about, 'sections':sections})
 
 def contactpage(request):
     if request.method == "POST":
