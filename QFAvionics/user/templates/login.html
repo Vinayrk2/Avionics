@@ -11,14 +11,14 @@
        }
     } */
     /* HTML: <div class="loader"></div> */
-    
 </style>
 
 <div class="row mx-0 w-100 d-flex justify-content-center" style="margin-top: 10vh;">
     <div class="p-2">
-        <div class="col-sm-8 col-md-6 py-3 container-fluid border bg-light rounded p-md-5">
-            <form action="{% url 'login' %}" method="post">
-                <h2 class="text-center">Login</h2>
+        <div class="col-sm-8 col-md-6 py-2 py-3 container-fluid border bg-light rounded px-md-5">
+            <p id="errmsg" class="text-danger"></p>
+            <form id="loginform" action="{% url 'login' %}" method="post" onsubmit="return logincheck();">
+                <h2 class="text-center"><i class="fa-solid fa-user-large"></i> Login</h2>
                 {% if message %}
                 <p style="color: red">{{ message }}</p>
                 {% endif %}
@@ -31,5 +31,35 @@
         </div>
     </div>
 </div>
+
+<script>
+    let form = document.querySelector('#loginform');
+    let msg = document.querySelector('#errmsg');
+
+
+    let logincheck = () => {
+            let username = document.querySelector('#id_username').value;
+            let password = document.querySelector('#id_password');
+            const passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+
+            password.setAttribute("pattern", passwordPattern);
+            password.setAttribute("title", "Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters !")
+
+            setTimeout(() => {
+                msg.innerText = "";
+            }, 5000);
+
+            if (username.length <= 3 || username.length > 10) {
+                msg.innerText = "username must between 3 to 10 characters!";
+                return false;
+            }
+    
+            if(password.validity.patternMismatch) {
+                msg.innerText = "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters !";
+                return false;
+            }
+            return true;
+        }
+</script>
 
 {% endblock %}
