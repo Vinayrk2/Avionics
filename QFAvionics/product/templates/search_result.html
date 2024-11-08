@@ -16,7 +16,6 @@
     .product-grid {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        /* 5 columns per row on large screens */
         gap: 1rem;
     }
 
@@ -100,7 +99,8 @@
                     <h4 style="font-family: sans-serif; font-weight:bolder;">Products:</h4>
                     <div>({{count.products}} products found)</div>
                 </div>
-                {% comment %} <div class="col-lg-1 col-lg-0 col-0"></div> {% endcomment %}
+
+                
                 <div class="product-grid">
                     {% for product in products %}
                     <div class="product-card">
