@@ -48,9 +48,8 @@
             setTimeout(() => {
                 msg.innerText = "";
             }, 5000);
-
-            if (username.length <= 3 || username.length > 10) {
-                msg.innerText = "username must between 3 to 10 characters!";
+            if (username.length <= 3 || username.length > 100) {
+                msg.innerText += "username length must between 3 to 100 characters!";
                 return false;
             }
     
