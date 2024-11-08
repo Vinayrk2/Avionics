@@ -29,16 +29,27 @@
     <div id="carouselExample" class="carousel slide"
         style="box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;">
         <div class="carousel-inner" style="height:max(35vh,35vw)">
+            {% if images %}
+            {% for image in images %}
+            {% if image.pk == 1 %}
             <div class="carousel-item active">
-                <img src="{% static 'images/homeimg1.png'%}" class="d-block w-100" alt="..."
+                <img src="{{image.image.url}}" class="d-block w-100" alt="..."
                     style="object-fit:cover; height:inherit;">
             </div>
+            {% else %}
             <div class="carousel-item">
+                <img src="{{image.image.url}}" class="d-block w-100" alt="..."
+                    style="object-fit:cover; height:inherit;">
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+             {% comment %} <div class="carousel-item">
                 <img src="{% static 'images/homeimg2.png'%}" class="d-block w-100" alt="..." style="object-fit:cover;">
             </div>
             <div class="carousel-item">
                 <img src="{% static 'images/homeimg3.png'%}" class="d-block w-100" alt="..." style="object-fit:cover;">
-            </div>
+            </div>  {% endcomment %}
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

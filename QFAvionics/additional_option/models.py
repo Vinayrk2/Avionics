@@ -40,8 +40,26 @@ class SiteSettings(models.Model):
     airport = models.TextField(default="Red Deer Regional Airport, CYQF, YQF", blank=True, null=True)
     email_app_password = models.TextField(max_length=30,  default="zochakahgfehnxdq", blank=True, null=True)
     tax = models.DecimalField(decimal_places=2,  max_digits=5, default=0.15, null=False, blank=False)
+    instagram = models.URLField(blank=True, null=True)
+    youtube = models.URLField(blank=True, null=True)
+    linkedin = models.URLField(blank=True, null=True)
 
-
+    def get_footer_data(self):
+        return {
+            "location": self.address,
+            "airport": self.airport,
+            "instagram": self.instagram,
+            "youtube": self.youtube,
+            "linkedin": self.linkedin
+        }
+    
+    def get_header_data(self):
+        return {
+            "site_name": self.site_name,
+            "email": self.email,
+            "phone_number": self.phone_number_1,
+        }
+    
     def __str__(self):
         return "Website Settings"
 
@@ -155,4 +173,4 @@ class CarasoleImage(models.Model):
         verbose_name_plural = "Home Slider Images"
 
     def __str__(self):
-        return "Image - " + self.pk
+        return "Image - {}".format(self.pk)

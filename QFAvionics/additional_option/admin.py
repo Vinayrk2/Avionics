@@ -4,7 +4,7 @@ from .models import SiteSettings, AboutSection, AboutContent, HomeSection
 from .adminform import ServiceForm, AboutSectionForm
 from django.core.exceptions import ValidationError
 from django.forms import BaseInlineFormSet
-from .models import HomeSection, HomeSectionItem
+from .models import HomeSection, HomeSectionItem, CarasoleImage
 
 admin.site.register(SiteSettings)
 
@@ -51,7 +51,14 @@ class HomeSectionItemInline(admin.TabularInline):
     formset = HomeSectionItemInlineFormset
     extra = 1
     max_num = 6 
+    
+    
+class HomeSectionImageInline(admin.TabularInline):
+    model = CarasoleImage
+    extra = 1
+    max_num = 3
+
 
 @admin.register(HomeSection)
 class HomeSectionAdmin(admin.ModelAdmin):
-    inlines = [HomeSectionItemInline]
+    inlines = [HomeSectionItemInline, HomeSectionImageInline]
