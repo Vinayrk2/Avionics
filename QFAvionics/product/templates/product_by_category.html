@@ -6,11 +6,7 @@
         padding: 15px;
     }
 
-    .product-card {
-        border: 1px solid #ddd;
-        margin-bottom: 20px;
-        padding: 10px;
-    }
+
 
     .product-image {
         height: 200px;
@@ -61,7 +57,11 @@
 
     .product-card {
         background-color: rgb(245, 245, 245);
+
+        margin-bottom: 20px;
+        /* padding: 10px; */
     }
+
 
     @media (max-width: 1200px) {
 
@@ -140,7 +140,7 @@
                 {% if products %}
                 <div class="product-grid">
                     {% for product in products %}
-                    <div class="product-card border-none">
+                    <div class="product-card">
                         <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
                             <div class="card h-100" style="background-color: rgb(245, 245, 245);">
                                 <div class="card-img-top-wrapper p-3">
