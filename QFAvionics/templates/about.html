@@ -80,12 +80,12 @@
 
                 {% for section in sections %}
                 <section class="bg-light p-4 rounded my-3">
-                    <h2 class="h3 mb-4 text-center">{{section.title}}</h2>
+                    <h2 class="h3 mb-4 text-center fw-bolder">{{section.title}}</h2>
                     <div class="row">
                         {% if section.column %}
                         {% for title, info in section.column.items %}
                         <div class="col-md-6 mb-3">
-                            <h4 class="h5">{{title}}</h4>
+                            <h4 class="h5 fw-bold">{{title}}</h4>
                             <p>{{info}}</p>
                         </div>
                         {% endfor %}
