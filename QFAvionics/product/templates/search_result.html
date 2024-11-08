@@ -12,6 +12,40 @@
         box-shadow: 0.5px 0.5px 5px 0.5px gray;
         background-position: center;
     }
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 columns per row on large screens */
+        gap: 1rem;
+    }
+    
+    .product-card {
+        background-color: rgb(245, 245, 245);
+    }
+    
+    @media (max-width: 1200px) { /* Extra large screens */
+        .product-grid {
+            grid-template-columns: repeat(4, 1fr); /* 4 columns per row */
+        }
+    }
+    
+    @media (max-width: 992px) { /* Large screens */
+        .product-grid {
+            grid-template-columns: repeat(3, 1fr); /* 3 columns per row */
+        }
+    }
+    
+    @media (max-width: 768px) { /* Medium screens */
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr); /* 2 columns per row */
+        }
+    }
+    
+    @media (max-width: 576px) { /* Small screens */
+        .product-grid {
+            grid-template-columns: 1fr; /* 1 column per row */
+        }
+    }
+    
 </style>
 
 <div class="container-fluid mt-5 pt-4">
@@ -51,34 +85,36 @@
                     <h4 style="font-family: sans-serif; font-weight:bolder;">Products:</h4>
                     <div>({{count.products}} products found)</div>
                 </div>
-                
+                {% comment %} <div class="col-lg-1 col-lg-0 col-0"></div> {% endcomment %}
+                <div class="product-grid">
                 {% for product in products %}
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2">
-                    <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
-                        <div class="card h-100" style="background-color: rgb(245, 245, 245);">
-                            <div class="card-img-top-wrapper p-3">
-                                <img src="{{product.image}}" alt="Product Name" class="card-img-top rounded"
-                                    style="mix-blend-mode: darken;">
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bolder text-dark">{{product.name}}</h5>
-                                <p class="card-text flex-grow-1 text-secondary">{{product.description}}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-success fw-bolder fs-5">$ {{product.price}} <span
-                                            style="font-size: 14px;">{{product.currency}}</span></span>
-                                    <span class="text-secondary" style="font-size: 13px;">{{product.category}}</span>
+                    <div class="product-card">
+                        <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
+                            <div class="card h-100" style="background-color: rgb(245, 245, 245);">
+                                <div class="card-img-top-wrapper p-3">
+                                    <img src="{{product.image}}" alt="Product Name" class="card-img-top rounded"
+                                        style="mix-blend-mode: darken;">
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <a href="{% url 'cart_add' id=product.id %}"><button
-                                            class="btn mt-3 py-2 px-3 text-white"
-                                            style="background-color: #090841; font-size: 12px;">+ ADD TO
-                                            CART</button></a>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title fw-bolder text-dark">{{product.name}}</h5>
+                                    <p class="card-text flex-grow-1 text-secondary">{{product.description}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-success fw-bolder fs-5">$ {{product.price}} <span
+                                                style="font-size: 14px;">{{product.currency}}</span></span>
+                                        <span class="text-secondary" style="font-size: 13px;">{{product.category}}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <a href="{% url 'cart_add' id=product.id %}">
+                                            <button class="btn mt-3 py-2 px-3 text-white"
+                                                    style="background-color: #090841; font-size: 12px;">+ ADD TO CART</button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-                {% endfor %}
+                        </a>
+                    </div>
+                        {% endfor %}
+                    </div>
 
                 {% if count.products > 12 %}
                 <div class="pagination d-flex justify-content-center mt-4">
