@@ -157,24 +157,26 @@
                 }
             }
         }
-        .loader{
+
+        .loader {
             display: flex;
             justify-content: center;
             align-items: center;
-            position:absolute; 
-            top:0;
-            box-sizing:border-box;  
+            position: fixed;
+            top: 0;
+            box-sizing: border-box;
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            overflow-y:hidden;
+            overflow-y: hidden;
             margin: 0;
             padding: 0;
-            z-index:300;
+            z-index: 300;
             background-color: rgba(0, 0, 0, 0.774);
             display: none;
         }
-        #round{
+
+        #round {
             height: 50px;
             width: 50px;
             border: 5px solid white;
@@ -186,17 +188,20 @@
             animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
             animation-iteration-count: infinite;
         }
-        #loading_text{
+
+        #loading_text {
             color: white;
-            font-weight:bolder;
+            font-weight: bolder;
             transform: translate(-22%);
             margin-top: 2%;
         }
-        @keyframes loading{
-            0%{
+
+        @keyframes loading {
+            0% {
                 transform: rotate(0deg);
             }
-            100%{
+
+            100% {
                 transform: rotate(360deg);
             }
         }
@@ -218,21 +223,28 @@
         <div class="top-bar">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <div class="d-sm-flex" style="cursor: pointer; color: rgb(160, 160, 160);">
-                    <div class="me-3 "><i class="fas fa-phone"></i> {{header.phone_number|default:"+1 (403) 886-4306"}}</div>
-                    <div class="me-3" id="emailButton"><i class="fas fa-envelope"></i> {{header.email|default:"info@qfavionics.com"}}</div>
+                    <div class="me-3 "><i class="fas fa-phone"></i> {{header.phone_number|default:"+1 (403) 886-4306"}}
+                    </div>
+                    <div class="me-3" id="emailButton"><i class="fas fa-envelope"></i>
+                        {{header.email|default:"info@qfavionics.com"}}</div>
                 </div>
                 <h3 id="companyname" style="letter-spacing: 1px;">QF Avionics</h3>
                 <div class="d-sm-flex">
                     <div class="d-flex justify-content-center align-items-center" style="margin-top: -6px;">
-                    <a href="{{footer.instagram|default_if_none:"#" }}" class="text-white mt-2 me-2"><i class="fa-brands fa-instagram fs-6"></i></a>
-                    <a href="{{footer.youtube|default_if_none:"#" }}" class="text-white mt-2 me-2"><i class="fa-brands fa-youtube fs-6"></i></a>
-                    <a href="{{footer.linkedin|default_if_none:"#" }}" class="text-white mt-2 me-2"><i class="fa-brands fa-linkedin fs-6"></i></a>
+                        <a href="{{footer.instagram|default_if_none:" #" }}" class="text-white mt-2 me-2"><i
+                                class="fa-brands fa-instagram fs-6"></i></a>
+                        <a href="{{footer.youtube|default_if_none:" #" }}" class="text-white mt-2 me-2"><i
+                                class="fa-brands fa-youtube fs-6"></i></a>
+                        <a href="{{footer.linkedin|default_if_none:" #" }}" class="text-white mt-2 me-2"><i
+                                class="fa-brands fa-linkedin fs-6"></i></a>
                     </div>
                     <select class="form-select" id="currency-value" aria-label="Default select example"
                         style="height: 35px; width: 105px;">
                         {% if request.session.currency == "USD" %}
-                        <option value="USD"data-bs-toggle="tooltip" data-bs-placement="bottom" title="Click to see product price in USD currency" selected>💲USD</option>
-                        <option value="CAD" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Click to see product price in CAD currency">💲CAD</option>
+                        <option value="USD" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            title="Click to see product price in USD currency" selected>💲USD</option>
+                        <option value="CAD" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            title="Click to see product price in CAD currency">💲CAD</option>
                         {% else %}
                         <option value="USD">💲USD</option>
                         <option value="CAD" selected>💲CAD</option>
@@ -242,7 +254,8 @@
             </div>
         </div>
 
-        <nav class="position-absolute navbar navbar-expand-lg navbar-light bg-white w-100 " style="z-index: 200;box-sizing: border-box;">
+        <nav class="position-absolute navbar navbar-expand-lg navbar-light bg-white w-100 "
+            style="z-index: 200;box-sizing: border-box;">
             <!-- search box -->
             <div id="searchbox" class="d-flex justify-content-center position-absolute">
                 <form id="searchform" class="d-flex" action="{% url 'search'  %}" method="get">
@@ -345,7 +358,7 @@
         {% if messages %}
         <ul class="messages" style="margin-top: 12vh; position: absolute; z-index: 1000; right: 15px;">
             {% for message in messages %}
-            <div class="alert alert-primary"  role="alert" id="alert"  style="margin-top: -10px;">
+            <div class="alert alert-primary" role="alert" id="alert" style="margin-top: -10px;">
                 {{ message }}</div>
             {% endfor %}
         </ul>
@@ -387,16 +400,21 @@
                 <div class="col-md-3 mb-4">
                     <h5><i class="fa-solid fa-location-dot fs-6"></i> Location</h5>
                     <div class="text-secondary">
-                        <a href="https://www.google.com/maps/dir//3801+Airport+Dr,+Springbrook,+AB+T4S+2E8/@52.1763421,-113.9696467,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x537450468fc942f9:0xb14e4971aebfab17!2m2!1d-113.8872465!2d52.1763708?entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D" class="text-decoration-none text-secondary" target="_blank">
+                        <a href="https://www.google.com/maps/dir//3801+Airport+Dr,+Springbrook,+AB+T4S+2E8/@52.1763421,-113.9696467,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x537450468fc942f9:0xb14e4971aebfab17!2m2!1d-113.8872465!2d52.1763708?entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D"
+                            class="text-decoration-none text-secondary" target="_blank">
                             {{footer.location}} </a>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <h5><i class="fa-solid fa-hashtag"></i> Social Media Channel</h5>
-                    <p class="text-secondary">Follow to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
-                    <a href="{{footer.instagram|default_if_none:"#" }}" class="text-secondary mt-2 me-2"><i class="fa-brands fa-instagram mx-1 fs-4"></i></a>
-                    <a href="{{footer.youtube|default_if_none:"#"}}" class="text-secondary mt-2 me-2"><i class="fa-brands fa-youtube mx-1 fs-4"></i></a>
-                    <a href="{{footer.linkedin|default_if_none:"#"}}" class="text-secondary mt-2 me-2"><i class="fa-brands fa-linkedin mx-1 fs-4"></i></a>
+                    <p class="text-secondary">Follow to get special offers, free giveaways, and once-in-a-lifetime
+                        deals.</p>
+                    <a href="{{footer.instagram|default_if_none:" #" }}" class="text-secondary mt-2 me-2"><i
+                            class="fa-brands fa-instagram mx-1 fs-4"></i></a>
+                    <a href="{{footer.youtube|default_if_none:" #"}}" class="text-secondary mt-2 me-2"><i
+                            class="fa-brands fa-youtube mx-1 fs-4"></i></a>
+                    <a href="{{footer.linkedin|default_if_none:" #"}}" class="text-secondary mt-2 me-2"><i
+                            class="fa-brands fa-linkedin mx-1 fs-4"></i></a>
                 </div>
             </div>
         </div>
@@ -449,8 +467,8 @@
         window.addEventListener('load', () => {
             document.querySelectorAll(".alert").forEach((value, key) => {
                 setTimeout(() => {
-                   value.style.opacity = 0
-                }, 2000*(key+1))
+                    value.style.opacity = 0
+                }, 2000 * (key + 1))
             })
         })
 
@@ -464,7 +482,7 @@
             window.location.href = mailtoLink;
         });
 
-        const showLoading = (e)=>{
+        const showLoading = (e) => {
             document.getElementById("loading").style.display = "flex"
             document.querySelector("body").style.overflow = "hidden"
             return true
