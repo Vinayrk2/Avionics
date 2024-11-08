@@ -412,7 +412,7 @@
         })
 
         document.getElementById("emailButton").addEventListener("click", function () {
-            const email = "info@qfavionics.com";
+            const email = '{{header.email|default:"info@qfavionics.com"}}';
             const subject = "Contact To Distributor";
             const body = "type your message here";
 
