@@ -78,7 +78,7 @@ def userlogin(request):
                 request.session["currency"] = "CAD"
                 return redirect("/")
             else:
-                raise Exception("Invalid User")
+                raise Exception("Invalid username or password")
         except Exception as e:
             form = UserLoginForm()
             return render(request, "login.html", {"form":form , "message":e})
