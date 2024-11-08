@@ -1,28 +1,89 @@
 {% extends "master.html" %}
-    {% block content %}
-    
-    <div class="container border-3">
-        {% comment %} {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }} text-danger"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
+{% block content %}
+
+<div class="container border-3">
+    {% comment %} {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
     {% endif %} {% endcomment %}
     <div class="row mt-5 pt-3 mx-0 w-100 d-flex justify-content-center">
         <div class="p-2">
-    <div class="col-sm-8 col-md-6 py-3 container-fluid border bg-light rounded p-md-5" style="">
-        <form action="{% url 'signup' %}" method="post" class="" enctype="multipart/form-data">
-            <h2 class="text-center">Registration</h2>
-            {{ form.as_p }}
-            {% csrf_token %}
-            <button class="btn btn-primary container fw-bolder mb-2" type="submit"> Register </button>
-            <p> Already Have An Account ? <a href="{% url 'login' %}">LogIn Here</a></p>
-        </form>
+            <div class="col-sm-8 col-md-6 py-2 py-3 container-fluid border bg-light rounded px-md-5">
+                <ul id="errmsg">
+                </ul>
+                <form id="registerform" action="{% url 'signup' %}" method="post" class="" enctype="multipart/form-data"
+                    onsubmit="return registercheck();">
+                    <h2 class="text-center"><i class="fa-solid fa-user-plus"></i> Registration</h2>
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <button id="registerbtn" class="btn btn-primary container fw-bolder mb-2" type="submit"> Register
+                    </button>
+                    <p> Already Have An Account ? <a href="{% url 'login' %}">LogIn Here</a></p>
+                </form>
+            </div>
+        </div>
     </div>
-    </div>
-    </div>
-    </div>
+</div>
+
+<script>
+    let form = document.querySelector('#registerform');
+    let msg = document.querySelector('#errmsg');
+
+    let registercheck = () => {
+        console.log("donnnn")
+        let username = document.querySelector('#id_username').value;
+        let firstname = document.querySelector('#id_first_name').value;
+        let lastname = document.querySelector('#id_last_name').value;
+        let password = document.querySelector('#id_password1');
+        let confirmpassword = document.querySelector('#id_password2').value;
+
+        const passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+
+        password.setAttribute("pattern", passwordPattern);
+        password.setAttribute("title", "Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters !")
+
+        setTimeout(() => {
+            msg.innerHTML = "";
+        }, 5000);
+
+        if (username.length <= 3 || username.length > 10) {
+            msg.innerHTML += `<li class="text-danger">username must between 3 to 10 characters!</li>`;
+            return false;
+        } else {
+            msg.innerHTML = "";
+        }
+
+        // character check function
+        function checkAlphabets(input) {
+            for (const char of input) {
+                if (!(char >= "a" && char <= "z") &&
+                    !(char >= "A" && char <= "Z")) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        if (!checkAlphabets(firstname) || !checkAlphabets(lastname)) {
+            msg.innerHTML += `<li class="text-danger">Firstname and Lastname does not contain numbers !</li>`;
+            return false;
+        } else {
+            msg.innerHTML = "";
+        }
+
+        if (password.validity.patternMismatch) {
+            msg.innerHTML += `<li class="text-danger">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters !</li>`;
+            return false;
+        } else {
+            msg.innerHTML = "";
+        }
+
+        return true;
+    }
+</script>
 
 
-    {% endblock %}
+{% endblock %}
