@@ -102,10 +102,11 @@ def send_verification_email(user, req):
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     verification_link = "{}://{}/verify/{}/{}/".format( req.scheme,  req.get_host(), uid, token)
     send_mail(
-        "Email Verification",
+        "Email Verification", 
         f"Click here to verify your email: {verification_link}",
         "no-reply@qfavionics.com",
         [user.email],
+        html_message=f"Click here to verify your email: <a href='{verification_link}'><button style='background-color:green; color:white; padding:10px; border:none; text-decoration:none;'> Verify </button></a>"
     )
 
 

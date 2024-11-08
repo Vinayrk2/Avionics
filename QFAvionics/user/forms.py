@@ -9,6 +9,7 @@ class UserSignUpForm(UserCreationForm):
 
 	def __init__(self, *args, **kwargs):
 		super(UserCreationForm, self).__init__(*args,**kwargs)
+		self.label_suffix = ''
 
 		for fieldname in ['username', 'password1', 'password2','email',"phone_number","first_name","last_name"]:
 			self.fields[fieldname].help_text = None
@@ -24,7 +25,9 @@ class UserLoginForm(AuthenticationForm):
 	
 	def __init__(self, *args, **kwargs):
 		super(UserLoginForm, self).__init__(*args, **kwargs)
+		self.label_suffix = ''
   
 		for fieldname in ['username', 'password']:
 			self.fields[fieldname].widget.attrs.update({'class': 'form-control'})
+		self.fields['username'].label = "Username or Email"
 		
