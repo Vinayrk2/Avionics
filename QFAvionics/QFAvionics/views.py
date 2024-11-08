@@ -11,7 +11,7 @@ from additional_option.models import AboutContent, Link
 
 def home(request):
     categories = Category.objects.all()[:4]
-    products = Product.objects.all().order_by('-created_at')[:4]
+    products = Product.objects.all().order_by('-created_at')[:5]
 
     whatwedo = HomeSection.objects.filter(pk=1)
     

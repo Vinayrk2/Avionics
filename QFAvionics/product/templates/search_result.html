@@ -12,6 +12,52 @@
         box-shadow: 0.5px 0.5px 5px 0.5px gray;
         background-position: center;
     }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1rem;
+    }
+
+    .product-card {
+        background-color: rgb(245, 245, 245);
+    }
+
+    @media (max-width: 1200px) {
+
+        /* Extra large screens */
+        .product-grid {
+            grid-template-columns: repeat(4, 1fr);
+            /* 4 columns per row */
+        }
+    }
+
+    @media (max-width: 992px) {
+
+        /* Large screens */
+        .product-grid {
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns per row */
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        /* Medium screens */
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 columns per row */
+        }
+    }
+
+    @media (max-width: 576px) {
+
+        /* Small screens */
+        .product-grid {
+            grid-template-columns: 1fr;
+            /* 1 column per row */
+        }
+    }
 </style>
 
 <div class="container-fluid mt-5 pt-4">
@@ -22,28 +68,30 @@
         <!-- Main Content -->
         <div class="col-md-11">
             {% if news or products %}
-            <p>Showing similar results for "{{query}}".  </p>
+            <p>Showing similar results for "{{query}}". </p>
             {% endif %}
             {% if news %}
             <div class="w-100 d-flex align-items-center justify-content-between">
                 <h4 style="font-family: sans-serif; font-weight:bolder;">News:</h4>
                 <div>({{news|length}} news found)</div>
             </div>
-            
-            
+
+
             <div class="scroll-container d-flex" style="overflow-x: scroll;">
                 {% for value in news %}
                 <a href="" class="text-decoration-none m-2">
-                    <div class="scroll-item item1" style="background-image: url('{{value.image.url}}'); position:relative;">
+                    <div class="scroll-item item1"
+                        style="background-image: url('{{value.image.url}}'); position:relative;">
                         <p class="p-3 text-center fw-bolder text-white align-items-center rounded w-100 "
-                        style="background-color: rgba(0, 0, 0, 0.807); height: 50%; letter-spacing: 0.5px; font-size:80%; line-height: 150%; position:absolute; bottom:-10%;">{{value.title}}</p>
+                            style="background-color: rgba(0, 0, 0, 0.807); height: 50%; letter-spacing: 0.5px; font-size:80%; line-height: 150%; position:absolute; bottom:-10%;">
+                            {{value.title}}</p>
                     </div>
                 </a>
                 {% endfor %}
             </div>
             <hr class="my-3" />
             {% endif %}
-            
+
             <div class="row">
                 <!-- Product 1 -->
                 {% if products %}
@@ -51,72 +99,78 @@
                     <h4 style="font-family: sans-serif; font-weight:bolder;">Products:</h4>
                     <div>({{count.products}} products found)</div>
                 </div>
+
                 
-                {% for product in products %}
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2">
-                    <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
-                        <div class="card h-100" style="background-color: rgb(245, 245, 245);">
-                            <div class="card-img-top-wrapper p-3">
-                                <img src="{{product.image}}" alt="Product Name" class="card-img-top rounded"
-                                    style="mix-blend-mode: darken;">
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bolder text-dark">{{product.name}}</h5>
-                                <p class="card-text flex-grow-1 text-secondary">{{product.description}}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-success fw-bolder fs-5">$ {{product.price}} <span
-                                            style="font-size: 14px;">{{product.currency}}</span></span>
-                                    <span class="text-secondary" style="font-size: 13px;">{{product.category}}</span>
+                <div class="product-grid">
+                    {% for product in products %}
+                    <div class="product-card">
+                        <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
+                            <div class="card h-100" style="background-color: rgb(245, 245, 245);">
+                                <div class="card-img-top-wrapper p-3">
+                                    <img src="{{product.image}}" alt="Product Name" class="card-img-top rounded"
+                                        style="mix-blend-mode: darken;">
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <a href="{% url 'cart_add' id=product.id %}"><button
-                                            class="btn mt-3 py-2 px-3 text-white"
-                                            style="background-color: #090841; font-size: 12px;">+ ADD TO
-                                            CART</button></a>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title fw-bolder text-dark">{{product.name}}</h5>
+                                    <p class="card-text flex-grow-1 text-secondary">{{product.description}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-success fw-bolder fs-5">$ {{product.price}} <span
+                                                style="font-size: 14px;">{{product.currency}}</span></span>
+                                        <span class="text-secondary"
+                                            style="font-size: 13px;">{{product.category}}</span>
+                                    </div>
+                                    <!-- <div class="d-flex align-items-center">
+                                        <a href="{% url 'cart_add' id=product.id %}">
+                                            <button class="btn mt-3 py-2 px-3 text-white"
+                                                style="background-color: #090841; font-size: 12px;">+ ADD TO
+                                                CART</button>
+                                        </a>
+                                    </div> -->
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
 
                 {% if count.products > 12 %}
                 <div class="pagination d-flex justify-content-center mt-4">
                     <ul class="pagination">
                         {% if products.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="?q={{query}}&page=1">First</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="?q={{query}}&page={{ products.previous_page_number }}">Previous</a>
-                            </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?q={{query}}&page=1">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="?q={{query}}&page={{ products.previous_page_number }}">Previous</a>
+                        </li>
                         {% endif %}
-                
+
                         <!-- Display individual page numbers -->
                         {% for num in products.paginator.page_range %}
-                            {% if products.number == num %}
-                                <li class="page-item active">
-                                    <span class="page-link">{{ num }}</span>
-                                </li>
-                            {% else %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?q={{query}}&page={{ num }}">{{ num }}</a>
-                                </li>
-                            {% endif %}
+                        {% if products.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?q={{query}}&page={{ num }}">{{ num }}</a>
+                        </li>
+                        {% endif %}
                         {% endfor %}
-                
+
                         {% if products.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?q={{query}}&page={{ products.next_page_number }}">Next</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="?q={{query}}&page={{ products.paginator.num_pages }}">Last</a>
-                            </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?q={{query}}&page={{ products.next_page_number }}">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?q={{query}}&page={{ products.paginator.num_pages }}">Last</a>
+                        </li>
                         {% endif %}
                     </ul>
                 </div>
                 {% endif %}
-                
+
                 {% else %}
                 <div class="col-md-4">
                     <div class="fw-bolder" style="height: 50vh;"> Sorry! No Results Available For {{query}}</div>

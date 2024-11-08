@@ -3,26 +3,79 @@
 
 {% block content %}
 <style>
-     .scroll-container {
-      display: flex;
-      overflow-x: auto;
-      white-space: nowrap;
+    .scroll-container {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 
     .scroll-item {
-      min-width: 300px; /* Adjust the width as needed */
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-size: cover;
-      background-position: center;
-      color: #fff;
-      font-size: 24px;
-      font-weight: bold;
-      margin-right: 10px;
-      border-radius: 10px;
+        min-width: 300px;
+        /* Adjust the width as needed */
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 10px;
+        border-radius: 10px;
     }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        /* 5 columns per row on large screens */
+        gap: 1rem;
+    }
+
+    .product-card {
+        background-color: rgb(245, 245, 245);
+
+        margin-bottom: 20px;
+        /* padding: 10px; */
+    }
+
+
+    @media (max-width: 1200px) {
+
+        /* Extra large screens */
+        .product-grid {
+            grid-template-columns: repeat(4, 1fr);
+            /* 4 columns per row */
+        }
+    }
+
+    @media (max-width: 992px) {
+
+        /* Large screens */
+        .product-grid {
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns per row */
+        }
+    }
+
+    @media (max-width: 768px) {
+
+        /* Medium screens */
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 columns per row */
+        }
+    }
+
+    @media (max-width: 576px) {
+
+        /* Small screens */
+        .product-grid {
+            grid-template-columns: 1fr;
+            /* 1 column per row */
+        }
+    }
+
 </style>
 
 <div class="container-fluid mt-5 pt-3">
@@ -44,12 +97,12 @@
             {% endif %}
             {% endfor %}
             {% endif %}
-             {% comment %} <div class="carousel-item">
+            {% comment %} <div class="carousel-item">
                 <img src="{% static 'images/homeimg2.png'%}" class="d-block w-100" alt="..." style="object-fit:cover;">
             </div>
             <div class="carousel-item">
                 <img src="{% static 'images/homeimg3.png'%}" class="d-block w-100" alt="..." style="object-fit:cover;">
-            </div>  {% endcomment %}
+            </div> {% endcomment %}
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -67,7 +120,11 @@
         <div class="row mb-5 text-center">
             <h1 class="display-5 fw-bold text-body-emphasis" style="letter-spacing: 1px;"> WHAT WE DO</h1>
             <p class="lead px-3">
-                QF Avionics, established in 1979, is a premier independent provider of aviation maintenance, repair, and overhaul (MRO) services in Canada. With over 40 years of experience, the company has built a strong reputation for delivering top-tier solutions across all aviation sectors, including commercial, military, and general aviation. QF Avionics sets the standard for reliability and innovation, ensuring aircraft remain in peak operational condition.
+                QF Avionics, established in 1979, is a premier independent provider of aviation maintenance, repair, and
+                overhaul (MRO) services in Canada. With over 40 years of experience, the company has built a strong
+                reputation for delivering top-tier solutions across all aviation sectors, including commercial,
+                military, and general aviation. QF Avionics sets the standard for reliability and innovation, ensuring
+                aircraft remain in peak operational condition.
             </p>
         </div>
     </div>
@@ -86,7 +143,9 @@
                         </div>
                         <div class="col-12">
                             <div class="card-body d-flex flex-column justify-content-center">
-                                <h2 class="card-title fs-3" style="height: 70px; width: 109%; margin: -85px 0px 0px -16px; background-color: rgba(3, 7, 44, 0.726); padding-left: 10px; color: rgb(223, 223, 223);">{{section.title}}</h2>
+                                <h2 class="card-title fs-3"
+                                    style="height: 70px; width: 109%; margin: -85px 0px 0px -16px; background-color: rgba(3, 7, 44, 0.726); padding-left: 10px; color: rgb(223, 223, 223);">
+                                    {{section.title}}</h2>
                                 <p class="card-text" style="height: 100px;">{{section.description}}
                                 </p>
                             </div>
@@ -106,13 +165,15 @@
             {% if categories %}
             {% for category in categories %}
             <a href="{% url 'product-list-categorized' name=category.name %}" class="text-decoration-none">
-            <div class="scroll-item item1" style="overflow: hidden; background-image: image-set('{{category.image}}')">
-                <p class="fs-3 rounded w-100 d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.651); height: 110%;">{{category.name}}</p>
-            </div>
-        </a>
+                <div class="scroll-item item1"
+                    style="overflow: hidden; background-image: image-set('{{category.image}}')">
+                    <p class="fs-3 rounded w-100 d-flex justify-content-center align-items-center"
+                        style="background-color: rgba(0, 0, 0, 0.651); height: 110%;">{{category.name}}</p>
+                </div>
+            </a>
             {% endfor %}
             {% endif %}
-          </div>
+        </div>
         {% comment %} <!-- <div class="mt-2 d-flex justify-content-center">
             {% if categories|length < 4 %} <div class="col-md-{{categories|length|card_size}} mb-4">
                 {% else %}
@@ -131,6 +192,7 @@
             <h1 class="text-center fw-bolder">Featured Collection</h1>
             <div class="row h-auto">
                 {% if products %}
+                <!--                 
                 {% for product in products %}
                 <div class="col-md-3 col-sm-6 col-12 my-2">
                     <div class="card h-100 rounded">
@@ -149,27 +211,57 @@
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+                {% endfor %} -->
+                <div class="product-grid">
+                    {% for product in products %}
+                    <div class="product-card">
+                        <a href="{% url 'product-view' id=product.id %}" class="text-decoration-none border-none">
+                            <div class="card h-100" style="background-color: rgb(245, 245, 245);">
+                                <div class="card-img-top-wrapper p-3">
+                                    <img src="{{product.image}}" alt="Product Name" class="card-img-top rounded"
+                                        style="mix-blend-mode: darken;">
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title fw-bolder text-dark">{{product.name}}</h5>
+                                    <p class="card-text flex-grow-1 text-secondary">{{product.description}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-success fw-bolder fs-5">$ {{product.price}} <span
+                                                style="font-size: 14px;">{{product.currency}}</span></span>
+                                        <span class="text-secondary"
+                                            style="font-size: 13px;">{{product.category}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
                 {% endif %}
             </div>
             <div class="d-flex justify-content-center my-3">
-            <a href="{% url 'product-list-categorized' name='all' %}" class="btn border px-4 py-3 text-white" style="border-radius: 100px; background-color: rgb(3, 8, 53)">View Products <i class="fa-solid fa-angles-down"></i></a>
+                <a href="{% url 'product-list-categorized' name='all' %}" class="btn border px-4 py-3 text-white"
+                    style="border-radius: 100px; background-color: rgb(3, 8, 53)">View Products <i
+                        class="fa-solid fa-angles-down"></i></a>
             </div>
         </div>
         {% if not request.user.is_authenticated %}
         <saction class="px-4 text-center">
             <h1 class="display-6 fw-bold text-body-emphasis">SIGNUP OR LOGIN</h1>
             <div class="col-lg-6 mx-auto mt-4">
-              <p class="lead mb-4">Login to the system to access the features and to get the latest updates on our products
-                and services.</p>
-              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <a href="{% url 'signup' %}" style="text-decoration:none; color:black;"> <button
-                    class="btn rounded-sm" style="border: 1px solid rgb(202, 202, 202); border-radius: 50px; padding: 15px 25px;"> CREATE YOUR ACCOUNT</button></a>
-            <a href="{% url 'login' %}" style="text-decoration:none; color:black;"> <button
-                    class="btn fw-bold" style="padding: 15px 25px;"> SIGN-IN </button></a>
-              </div>
+                <p class="lead mb-4">Login to the system to access the features and to get the latest updates on our
+                    products
+                    and services.</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a href="{% url 'signup' %}" style="text-decoration:none; color:black;"> <button
+                            class="btn rounded-sm"
+                            style="border: 1px solid rgb(202, 202, 202); border-radius: 50px; padding: 15px 25px;">
+                            CREATE YOUR ACCOUNT</button></a>
+                    <a href="{% url 'login' %}" style="text-decoration:none; color:black;"> <button class="btn fw-bold"
+                            style="padding: 15px 25px;"> SIGN-IN </button></a>
+                </div>
             </div>
         </saction>
         {% endif %}
-        
+
         {% endblock content%}
