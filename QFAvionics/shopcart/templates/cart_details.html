@@ -85,7 +85,7 @@
                             <span>Total</span>
                             <span>${{total}}</span>
                         </div>
-                        <form  action="{% url 'send_detail' %}" method="post">
+                        <form  action="{% url 'send_detail' %}" method="post" onsubmit="return showLoading()">
                             {% csrf_token %}
                             <button type="submit" class="btn w-100 mb-3 text-white" style="background-color: #090841;;">Send Order Summary</button>
                         </form>

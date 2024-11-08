@@ -157,20 +157,63 @@
                 }
             }
         }
-        /* #alert{
-            box-sizing: border-box;
-            /* position: absolute; */
-        
-        /* #mainbox{
-            /* padding-bottom: 5vh; */
-            .alert {
-                transition: opacity 1.5s ease-in-out;
+        .loader{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position:absolute; 
+            top:0;
+            box-sizing:border-box;  
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            overflow-y:hidden;
+            margin: 0;
+            padding: 0;
+            z-index:300;
+            background-color: rgba(0, 0, 0, 0.774);
+            display: none;
+        }
+        #round{
+            height: 50px;
+            width: 50px;
+            border: 5px solid white;
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            animation-name: loading;
+            animation-duration: 2s;
+            animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+            animation-iteration-count: infinite;
+        }
+        #loading_text{
+            color: white;
+            font-weight:bolder;
+            transform: translate(-22%);
+            margin-top: 2%;
+        }
+        @keyframes loading{
+            0%{
+                transform: rotate(0deg);
             }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
     </style>
 
 </head>
 
 <body>
+
+    <div class="loader" id="loading">
+        <div>
+            <div id="round"></div>
+            <div id="loading_text"> Processing... </div>
+        </div>
+
+    </div>
+
     <main id="mainbox" class="">
         <div class="top-bar">
             <div class="container-fluid d-flex justify-content-between align-items-center">
@@ -420,6 +463,12 @@
 
             window.location.href = mailtoLink;
         });
+
+        const showLoading = (e)=>{
+            document.getElementById("loading").style.display = "flex"
+            document.querySelector("body").style.overflow = "hidden"
+            return false
+        }
     </script>
 </body>
 
