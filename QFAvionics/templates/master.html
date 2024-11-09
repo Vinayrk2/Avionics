@@ -258,7 +258,8 @@
             style="z-index: 200;box-sizing: border-box;">
             <!-- search box -->
             <div id="searchbox" class="d-flex justify-content-center position-absolute">
-                <form id="searchform" class="d-flex" action="{% url 'search'  %}" method="get">
+                <form id="searchform" class="d-flex" action="{% url 'search'  %}" method="get" onsubmit="return searchfunc();">
+                    <p id="searchmsg" class="text-danger position-absolute" style="margin-top: -38px; font-size: 15px;"></p>
                     <input id="searchinput" type="text" name="q" placeholder="Enter Keyword . . .">&nbsp;
                     <button id="searchbtn" type="submit">Search</button>
                     <input type="hidden" name="page" value="1">
@@ -270,6 +271,7 @@
                     </svg>
                 </form>
             </div>
+
             <div class="container-fluid border-bottom">
                 <a class="navbar-brand" href="{% url 'home' %}">
                     <img src="{% static 'images/logo.png' %}" alt="QF Avionics"
@@ -423,7 +425,26 @@
     <script>
         let searchcancel = document.querySelector('#searchcancel');
         let searchopen = document.querySelector('#searchopen');
+        let searchmsg = document.querySelector('#searchmsg');
 
+        // search input validation
+        let searchfunc = () => {
+            let searchinput = document.querySelector('#searchinput').value;
+
+            setTimeout(() => {
+                searchmsg.innerText = "";
+            }, 5000);
+
+        if (searchinput.length < 3) {
+                searchmsg.innerText = "search text length must be greater then 3 characters!";
+                return false;
+            } else {
+                searchmsg.innerText = "";
+            }
+            return true;
+        }
+
+        // search functionallity
         searchopen.addEventListener("click", () => {
             console.log("click")
             searchbox.style.top = "0vh";
