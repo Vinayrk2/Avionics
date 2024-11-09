@@ -76,13 +76,17 @@ def cart_clear(request):
 @login_required(login_url="/login/")
 def cart_detail(request):
     total = 0
+    
+    products = []
     for key,item in request.session.get("cart").items():
         product = Product.objects.get(pk=item["product_id"])
         item["price"] = product.price
         if request.session.get("currency") == "USD":
             item["price"] = round(float(item["price"]) * float(settings.CURRENCY_EXCHANGE_RATE),2)
         total += float(item["price"]) * float(item["quantity"])
-
+        product = product.to_dict(request)
+        product["quantity"] = item["quantity"]
+        products.append(product)
     shipping_charge = round(settings.CHARGES["shipping"],2)
     tax = round(float(settings.CHARGES["tax"])*float(total),2)
     
@@ -90,7 +94,8 @@ def cart_detail(request):
         "total": round(total+tax+shipping_charge,2),
         "sub_total": round(total,2),
         "tax": tax,
-        "shipping_charge":shipping_charge
+        "shipping_charge":shipping_charge,
+        "products":products
     }
     
     return render(request, 'cart_details.html',context)

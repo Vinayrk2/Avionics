@@ -10,20 +10,20 @@
                 <div class="row">
                     <div class="col-10">
                     </div>
-                    {% if request.session.cart %}
+                    {% if products %}
                     <div class="col-12">
                         <a href="{% url 'cart_clear' %}"><button type="button" class="btn w-100 border bg-light fs-5 fw-bold text-danger"><i class="fa-solid fa-trash-can"></i> Clear Cart</button></a>
                     </div>
                     {% endif %}
                 </div>
 
-                {% if request.session.cart %}
-                {% for key,product  in request.session.cart.items %}
+                {% if products %}
+                {% for product  in products %}
                 <div class="card mb-4 mt-3">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="{{product.image}}" alt="NikeCourt Air Max Volley"
+                                <img src="{{product.image.url}}" alt="NikeCourt Air Max Volley"
                                     class="img-fluid rounded" style="mix-blend-mode: darken;">
                             </div>
                             <div class="col-md-8">
@@ -38,18 +38,18 @@
                                                 <h5>Quantity: </h5>
                                             </div>
                                             <div class="col">
-                                                <h5><a href="{% url 'item_decrement' id=product.product_id %}" style="text-decoration: none;">-</a></h5>
+                                                <h5><a href="{% url 'item_decrement' id=product.id %}" style="text-decoration: none;">-</a></h5>
                                             </div>
                                             <div class="col">
                                                 <h5> {{product.quantity}} </h5>
                                             </div>
                                             <div class="col">
-                                                <h5><a href="{% url 'item_increment' id=product.product_id %}" style="text-decoration: none;">+</a></h5>
+                                                <h5><a href="{% url 'item_increment' id=product.id %}" style="text-decoration: none;">+</a></h5>
                                             </div>
                                         </div>
                                     </div>
                                    
-                                    <a href="{% url 'item_clear' id=product.product_id %}" class="container"><button type="button" class="btn bg-light">Remove Item</button></a>
+                                    <a href="{% url 'item_clear' id=product.id %}" class="container"><button type="button" class="btn bg-light">Remove Item</button></a>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                 {% endif %}
             </div>
 
-            {% if request.session.cart %}
+            {% if products %}
             <div class="col-md-4 mt-md-5 pt-md-2">
                 <div class="card">
                     <div class="card-body bg-light">
