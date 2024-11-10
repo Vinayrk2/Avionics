@@ -109,7 +109,7 @@ class Image(models.Model):
 
 class Category(models.Model):
     name = models.TextField(blank=False, default="", max_length=100)
-    image = models.ImageField(upload_to="static/product/category/", blank=True)
+    image = models.ImageField(upload_to="static/product/category/", blank=True, default="defult.png")
     
     class Meta:
         verbose_name = "Category"

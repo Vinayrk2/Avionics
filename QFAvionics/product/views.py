@@ -29,6 +29,10 @@ def product_by_category(request,name):
         return redirect("/")
     products_dict = []
     
+    if not products:
+        page_obj = None
+        return render(request, 'product_by_category.html',{"products":page_obj})
+        
     for product in products:
         temp = product.to_dict(request)
         temp["image"] = product.get_image().url

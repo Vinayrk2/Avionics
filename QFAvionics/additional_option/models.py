@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.cache import cache
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_migrate
 from django.core.exceptions import ValidationError
 
 # Create your models here.
@@ -32,7 +32,7 @@ class Link(models.Model):
 class SiteSettings(models.Model):
     site_name = models.CharField(max_length=100, default="QFAvionics")
     email = models.EmailField(max_length=70, blank=False, null=False,  default='info@qfavionics.com')
-    phone_number_1 = models.IntegerField(blank=True, null=True, default='14038864326')
+    phone_number_1 = models.IntegerField(blank=True, null=True)
     phone_number_2 = models.IntegerField(blank=True, null=True)
     bussiness_email = models.EmailField(max_length=70, blank=False, default='info@qfavionics.com', null=False, help_text="Email on which receive the email")
     currency_rate = models.DecimalField(null=False, blank=False, default=0.72, decimal_places=2, max_digits=3)
@@ -74,7 +74,16 @@ class SiteSettings(models.Model):
             "address": self.address,
             "airport": self.airport
         }
+        
+    @classmethod
+    def get_instance(cls):
+        instance, created = cls.objects.get_or_create(id=1)
+        return instance
     
+    @receiver(post_migrate)
+    def create_singleton_instance(sender, **kwargs):
+        if sender.name == "additional_option":
+            SiteSettings.get_instance()
     class Meta:
         verbose_name = "Site Setting"
         verbose_name_plural = "Site Settings"
@@ -114,6 +123,16 @@ class AboutContent(models.Model):
         
     def __str__(self):
         return "About Us Page"
+    
+    @classmethod
+    def get_instance(cls):
+        instance, created = cls.objects.get_or_create(id=1)
+        return instance
+    
+    @receiver(post_migrate)
+    def create_singleton_instance(sender, **kwargs):
+        if sender.name == "additional_option":
+            AboutContent.get_instance()
 
 class AboutSection(models.Model):
     class Meta:
@@ -144,6 +163,16 @@ class HomeSection(models.Model):
 
     def __str__(self):
         return "Home Section"
+    
+    @classmethod
+    def get_instance(cls):
+        instance, created = cls.objects.get_or_create(id=1)
+        return instance
+    
+    @receiver(post_migrate)
+    def create_singleton_instance(sender, **kwargs):
+        if sender.name == "additional_option":
+            HomeSection.get_instance()
 
 class HomeSectionItem(models.Model):
     home = models.ForeignKey(HomeSection, on_delete=models.CASCADE, related_name='items')
