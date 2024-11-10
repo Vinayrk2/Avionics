@@ -19,6 +19,12 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     features = models.JSONField(default=dict)
     
+    @property
+    def image(self):
+        # Return the URL of the first image associated with this product
+        first_image = self.images.first()  # Access related images
+        return first_image.image if first_image else DefaultImage()
+    
     def get_related_products(self,request):
         product_temp = Product.objects.filter(category=self.category).exclude(id=self.id)[:8]
         products = []
