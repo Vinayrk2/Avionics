@@ -32,8 +32,8 @@ class Link(models.Model):
 class SiteSettings(models.Model):
     site_name = models.CharField(max_length=100, default="QFAvionics")
     email = models.EmailField(max_length=70, blank=False, null=False,  default='info@qfavionics.com')
-    phone_number_1 = models.IntegerField(blank=True, null=True)
-    phone_number_2 = models.IntegerField(blank=True, null=True)
+    phone_number_1 = models.CharField(blank=True, null=True, max_length=10)
+    phone_number_2 = models.CharField(blank=True, null=True, max_length=10)
     bussiness_email = models.EmailField(max_length=70, blank=False, default='info@qfavionics.com', null=False, help_text="Email on which receive the email")
     currency_rate = models.DecimalField(null=False, blank=False, default=0.72, decimal_places=2, max_digits=3)
     address = models.TextField(default="QF Avionics Center LtdHangar #11 Airport Drive, Springbook,ABT4S 2E8Canada", blank=True, null=True)

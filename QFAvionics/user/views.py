@@ -64,7 +64,7 @@ def userlogin(request):
                         user = user
                     else:
                         user = None
-            print(user)
+            # print(user)
             if user is not None:
                 if user.is_superuser == True:
                     messages.add_message(request, messages.WARNING, "Admin cannot login to user login")
@@ -94,7 +94,7 @@ def userprofile(request):
 
 def userlogout(request):
     logout(request)
-    print(request.user)
+    # print(request.user)
     return redirect("/")
 
 
