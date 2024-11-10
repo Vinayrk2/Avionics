@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 # Create your models here.
 class Service(models.Model):
     name = models.CharField(max_length=40, default='', blank=False, null=False)
-    image = models.ImageField(upload_to='static/service/images/')
+    image = models.ImageField(upload_to='static/service/images/', default="defult.png")
     status = models.BooleanField(default=True)
     description = models.TextField(default='')
     service_type = models.CharField(default='', max_length=40, blank=False, null=False)
@@ -149,7 +149,7 @@ class HomeSectionItem(models.Model):
     home = models.ForeignKey(HomeSection, on_delete=models.CASCADE, related_name='items')
     title = models.CharField(max_length=100, blank=False, null=False)
     description = models.TextField(max_length=210, blank=False, null=False)
-    image = models.ImageField(blank=True, upload_to='static/images/whatwedo')
+    image = models.ImageField(blank=True, upload_to='static/images/whatwedo', default="defult.png")
 
     class Meta:
         verbose_name = "Home Section Item"
@@ -165,7 +165,7 @@ class HomeSectionItem(models.Model):
         return self.title
 
 class CarasoleImage(models.Model):
-    image = models.ImageField(upload_to='static/images/carousel')
+    image = models.ImageField(upload_to='static/images/carousel', default="defult.png")
     home = models.ForeignKey(HomeSection, on_delete=models.CASCADE, related_name='images')
 
     class Meta:
