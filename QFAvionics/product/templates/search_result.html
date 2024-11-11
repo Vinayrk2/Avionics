@@ -119,13 +119,6 @@
                                         <span class="text-secondary"
                                             style="font-size: 13px;">{{product.category}}</span>
                                     </div>
-                                    <!-- <div class="d-flex align-items-center">
-                                        <a href="{% url 'cart_add' id=product.id %}">
-                                            <button class="btn mt-3 py-2 px-3 text-white"
-                                                style="background-color: #090841; font-size: 12px;">+ ADD TO
-                                                CART</button>
-                                        </a>
-                                    </div> -->
                                 </div>
                             </div>
                         </a>
@@ -133,7 +126,7 @@
                     {% endfor %}
                 </div>
 
-                {% if count.products > 12 %}
+                {% if count.products > 15 %}
                 <div class="pagination d-flex justify-content-center mt-4">
                     <ul class="pagination">
                         {% if products.has_previous %}

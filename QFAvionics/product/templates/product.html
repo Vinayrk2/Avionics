@@ -24,7 +24,6 @@
                <div class="row" style="display: flex; flex-wrap: nowrap; overflow-x: scroll;">
 
                 {% for image in product.images %}
-    <!-- <img src="{{image.image.url}}" style="display: inline; width:100px; height:100px;"/> -->
                     <div class="box rounded me-2 mt-3" style="height:10vh; width:10vh; background-color: rgb(238, 238, 238);">
                         <img src="{{image.image.url}}"
                             alt="" class="zoom" style="mix-blend-mode: darken;">
@@ -38,7 +37,7 @@
                 <p>{{product.category.name}}</p>
                 <div class="d-flex justify-content-between">
                 <p class="price fs-4 fw-bold" style="color: green;">${{product.price}}<span style="font-size: 14px;"> {{product.currency}}</span></p>
-                <p class="stock-info in-stock">186 Units Avail.</p>
+                <p class="stock-info in-stock">{{product.stock_quantity}} Units Avail.</p>
                 </div>
 
                 <div class="d-flex align-items-center">
@@ -107,17 +106,6 @@
     </div>
     </main>
 </div>
-
-
-<!-- <div class="container" style="border: 1px solid red;">
-    <h1> Product Details Here....</h1>
-    <h2> {{product.name}}</h2>
-    {% for key, value in product.items %}
-    <h3> {{key}} : {{value}}</h3>
-    {% endfor %}
-
-    
-</div> -->
 
 <script>
     let zoom = document.getElementsByClassName('zoom');
