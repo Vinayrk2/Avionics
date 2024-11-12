@@ -360,7 +360,7 @@
         {% if messages %}
         <ul class="messages" style="margin-top: 12vh; position: absolute; z-index: 1000; right: 15px;">
             {% for message in messages %}
-            <div class="alert alert-primary" role="alert" id="alert" style="margin-top: -10px;">
+            <div class="alert {{message.tags}}" role="alert" id="alert" style="margin-top: -10px;">
                 {{ message }}</div>
             {% endfor %}
         </ul>

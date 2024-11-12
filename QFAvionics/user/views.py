@@ -95,6 +95,7 @@ def userprofile(request):
 def userlogout(request):
     logout(request)
     # print(request.user)
+    messages.add_message(request, messages.WARNING, "Logged out successfully")
     return redirect("/")
 
 
