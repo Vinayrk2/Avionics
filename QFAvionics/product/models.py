@@ -18,6 +18,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     features = models.JSONField(default=dict)
+    more_details = models.URLField(default="", null=True, blank=True)
     
     @property
     def image(self):
@@ -77,7 +78,8 @@ class Product(models.Model):
             'updated_at': self.updated_at.isoformat(),
             'id':self.pk,
             'image': self.get_image(),
-            'features': self.features
+            'features': self.features,
+            'more_details': self.more_details,
             # 'images': [image.id for image in self.images.all()]  # List of image IDs
         }
         

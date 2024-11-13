@@ -42,6 +42,11 @@
 
                 <div class="d-flex align-items-center">
                     <a href="{% url 'cart_add' id=product.id %}"><button class="btn me-2 py-2 px-4 text-white" style="background-color: #090841;">+ ADD TO CART</button></a>
+                    {% if product.more_details != "" %}
+                    <a href="{{product.more_details}}"><button class="btn me-2 py-2 px-4 text-white" style="background-color: #330453;">More Details</button></a>
+                    {% else %}
+                    <button class="btn me-2 py-2 px-4 text-white" type="button" style="background-color: #330453;" onclick="showAlert('No details available')">More Details</button>
+                    {% endif %}
                 </div>
             </div>
 
@@ -117,5 +122,7 @@
             img.src=e.target.src;
         })
     }
+
+    const showAlert = (a)=> alert(a)
 </script>
 {% endblock %}
