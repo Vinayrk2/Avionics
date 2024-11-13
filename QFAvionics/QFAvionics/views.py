@@ -47,37 +47,37 @@ def contactpage(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         message = request.POST.get('description')
-        subject = request.POST.get("subject")
+        subject = "Feedback"
         
-        if request.POST.get("username"):
-            username = request.POST.get("username")
+        if name and email and message and subject:
+            if request.POST.get("username"):
+                username = request.POST.get("username")
+            else:
+                username = "user is not registered"
+            html_message = render_to_string('emailcomplaint.html', {
+                'name': name,
+                'email': email,
+                "username": username,
+                'message': message,
+                'subject': subject
+            })
+            flag = send_mail(
+                subject=subject,
+                message=message, 
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[settings.EMAIL_HOST_USER],
+                html_message=html_message,
+                fail_silently=False,
+            )
+            if flag:
+                messages.success(request, "Your message has been sent successfully!")
+                return redirect("/")
+            else:
+                messages.add_message(request,  messages.ERROR, 'Failed to send mail, try again later')
+                return redirect("/")
         else:
-            username = "user is not registered"
-        html_message = render_to_string('emailcomplaint.html', {
-            'name': name,
-            'email': email,
-            "username": username,
-            'message': message,
-            'subject': subject
-        })
-        flag = send_mail(
-            subject=subject,
-            message=message, 
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[settings.EMAIL_HOST_USER],
-            html_message=html_message,
-            fail_silently=False,
-        )
-        if flag:
-            messages.success(request, "Your message has been sent successfully!")
-            return redirect("/")
-        else:
-            messages.add_message(request,  messages.ERROR, 'Failed to send mail, try again later')
-            return redirect("/")
-        
-    # else:
-    #     messages.add_message(request,  messages.INFO, 'Invalid Operation')
-    #     return redirect("/")
+            messages.add_message(request,  messages.ERROR, 'All Fields Are Mandatory')
+            return redirect("contactpage")
     else:
         return render(request, "contact.html", {})
 

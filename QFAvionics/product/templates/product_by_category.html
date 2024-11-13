@@ -6,8 +6,6 @@
         padding: 15px;
     }
 
-
-
     .product-image {
         height: 200px;
         object-fit: contain;
@@ -51,59 +49,38 @@
     .product-grid {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        /* 5 columns per row on large screens */
         gap: 1rem;
     }
 
     .product-card {
         background-color: rgb(245, 245, 245);
-
         margin-bottom: 20px;
-        /* padding: 10px; */
     }
 
-
     @media (max-width: 1200px) {
-
-        /* Extra large screens */
         .product-grid {
             grid-template-columns: repeat(4, 1fr);
-            /* 4 columns per row */
         }
     }
 
     @media (max-width: 992px) {
-
-        /* Large screens */
         .product-grid {
             grid-template-columns: repeat(3, 1fr);
-            /* 3 columns per row */
         }
     }
 
     @media (max-width: 768px) {
-
-        /* Medium screens */
         .product-grid {
             grid-template-columns: repeat(2, 1fr);
-            /* 2 columns per row */
         }
     }
 
     @media (max-width: 576px) {
-
-        /* Small screens */
         .product-grid {
             grid-template-columns: 1fr;
-            /* 1 column per row */
         }
     }
 
-    /* @media (min-width:1200px){
-         #hor{
-            display: flex;
-            
-         } */
 </style>
 <main class="mt-5 pt-4">
 
@@ -156,13 +133,6 @@
                                         <span class="text-secondary"
                                             style="font-size: 13px;">{{product.category}}</span>
                                     </div>
-                                    <!-- <div class="d-flex align-items-center" style="bottom: 0;">
-                                        <a href="{% url 'cart_add' id=product.id %}">
-                                            <button class="btn mt-3 py-2 px-3 text-white"
-                                                style="background-color: #090841; font-size: 12px;">+ ADD TO
-                                                CART</button>
-                                        </a>
-                                    </div> -->
                                 </div>
                             </div>
                         </a>
@@ -170,7 +140,7 @@
                     {% endfor %}
                 </div>
 
-                {% if count.products > 12 %}
+                {% if count.products > 15 %}
                 <div class="pagination d-flex justify-content-center mt-4">
                     <ul class="pagination">
                         {% if products.has_previous %}
@@ -209,7 +179,7 @@
 
                 {% else %}
                 <div class="col-md-4">
-                    <div class="fw-bolder" style="height: 50vh;"> Sorry! No Products Available For {{name}}</div>
+                    <div class="fw-bolder" style="height: 50vh;"> Sorry! No Products Available.</div>
 
                 </div>
                 {% endif %}
