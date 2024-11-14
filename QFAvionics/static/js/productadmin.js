@@ -54,6 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
         valueInput.placeholder = "Value";
         valueInput.value = value;
         valueInput.className = "jsonfield"
+        valueInput.row = "2"
+        valueInput.cols = "199"
         wrapper.appendChild(valueInput);
         wrapper.onchange = () => {
             updateButton.removeAttribute("disabled")
