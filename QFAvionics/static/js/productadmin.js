@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const notice = document.createElement("p")
     notice.textContent = "* Any changes in the fields require you to confirm and save. After that it will reflect to the system.";
     notice.style = "color:red;"
-    jsonField.parentElement.appendChild(notice)
-    // Load existing JSON data if any
+    jsonField.parentNode.after(notice)
+    
     let features = {};
     try {
         features = JSON.parse(jsonField.value) || {};
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
         valueInput.value = value;
         valueInput.className = "jsonfield"
         valueInput.row = "2"
-        valueInput.cols = "199"
+        valueInput.cols = "150"
         wrapper.appendChild(valueInput);
         wrapper.onchange = () => {
             updateButton.removeAttribute("disabled")
