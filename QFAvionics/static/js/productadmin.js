@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const fieldInput = document.createElement("input");
         fieldInput.type = "text";
         fieldInput.placeholder = "Field";
-        fieldInput.classList.add('jsonfield')
         fieldInput.value = typeof(field) == "string"?  field : "";
         
         fieldInput.onchange = () => {
@@ -50,10 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
         wrapper.appendChild(fieldInput);
 
         // Create input for field value
-        const valueInput = document.createElement("input");
+        const valueInput = document.createElement("textarea");
         valueInput.type = "text";
         valueInput.placeholder = "Value";
         valueInput.value = value;
+        valueInput.className = "jsonfield"
         wrapper.appendChild(valueInput);
         wrapper.onchange = () => {
             updateButton.removeAttribute("disabled")
