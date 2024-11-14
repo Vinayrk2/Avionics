@@ -16,10 +16,12 @@
     <main class="container-fluid my-5 border p-4 p-sm-5 rounded">
         <div class="row">
             <div class="col-md-6 pe-3">
-               <div class="row">
+               <div style="height: 45vh; overflow: hidden;" class="d-flex align-items-center justify-content-center">
+                <div>
                 <img src="{{product.image.url}}"
-                    alt="Nexus TJ-102 In-Line Microphone Jack" class="" id="main-img" style="mix-blend-mode: darken;">
-               </div> 
+                    alt="QF Avionics Product" id="main-img" style="mix-blend-mode: darken;">
+               </div>
+               </div>
                 
                <div class="row" style="display: flex; flex-wrap: nowrap; overflow-x: scroll;">
 
@@ -40,12 +42,12 @@
                 <p class="stock-info in-stock">{{product.stock_quantity}} Units Avail.</p>
                 </div>
 
-                <div class="d-flex align-items-center">
-                    <a href="{% url 'cart_add' id=product.id %}"><button class="btn me-2 py-2 px-4 text-white" style="background-color: #090841;">+ ADD TO CART</button></a>
+                <div class="d-flex align-items-center flex-wrap">
+                    <a href="{% url 'cart_add' id=product.id %}"><button class="btn mt-2 me-2 py-2 px-4 text-white" style="background-color: #090841;">+ ADD TO CART</button></a>
                     {% if product.more_details != "" %}
-                    <a href="{{product.more_details}}"><button class="btn me-2 py-2 px-4 text-white" style="background-color: #330453;">More Details</button></a>
+                    <a href="{{product.more_details}}"><button class="btn mt-2 me-2 py-2 px-4 text-white" style="background-color: #660404;">More Details</button></a>
                     {% else %}
-                    <button class="btn me-2 py-2 px-4 text-white" type="button" style="background-color: #330453;" onclick="showAlert('No details available')">More Details</button>
+                    <button class="btn me-2 mt-2 py-2 px-4 text-white" type="button" style="background-color: #660404;" onclick="showAlert('No details available')">More Details</button>
                     {% endif %}
                 </div>
             </div>
