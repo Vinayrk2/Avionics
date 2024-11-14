@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const fieldInput = document.createElement("input");
         fieldInput.type = "text";
         fieldInput.placeholder = "Field";
+        fieldInput.classList.add('jsonfield')
         fieldInput.value = typeof(field) == "string"?  field : "";
         
         fieldInput.onchange = () => {

@@ -37,14 +37,22 @@
                 <h2 class="mb-3 fw-bold">{{product.name}}</h2>
                 <p class="lead">{{product.description}}</p>
                 <p>{{product.category.name}}</p>
-                <div class="d-flex justify-content-between">
-                <p class="price fs-4 fw-bold" style="color: green;">${{product.price}}<span style="font-size: 14px;"> {{product.currency}}</span></p>
-                <p class="stock-info in-stock">{{product.stock_quantity}} Units Avail.</p>
-                </div>
-
+                {% if product.part_number != None and product.part_number != "" %}
+                <p>Part Number : #{{product.part_number}} </p>
+                {% endif %}
+                {% if product.availability != None and product.availability != "" %}
+                <p>Availablility : {{product.availability}}</p>
+                {% endif %}
+                {% if product.manufacturer != None and product.manufacturer != "" %}
+                <p>Manufacturer : {{product.manufacturer}}</p>
+                {% endif %}
+                {% if product.condition != None and product.condition != "" %}
+                <p>Condition : {{product.condition}}</p>
+                {% endif %}
+                
                 <div class="d-flex align-items-center flex-wrap">
                     <a href="{% url 'cart_add' id=product.id %}"><button class="btn mt-2 me-2 py-2 px-4 text-white" style="background-color: #090841;">+ ADD TO CART</button></a>
-                    {% if product.more_details != "" %}
+                    {% if product.more_details != "" and product.more_details != None %}
                     <a href="{{product.more_details}}"><button class="btn mt-2 me-2 py-2 px-4 text-white" style="background-color: #660404;">More Details</button></a>
                     {% else %}
                     <button class="btn me-2 mt-2 py-2 px-4 text-white" type="button" style="background-color: #660404;" onclick="showAlert('No details available')">More Details</button>
@@ -88,23 +96,15 @@
                      <div class="d-flex justify-content-between">
                     <p class="card-text fs-4 fw-bold" style="color: rgb(17, 99, 17);">${{product.price}}</p>
                     <!-- <p class="card-text text-secondary pt-2">{{product.category.name}}</p> -->
-                    </div>
+                </div>
+                {% if product.availability != None and product.availability != "" %}
+                <p>Availablility : {{product.availability}}</p>
+                {% endif %}
+                {% if product.manufacturer != None and product.manufacturer != "" %}
+                <p>{{product.manufacturer}}</p>
+                {% endif %}
                     <a href="{% url 'product-view' id=product.id %}" class="btn btn-link p-0 text-decoration-none mt-3">View Details</a>
                 </div>
-                {%  if product.stock_quantity < 10 %}
-                <div class="card-footer bg-white">
-                    <small class="text-danger"><span class="fs-5 fw-bold">{{product.stock_quantity}} </span> Units Available</small>
-                </div>
-                {% elif  product.stock_quantity < 50 %}
-
-                <div class="card-footer bg-white">
-                    <small class="text-warning"><span class="fs-5 fw-bold">{{product.stock_quantity}} </span> Units Available</small>
-                </div>
-                {% else %}
-                <div class="card-footer bg-white">
-                    <small class="text-success"><span class="fs-5 fw-bold">{{product.stock_quantity}} </span> Units Available</small>
-                </div>
-                {% endif %}
             </div>
         </div>
         {% endfor %}

@@ -28,6 +28,15 @@
                             </div>
                             <div class="col-md-8">
                                 <h5 class="card-title fs-3">{{product.name}}</h5>
+                                {% if product.part_number != None and product.part_number != "" %}
+                                <p>Part Number : #{{product.part_number}} </p>
+                                {% endif %}
+                                {% if product.manufacturer != None and product.manufacturer != "" %}
+                                <p>Manufacturer : {{product.manufacturer}}</p>
+                                {% endif %}
+                                {% if product.condition != None and product.condition != "" %}
+                                <p>Condition : {{product.condition}}</p>
+                                {% endif %}
                                 <p class="card-text text-muted">{{product.category}}</p>
                                 <p class="card-text"><span class="fw-bold fs-4">${{product.price}}<span style="font-size: 14px;">{{request.session.currency}}</span></span> per unit</p>
                                 <div class="row g-2 mb-3">
@@ -89,6 +98,7 @@
                             {% csrf_token %}
                             <button type="submit" class="btn w-100 mb-3 text-white" style="background-color: #090841;;">Submit</button>
                         </form>
+                        <a class="text-center d-block" href="{% url 'product-list-categorized' name='all' %}">Continue Shopping</a>
                     </div>
                 </div>
             </div>

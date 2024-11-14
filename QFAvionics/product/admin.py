@@ -13,8 +13,8 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductAttributeInline]
     form =  ProductForm
     search_fields = ('name', 'part_number')
-    list_filter = ('category', 'stock_quantity')
-    list_display = ('name', 'category', 'price', 'stock_quantity', 'created_at')
+    list_filter = ('category', 'availability')
+    list_display = ('name', 'category', 'price', 'availability' ,'created_at')
     
     
     class Media:

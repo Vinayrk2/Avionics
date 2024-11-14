@@ -9,16 +9,17 @@ CURRENCY_CHOICES = [
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    part_number = models.DecimalField(blank=True, null=True, unique=True, max_digits=20, decimal_places=0)
+    part_number = models.CharField(blank=True, null=True, default=None, unique=True, max_length=30)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    # currency = models.CharField(max_length=3,  choices=CURRENCY_CHOICES, default='CAD')
-    stock_quantity = models.PositiveIntegerField(default=0)  
     category = models.ForeignKey('Category', blank=True, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     features = models.JSONField(default=dict)
     more_details = models.URLField(default="", null=True, blank=True)
+    manufacturer = models.CharField(max_length=100, blank=True, null=True, default="")
+    condition = models.CharField(max_length=50, blank=True, null=True, default="")
+    availability = models.CharField(max_length=50, blank=True, null=True, default="")
     
     @property
     def image(self):
@@ -61,24 +62,21 @@ class Product(models.Model):
         else:
             raise ValueError("Discount percentage must be between 0 and 100.")
 
-    def is_in_stock(self):
-        if self.stock_quantity >= 0:
-            return False
-        # Implement stock logic here
-        return True  # Placeholder return value
-    
     def to_dict(self,request):
         obj = {
             'name': self.name,
             'description': self.description,
             # 'price': str(self.price),  # Convert to string for JSON serialization
-            'stock_quantity': self.stock_quantity,
+            'part_number': self.part_number,
             'category': self.category if self.category else None,  # Use category ID or None
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
             'id':self.pk,
             'image': self.get_image(),
             'features': self.features,
+            'condition': self.condition,
+            'availability': self.availability,
+            'manufacturer': self.manufacturer,
             'more_details': self.more_details,
             # 'images': [image.id for image in self.images.all()]  # List of image IDs
         }
