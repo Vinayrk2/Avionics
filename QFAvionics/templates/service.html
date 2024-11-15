@@ -28,15 +28,17 @@
     }
 
     .title {
-        color: #065baa;
+        color: #757575;
         border-bottom-width: thick;
         border-bottom-style: solid;
         border-bottom-color: #f0eeee;
-        font-size: 2rem;
+        font-size: 1.4rem;
+        margin-bottom: 3px;
     }
 
     #description {
         font-size: 1.1rem;
+        text-align: justify;
     }
     .service-name{
         color: #065baa;
@@ -44,14 +46,10 @@
     }
 </style>
 
-
-
-
-
 <div class="container">
     <div class="service-item">
         <div class="row">
-            <p class="service-name">
+            <p class="service-name mt-lg-3 fw-bold">
                 {{service.name}}
             </p>
         </div>
@@ -65,7 +63,7 @@
 
         {% if service.specifications %}
         <div class="row">
-            <p class="title mt-5">Specifications</p>
+            <p class="title mt-5 border-bottom">Specifications</p>
             <ul>
                 {% for key, value in service.specifications.items %}
                 <li>{{value}}</li>
@@ -75,17 +73,17 @@
         {% endif %}
 
         <div class="row">
-            <p class="title mt-3">Service Status</p>
+            <p class="title mt-3 border-bottom">Service Status</p>
             {% if service.status %}
-            <p class="text-success">Available</p>
+            <p class="text-success fs-4">Available</p>
             {% else %}
-            <p class="text-danger">Not Available</p>
+            <p class="text-danger fs-4">Not Available</p>
             {% endif %}
         </div>
 
         <div class="row">
-            <p class="title mt-3">Service Type</p>
-            <p>{{service.service_type}}</p>
+            <p class="title mt-2 border-bottom">Service Type</p>
+            <p class="fs-4">{{service.service_type}}</p>
         </div>
     </div>
 
