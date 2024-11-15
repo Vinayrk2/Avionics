@@ -93,7 +93,7 @@ class Product(models.Model):
                 obj['price'] = round(float(self.price),2)
                 obj['currency'] = "CAD"
         else:
-            obj['price'] = 'login to view the price'
+            obj['price'] = ''
         return obj
         
 
