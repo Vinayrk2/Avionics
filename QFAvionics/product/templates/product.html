@@ -4,6 +4,9 @@
 
 {% block content %}
 <style>
+    .img_container::-webkit-scrollbar {
+    display: none;
+}
 </style>
 
 <div class="container" style="margin-top: 80px;">
@@ -18,7 +21,7 @@
                     </div>
                 </div>
 
-                <div class="row" style="display: flex; flex-wrap: nowrap; overflow-x: scroll;">
+                <div class="row img_container" style="display: flex; flex-wrap: nowrap; overflow-x: scroll;">
 
                     {% for image in product.images %}
                     <div class="box rounded me-2 mt-3"
@@ -63,7 +66,7 @@
                     </tbody>
                 </table>
                 {% if product.price != "" and product.price != None   %}
-                <span class="text-secondary fw-bolder fs-5">$ {{product.price}} <span
+                <span class="text-secondary fw-bolder fs-4">${{product.price}} <span
                     style="font-size: 14px;">{{product.currency}}</span></span>
                 {% else %}
                     <span class="text-danger fw-bolder fs-5">Login to view price</span>
@@ -72,10 +75,10 @@
                     <a href="{% url 'cart_add' id=product.id %}"><button class="btn mt-2 me-2 py-2 px-4 text-white"
                             style="background-color: #090841;">+ ADD TO CART</button></a>
                     {% if product.more_details != "" and product.more_details != None %}
-                    <a href="{{product.more_details}}"><button class="btn mt-2 me-2 py-2 px-4 text-white"
-                            style="background-color: #660404;">More Details</button></a>
+                    <a href="{{product.more_details}}"><button class="btn mt-2 me-2 py-2 px-4"
+                            style="border: 1px solid #090841;">More Details</button></a>
                     {% else %}
-                    <button class="btn me-2 mt-2 py-2 px-4 text-white" type="button" style="background-color: #660404;"
+                    <button class="btn me-2 mt-2 py-2 px-4" type="button" style="border: 1px solid #090841;"
                         onclick="showAlert('No details available')">More Details</button>
                     {% endif %}
                 </div>
