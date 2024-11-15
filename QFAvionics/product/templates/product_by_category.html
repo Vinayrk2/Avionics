@@ -135,9 +135,13 @@
                                     {% if product.manufacturer != None and product.manufacturer != "" %}
                                     <p class="card-text flex-grow-1 text-secondary">Manufacturer : {{product.manufacturer}}</p>
                                     {% endif %}
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span class="text-success fw-bolder fs-5">$ {{product.price}} <span
-                                                style="font-size: 14px;">{{product.currency}}</span></span>
+                                    <div class="d-flex justify-content-between">
+                                        {% if product.price != "" and product.price != None   %}
+                                        <span class="text-secondary fw-bolder fs-4">${{product.price}} <span
+                                            style="font-size: 14px;">{{product.currency}}</span></span>
+                                        {% else %}
+                                            <span class="text-danger fw-bolder fs-5">Login to view price</span>
+                                        {% endif%}
                                     </div>
                                 </div>
                             </div>
