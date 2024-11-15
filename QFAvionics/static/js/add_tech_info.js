@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const notice1 = document.createElement("p")
     notice1.textContent = "* Any changes in the fields require you to confirm and save. After that it will reflect to the system.";
     notice1.style = "color:red;"
-    jsonField1.parentElement.appendChild(notice1)
+    jsonField1.parentElement.after(notice1)
     // Load existing JSON data if any
     let features1 = {};
     try {
@@ -48,10 +48,13 @@ document.addEventListener("DOMContentLoaded", function () {
         wrapper1.appendChild(fieldInput1);
 
         // Create input for field value
-        const valueInput1 = document.createElement("input");
+        const valueInput1 = document.createElement("textarea");
         valueInput1.type = "text";
         valueInput1.placeholder = "Value";
         valueInput1.value = value;
+        valueInput1.className = "jsonfield"
+        valueInput1.row = "2"
+        valueInput1.cols = "110"
         wrapper1.appendChild(valueInput1);
         wrapper1.onchange = () => {
             updateButton1.removeAttribute("disabled")

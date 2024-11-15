@@ -7,6 +7,17 @@
     .img_container::-webkit-scrollbar {
     display: none;
 }
+
+#product_img {
+    height: 55vh;
+    overflow: hidden;
+}
+
+@media(max-width: 500px){
+    #product_img {
+        height: 40vh;
+    }
+}
 </style>
 
 <div class="container" style="margin-top: 80px;">
@@ -14,10 +25,14 @@
     <main class="container-fluid my-5 border p-4 p-sm-5 rounded">
         <div class="row">
             <div class="col-md-6 pe-3">
-                <div style="height: 45vh; overflow: hidden;" class="d-flex align-items-center justify-content-center">
+                <div id="product_img" class="d-flex align-items-center justify-content-center">
                     <div>
+                        <div class="d-flex justify-content-between" style="margin-top: 45%; mix-blend-mode: darken;">
+                            <a href="#" id="left_float_btn"><i class="fa-solid fa-chevron-left fs-4 bg-dark text-white py-2 pe-2 ps-4" onclick="slideImage(-1)" style="border-radius: 100px; margin-left: -20px;"></i></a>
+                            <a href="#" id="right_float_btn"><i class="fa-solid fa-chevron-right fs-4 bg-dark text-white py-2 pe-4 ps-2" onclick="slideImage(1)" style="border-radius: 100px; margin-right: -20px;"></i></a>
+                        </div>
                         <img src="{{product.image.url}}" alt="QF Avionics Product image" id="main-img"
-                            style="mix-blend-mode: darken;">
+                            style="margin-top: -45%;">
                     </div>
                 </div>
 
@@ -25,7 +40,7 @@
 
                     {% for image in product.images %}
                     <div class="box rounded me-2 mt-3"
-                        style="height:10vh; width:10vh; background-color: rgb(238, 238, 238);">
+                        style="height:10vh; width:10vh; background-color: rgb(238, 238, 238); cursor: pointer;">
                         <img src="{{image.image.url}}" alt="" class="zoom" style="mix-blend-mode: darken;">
                     </div>
                     {% endfor %}
@@ -33,8 +48,8 @@
             </div>
             <div class="col-md-6 p-3 p-sm-5 mt-3 mt-md-0 rounded-2"
                 style="background-color: rgb(241, 241, 241); height: 100%;">
-                <h2 class="mb-3 fw-bold">{{product.name}}</h2>
-                <p class="lead">{{product.description}}</p>
+                <h3 class="mb-3 fw-bold">{{product.name}}</h3>
+                <p class="lead fs-6 text-secondary">{{product.description}}</p>
                 <p>{{product.category.name}}</p>
 
                 <table class="table" style="font-size: 12px;">
@@ -47,7 +62,7 @@
                         {% endif %}
                         {% if product.availability != None and product.availability != "" %}
                         <tr>
-                            <td class="fw-bold">Status</td>
+                            <td class="fw-bold">Availability</td>
                             <td>{{product.availability}}</td>
                         </tr>
                         {% endif %}
@@ -116,7 +131,7 @@
                         class="text-decoration-none mt-3">
             <div class="card bg-light h-100">
                 <img src="{{product.image.url}}" class="card-img-top p-4 rounded-2" alt="Amphenol NEXUS TJ-105"
-                    style="mix-blend-mode: darken;">
+                    style="mix-blend-mode: darken; aspect-ratio:calc(4/4);">
                 <div class="card-body" style="margin-bottom: -10px;">
                     <h5 class="card-title text-decoration-none text-dark fw-bold">{{product.name}}</h5> 
                     <!-- <p class="card-text">{{product.description}}</p> -->
@@ -148,7 +163,7 @@
 <script>
     let zoom = document.getElementsByClassName('zoom');
     let img = document.getElementById('main-img');
-
+    let current = 0
 
     for (let i = 0; i < zoom.length; i++) {
         zoom[i].addEventListener('click', (e) => {
@@ -156,6 +171,27 @@
         })
     }
 
+    const slideImage = (change)=>{
+
+        if(zoom.length == 1){
+            return;
+        }
+        switch(change){
+            case -1:
+                if (current == 0)
+                    current = zoom.length;
+                current = (current-1) % zoom.length
+                img.src = zoom[current].src
+            break;
+            
+            case 1:
+                if (current == 3)
+                    current = -1;
+                current = (current+1) % zoom.length
+                img.src = zoom[current].src
+            break;
+        }
+    }
     const showAlert = (a) => alert(a)
 </script>
 {% endblock %}

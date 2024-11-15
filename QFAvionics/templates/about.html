@@ -30,10 +30,10 @@
 
         <div class="container p-0 mt-5">
             <main>
-                <section class="row">
-                    <div class="col-12 text-center py-5">
+                <section class="container-fluid">
+                    <div class="text-center py-5">
                         <h5 class="display-4 fw-lighter mb-4 fw-bold">ABOUT US</h5>
-                        <p class="lead px-3 px-md-5 mb-4 text-secondary">
+                        <p class="lead px-md-5 text-secondary">
                             {{content.main_description}}
                         </p>
                         <!-- <p class="lead px-3 px-md-5">
@@ -44,7 +44,7 @@
                     </div>
                 </section>
 
-                <section class="row bg-0 py-5 m-0">
+                <section class="row bg-0 pb-3 m-0">
                     <div class="col-md-4 mb-4 mb-md-0">
                         <div class="card h-100 border-3-dark rounded">
                             <div class="card-body rounded">
@@ -78,7 +78,7 @@
                 </section>
 
                 {% for section in sections %}
-                <section class="bg-light p-4 rounded my-3">
+                <section class="bg-light p-4 rounded my-3 m-0">
                     <h2 class="h3 mb-4 text-center fw-bolder">{{section.title}}</h2>
                     <div class="row">
                         {% if section.column %}

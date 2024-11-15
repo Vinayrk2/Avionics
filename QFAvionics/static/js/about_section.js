@@ -49,10 +49,13 @@ document.addEventListener("DOMContentLoaded", function () {
         wrapper.appendChild(fieldInput);
 
         // Create input for field value
-        const valueInput = document.createElement("input");
+        const valueInput = document.createElement("textarea");
         valueInput.type = "text";
         valueInput.placeholder = "Information";
         valueInput.value = value;
+        valueInput.className = "jsonfield"
+        valueInput.row = "2"
+        valueInput.cols = "110"
         wrapper.appendChild(valueInput);
         wrapper.onchange = () => {
             updateButton.removeAttribute("disabled")
