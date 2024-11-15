@@ -19,29 +19,79 @@
         width: auto;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         margin-top: 10vh;
+        font-size: 2rem;
     }
 
-    .row img {
-        max-height: 50vh;
-        max-width: 50vh;
-        margin: auto;
+
+
+    #img-div {
+        height: 60vh;
+        width: 100%;
+        /* border: 1px solid black; */
+        background-image: url({{service.image.url}});
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        /* background-position: ; */
     }
 
-    .title {
+    @media (max-width:770px) {
+        #img-div {
+            height: 40vh;
+            width: 100%;
+            background-size: contain;
+            background-image: url({{service.image.url}});
+            background-position: center;
+            /* border: 1px solid black; */
+            margin: auto;
+        }
+    }
+
+    @media (max-width:340px) {
+        #img-div {
+            height: 30vh;
+            width: 100%;
+            background-size: contain;
+            background-image: url({{service.image.url}});
+            background-position: center;
+            /* border: 1px solid black; */
+            margin: auto;
+        }
+    }
+
+
+    /* .title {
         color: #065baa;
         border-bottom-width: thick;
         border-bottom-style: solid;
         border-bottom-color: #f0eeee;
         font-size: 2rem;
-    }
+    } */
 
     #description {
         font-size: 1.1rem;
     }
-    .service-name{
+
+    .service-name {
         color: #065baa;
         font-size: 2rem;
     }
+
+    /* table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    } */
 </style>
 
 
@@ -59,8 +109,8 @@
             <p id="description">{{service.description}}</p>
         </div>
 
-        <div class="row">
-            <img src="{{service.image.url}}" alt="">
+        <div class="row img-fluid" id="img-div">
+            <!-- <img src="" alt="" class="img-fluid"> -->
         </div>
 
         {% if service.specifications %}
@@ -75,12 +125,31 @@
         {% endif %}
 
         <div class="row">
-            <p class="title mt-3">Service Status</p>
-            {% if service.status %}
-            <p class="text-success">Available</p>
-            {% else %}
-            <p class="text-danger">Not Available</p>
-            {% endif %}
+            <table border="1">
+                <tr class="border">
+                    <td>
+                        <p class="title mt-3">Service Status</p>
+
+                    </td>
+                    <td>
+                        {% if service.status %}
+                        <p class="text-success">Available</p>
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <td>
+                        {% else %}
+                        <p class="text-danger">Not Available</p>
+                        {% endif %}
+                    </td>
+
+                </tr>
+            </table>
+
+
+
         </div>
 
         <div class="row">
