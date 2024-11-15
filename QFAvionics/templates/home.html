@@ -119,12 +119,8 @@
     <div class="container-fluid mt-5">
         <div class="row mb-5 text-center">
             <h1 class="display-5 fw-bold text-body-emphasis" style="letter-spacing: 1px;"> WHAT WE DO</h1>
-            <p class="lead px-3">
-                QF Avionics, established in 1979, is a premier independent provider of aviation maintenance, repair, and
-                overhaul (MRO) services in Canada. With over 40 years of experience, the company has built a strong
-                reputation for delivering top-tier solutions across all aviation sectors, including commercial,
-                military, and general aviation. QF Avionics sets the standard for reliability and innovation, ensuring
-                aircraft remain in peak operational condition.
+            <p class="lead px-3 text-secondary">
+                QF Avionics, established in 1979, is a premier independent provider of aviation maintenance, repair, and overhaul (MRO) services in Canada. With over 40 years of experience, the company has built a strong reputation for delivering top-tier solutions across all aviation sectors, including commercial, military, and general aviation. QF Avionics sets the standard for reliability and innovation, ensuring aircraft remain in peak operational condition.
             </p>
         </div>
     </div>
@@ -143,10 +139,10 @@
                         </div>
                         <div class="col-12">
                             <div class="card-body d-flex flex-column justify-content-center">
-                                <h2 class="card-title fs-3"
-                                    style="height: 70px; width: 109%; margin: -85px 0px 0px -16px; background-color: rgba(3, 7, 44, 0.726); padding-left: 10px; color: rgb(223, 223, 223);">
+                                <h2 class="card-title fs-3 fw-bold"
+                                    style="height: 70px; width: 110%; margin: -85px 0px 0px -16px; background-color: rgba(3, 7, 44, 0.726); padding-left: 10px; color: rgb(223, 223, 223);">
                                     {{section.title}}</h2>
-                                <p class="card-text" style="height: 100px;">{{section.description}}
+                                <p class="card-text" style="height: 130px">{{section.description}}
                                 </p>
                             </div>
                         </div>
@@ -159,7 +155,7 @@
     </div>
 
     {% load custom_filters %}
-    <div class="container-fluid mt-5 p-2 p-lg-5">
+    <div class="container-fluid p-2">
         <h1 class="text-center fw-bolder">Our Product Categories</h1>
         <div class="scroll-container">
             {% if categories %}
@@ -167,7 +163,7 @@
             <a href="{% url 'product-list-categorized' name=category.name %}" class="text-decoration-none">
                 <div class="scroll-item item1"
                     style="overflow: hidden; background-image: image-set('{{category.image}}')">
-                    <p class="fs-3 rounded w-100 d-flex justify-content-center align-items-center"
+                    <p class="fs-2 fw-bold rounded w-100 d-flex justify-content-center align-items-center"
                         style="background-color: rgba(0, 0, 0, 0.651); height: 110%;">{{category.name}}</p>
                 </div>
             </a>
@@ -230,7 +226,7 @@
                                             <span class="text-secondary fw-bolder fs-4">${{product.price}} <span
                                                 style="font-size: 14px;">{{product.currency}}</span></span>
                                             {% else %}
-                                                <span class="text-danger fw-bolder fs-5">Login to view price</span>
+                                                <span class="text-danger fw-bolder">Login to view price</span>
                                             {% endif%}
                                         </div>
                                         <span class="text-secondary"
@@ -255,9 +251,7 @@
         <saction class="px-4 text-center">
             <h1 class="display-6 fw-bold text-body-emphasis">SIGNUP OR LOGIN</h1>
             <div class="col-lg-6 mx-auto mt-4">
-                <p class="lead mb-4">Login to the system to access the features and to get the latest updates on our
-                    products
-                    and services.</p>
+                <p class="lead mb-4 text-secondary">Login to the system to access the features and to get the latest updates on our products and services.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                     <a href="{% url 'signup' %}" style="text-decoration:none; color:black;"> <button
                             class="btn rounded-sm"

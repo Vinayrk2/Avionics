@@ -68,6 +68,10 @@
             /* Removes margin from the last icon */
         }
 
+        #hover_white:hover {
+            color: rgb(187, 187, 187);
+        }
+
         /* search box style */
         #searchbox {
             top: -100vh;
@@ -104,48 +108,6 @@
             border-radius: 5px;
             padding: 0px 10px;
             color: white;
-            border: none;
-        }
-
-        .iframe-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .iframe-content {
-            background-color: white;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 800px;
-            height: 80%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .iframe-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .iframe-body {
-            flex-grow: 1;
-            overflow: hidden;
-        }
-
-        iframe {
-            width: 100%;
-            height: 80vh;
             border: none;
         }
 
@@ -377,22 +339,22 @@
         {% endblock %}
     </main>
 
-    <footer class="footer">
+    <footer class="footer mt-4">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3 mb-4">
+                <div class="col-md-3">
                     <h5><i class="fa-solid fa-layer-group fs-6"></i> Services</h5>
                     <ul>
                         {% if services %}
                         {% for service in services|slice:":8" %}
                         <a href="{% url 'service' id=service.id %} " class="text-decoration-none text-secondary">
-                            <li>{{service.name}}</li>
+                            <li id="hover_white">{{service.name}}</li>
                         </a>
                         {% endfor %}
                         {% endif %}
                     </ul>
                 </div>
-                <div class="col-md-3 mb-4">
+                <div class="col-md-3">
                     <h5><i class="fa-solid fa-link fs-6"></i> Important Links</h5>
                     <ul class="text-secondary">
                         {% if links %}
@@ -400,29 +362,28 @@
 
 
                         <a href="{{link.url}}" target="_blank" class="text-decoration-none text-secondary">
-                            <li>{{link.name}}</li>
+                            <li id="hover_white">{{link.name}}</li>
                         </a>
                         {% endfor %}
                         {% endif %}
                     </ul>
                 </div>
-                <div class="col-md-3 mb-4">
+                <div class="col-md-3">
                     <h5><i class="fa-solid fa-location-dot fs-6"></i> Location</h5>
                     <div class="text-secondary">
                         <a href="https://www.google.com/maps/dir//3801+Airport+Dr,+Springbrook,+AB+T4S+2E8/@52.1763421,-113.9696467,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x537450468fc942f9:0xb14e4971aebfab17!2m2!1d-113.8872465!2d52.1763708?entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D"
                             class="text-decoration-none text-secondary" target="_blank">
-                            <pre class="text-secondary" style="font-size: 1rem;">{{footer.location}}</pre> </a>
+                            <pre class="text-secondary" style="font-size: 1rem; font-family: Play, sans-serif;">{{footer.location}}</pre></a>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <h5><i class="fa-solid fa-hashtag"></i> Social Media Channel</h5>
                     <p class="text-secondary">Follow to get special offers, free giveaways, and once-in-a-lifetime
                         deals.</p>
-                    <a href="{{footer.instagram|default_if_none:" #" }}" class="text-secondary mt-2 me-2"><i
-                            class="fa-brands fa-instagram mx-1 fs-4"></i></a>
-                    <a href="{{footer.youtube|default_if_none:" #"}}" class="text-secondary mt-2 me-2"><i
+                    <a href="{{footer.instagram|default_if_none:" #" }}" class="text-secondary mt-2 me-2"><i id="hover_white" class="fa-brands fa-instagram mx-1 fs-4"></i></a>
+                    <a href="{{footer.youtube|default_if_none:" #"}}" class="text-secondary mt-2 me-2"><i id="hover_white"
                             class="fa-brands fa-youtube mx-1 fs-4"></i></a>
-                    <a href="{{footer.linkedin|default_if_none:" #"}}" class="text-secondary mt-2 me-2"><i
+                    <a href="{{footer.linkedin|default_if_none:" #"}}" class="text-secondary mt-2 me-2"><i id="hover_white"
                             class="fa-brands fa-linkedin mx-1 fs-4"></i></a>
                 </div>
             </div>
