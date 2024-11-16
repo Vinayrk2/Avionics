@@ -159,12 +159,23 @@
                     <tr>
                         <td class="label">Specifications</td>
                         <td>
-                            <ul>
+                        <table class="subtable">
+                            <!-- <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead> -->
+                            <tbody>
                                 {% for key, value in service.specifications.items %}
-                                <li>{{value}}</li>
+                                <tr>
+                                    <td class="fw-bold">{{key}}</td>
+                                    <td><pre style="font-family:inherit;">{{value}}</pre></td>
+                                </tr>
                                 {% endfor %}
-                            </ul>
-                        </td>
+                            </tbody>
+                        </table>
+                    </td>
                     </tr>
                     {% endif %}
                     <tr>
@@ -197,7 +208,7 @@
                                     {% for key, value in service.technical_information.items %}
                                     <tr>
                                         <td class="fw-bold">{{key}}</td>
-                                        <td>{{value}}</td>
+                                        <td><pre style="font-family:inherit;">{{value}}</pre></td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
