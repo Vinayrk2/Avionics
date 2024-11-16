@@ -8,6 +8,12 @@
     display: none;
 }
 
+#main-img{
+    transition-property: src;
+    transition-duration: 0.5s;
+    
+}
+
 #product_img {
     height: 55vh;
     overflow: hidden;
@@ -34,12 +40,12 @@
                             <i class="fa-solid fa-chevron-right fs-2 bg-light text-dark py-2 px-3" onclick="slideImage(1)" ></i>
                         </div>
                         <img src="{{product.image.url}}" alt="QF Avionics Product image" id="main-img"
-                            style="margin-top: -45%;">
+                            style="margin-top: -45%; height:80%;">
                     </div>
                 </div>
                 {% comment %} </div> {% endcomment %}
 
-                <div class="row img_container" style="display: flex; flex-wrap: nowrap; overflow-x: scroll;">
+                <div class="row img_container" style="display: flex; height:20%; flex-wrap: nowrap; overflow-x: scroll;">
 
                     {% for image in product.images %}
                     <div class="box rounded me-2 mt-3"
