@@ -25,9 +25,15 @@
         left: 15%;
         bottom: 50px;
         font-weight: bolder;
+        pointer-events: none;
         letter-spacing: 1px;
         font-size: 90px;
         color: rgba(6, 9, 187, 0.103);
+    }
+
+    #about_backimg {
+        position: absolute;
+        width: 100vw;
     }
 
     /* divider */
@@ -54,9 +60,8 @@
 {% block content %}
 {% load static %}
 
+<img src="{% static 'images/about background.png' %}" id="about_backimg" alt="">
 <main id="mainbox">
-    <!-- <div class="container"> -->
-
     <div class="container-fluid p-0 mt-5">
             <section class="container-fluid">
                 <div class="text-center py-5">
