@@ -19,7 +19,7 @@
         width: auto;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         margin-top: 10vh;
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
 
@@ -75,24 +75,59 @@
 
     .service-name {
         color: #065baa;
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
-    /* table {
-        border-collapse: collapse;
+    .service-table {
         width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
     }
 
-    td,
-    th {
-        border: 1px solid #dddddd;
+    #title {
+        font-size: 1.5rem;
+    }
+
+    .service-table th,
+    .service-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
         text-align: left;
-        padding: 8px;
+        font-size: 1rem;
     }
 
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    } */
+    .table-header {
+        background-color: #f2f2f2;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .label {
+        font-weight: bold;
+        width: 30%;
+    }
+
+    ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .subtable {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .subtable th,
+    .subtable td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .subtable th {
+        background-color: #f8f8f8;
+        font-weight: bold;
+    }
 </style>
 
 <div class="container">
@@ -110,74 +145,78 @@
             <!-- <img src="" alt="" class="img-fluid"> -->
         </div>
 
-        {% if service.specifications %}
-        <div class="row">
-            <p class="title mt-5 border-bottom">Specifications</p>
-            <ul>
-                {% for key, value in service.specifications.items %}
-                <li>{{value}}</li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
-
-        <div class="row">
-            <table border="1">
-                <tr class="border">
-                    <td>
-                        <p class="title mt-3">Service Status</p>
-
-                    </td>
-                    <td>
-                        {% if service.status %}
-                        <p class="text-success">Available</p>
-                    </td>
 
 
-                </tr>
-                <tr>
-                    <td>
-                        {% else %}
-                        <p class="text-danger">Not Available</p>
-                        {% endif %}
-                    </td>
+        <div class="container">
+            <table class="service-table">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="table-header" id="title">Service Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if service.specifications %}
+                    <tr>
+                        <td class="label">Specifications</td>
+                        <td>
+                            <ul>
+                                {% for key, value in service.specifications.items %}
+                                <li>{{value}}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td class="label">Service Status</td>
+                        <td>
+                            {% if service.status %}
+                            <span class="status-available">Available</span>
+                            {% else %}
+                            <span class="status-unavailable">Not Available</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">Service Type</td>
+                        <td>{{service.service_type}}</td>
+                    </tr>
+                    {% if service.technical_information %}
 
-                </tr>
+                    <tr>
+                        <td class="label">Technical Information</td>
+                        <td>
+                            <table class="subtable">
+                                <!-- <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead> -->
+                                <tbody>
+                                    {% for key, value in service.technical_information.items %}
+                                    <tr>
+                                        <td class="fw-bold">{{key}}</td>
+                                        <td>{{value}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                    {% endif %}
+                </tbody>
             </table>
-
-
-
         </div>
 
-        <div class="row">
-            <p class="title mt-2 border-bottom">Service Type</p>
-            <p class="fs-4">{{service.service_type}}</p>
-        </div>
+
     </div>
 
-    {% if service.technical_information %}
-    <div class="service-item">
-        <div class="row">
-            <p class="title mt-5">Technical Information</p>
-        </div>
-        <div class="row">
-            <ul>
-                {% for key, value in service.technical_information.items %}
-                <li>{{value}}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-    {% endif %}
-</div>
-
-
-</div>
 
 
 
 
+    <!-- {{service.image}} -->
 
-<!-- {{service.image}} -->
-
-{% endblock %}
+    {% endblock %}
