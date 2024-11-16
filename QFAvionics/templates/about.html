@@ -33,7 +33,14 @@
 
     #about_backimg {
         position: absolute;
-        width: 100vw;
+        margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
+  background-image: url('your-image-url.jpg'); /* Replace with your image URL */
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-position: center; /* Centers the image */
+  height: 100vh; /* Sets the height of the body to fill the viewport */
+  width: 100%;
     }
 
     /* divider */
