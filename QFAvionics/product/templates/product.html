@@ -40,16 +40,16 @@
                     </div>
                     <div>
                     <img src="{{product.image.url}}" alt="QF Avionics Product image" id="main-img"
-                            style="margin-top: -45%; height:80%;">
+                            style="margin-top: -45%; height:80%; aspect-ratio:calc(16/14)">
                     </div>
                 {% comment %} </div> {% endcomment %}
                 {% comment %} </div> {% endcomment %}
 
-                <div class="row img_container" style="display: flex; height:20%; flex-wrap: nowrap; overflow-x: scroll;">
+                <div class="row img_container" style="display: flex; flex-wrap: nowrap; overflow-x: scroll;">
 
                     {% for image in product.images %}
                     <div class="box rounded me-2 mt-3"
-                        style="height:10vh; width:10vh; background-color: rgb(238, 238, 238); cursor: pointer;">
+                        style="height:100px; width:100px; aspect-ratio: calc(4/4); background-color: rgb(238, 238, 238); cursor: pointer;">
                         <img src="{{image.image.url}}" alt="" class="zoom" style="mix-blend-mode: darken;">
                     </div>
                     {% endfor %}
