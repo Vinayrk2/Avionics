@@ -13,17 +13,6 @@
     transition-duration: 0.5s;
     
 }
-
-{% comment %} #product_img {
-    height: 55vh;
-    overflow: hidden;
-} {% endcomment %}
-
-@media(max-width: 500px){
-    #product_img {
-        height: 40vh;
-    }
-}
 </style>
 
 <div class="container" style="margin-top: 80px;">
@@ -31,9 +20,6 @@
     <main class="container-fluid my-5 border p-4 p-sm-5 rounded">
         <div class="row">
             <div class="col-md-6 pe-3">
-                {% comment %} <div id="product_img" style="height:80%"> {% endcomment %}
-                    {% comment %} style="border-radius: 100px; margin-left: -10px;" {% endcomment %}
-                    {% comment %} style="border-radius: 100px; margin-right: -10px;" {% endcomment %}
                     <div class="d-flex justify-content-between" style="margin-top: 37.5%; mix-blend-mode: darken;">
                         <i class="fa-solid fa-chevron-left fs-2 bg-light text-dark py-2 px-3" onclick="slideImage(-1)" ></i>
                         <i class="fa-solid fa-chevron-right fs-2 bg-light text-dark py-2 px-3" onclick="slideImage(1)" ></i>
