@@ -8,6 +8,12 @@
     display: none;
 }
 
+#main-img{
+    transition-property: src;
+    transition-duration: 0.5s;
+    
+}
+
 #product_img {
     height: 55vh;
     overflow: hidden;
@@ -25,18 +31,21 @@
     <main class="container-fluid my-5 border p-4 p-sm-5 rounded">
         <div class="row">
             <div class="col-md-6 pe-3">
-                <div id="product_img" class="d-flex align-items-center justify-content-center">
+                <div id="product_img">
                     <div>
+                        {% comment %} style="border-radius: 100px; margin-left: -10px;" {% endcomment %}
+                        {% comment %} style="border-radius: 100px; margin-right: -10px;" {% endcomment %}
                         <div class="d-flex justify-content-between" style="margin-top: 45%; mix-blend-mode: darken;">
-                            <a href="#" id="left_float_btn"><i class="fa-solid fa-chevron-left fs-4 bg-dark text-white py-2 pe-2 ps-4" onclick="slideImage(-1)" style="border-radius: 100px; margin-left: -20px;"></i></a>
-                            <a href="#" id="right_float_btn"><i class="fa-solid fa-chevron-right fs-4 bg-dark text-white py-2 pe-4 ps-2" onclick="slideImage(1)" style="border-radius: 100px; margin-right: -20px;"></i></a>
+                            <i class="fa-solid fa-chevron-left fs-2 bg-light text-dark py-2 px-3" onclick="slideImage(-1)" ></i>
+                            <i class="fa-solid fa-chevron-right fs-2 bg-light text-dark py-2 px-3" onclick="slideImage(1)" ></i>
                         </div>
                         <img src="{{product.image.url}}" alt="QF Avionics Product image" id="main-img"
-                            style="margin-top: -45%;">
+                            style="margin-top: -45%; height:80%;">
                     </div>
                 </div>
+                {% comment %} </div> {% endcomment %}
 
-                <div class="row img_container" style="display: flex; flex-wrap: nowrap; overflow-x: scroll;">
+                <div class="row img_container" style="display: flex; height:20%; flex-wrap: nowrap; overflow-x: scroll;">
 
                     {% for image in product.images %}
                     <div class="box rounded me-2 mt-3"
@@ -91,7 +100,7 @@
                             style="background-color: #090841;">+ ADD TO CART</button></a>
                     {% if product.more_details != "" and product.more_details != None %}
                     <a href="{{product.more_details}}"><button class="btn mt-2 me-2 py-2 px-4"
-                            style="border: 1px solid #090841;">More Details</button></a>
+                            style="border: 1px solid #090841;" target="_blank">More Details</button></a>
                     {% else %}
                     <button class="btn me-2 mt-2 py-2 px-4" type="button" style="border: 1px solid #090841;"
                         onclick="showAlert('No details available')">More Details</button>

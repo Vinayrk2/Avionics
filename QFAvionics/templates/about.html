@@ -4,7 +4,7 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        
+
         /* width: 100%; */
     }
 
@@ -19,66 +19,104 @@
         border-radius: 1vh;
         width: fit-content;
     }
+
+    #company_name {
+        transform: rotate(165deg);
+        left: 15%;
+        bottom: 50px;
+        font-weight: bolder;
+        pointer-events: none;
+        letter-spacing: 1px;
+        font-size: 90px;
+        color: rgba(6, 9, 187, 0.103);
+    }
+
+    #about_backimg {
+        position: absolute;
+        width: 100vw;
+    }
+
+    /* divider */
+    .custom-shape-divider-bottom-1731775089 {
+        margin-top: -50px;
+    width: 100%;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1731775089 svg {
+    position: relative;
+    display: block;
+    width: calc(170% + 1.3px);
+    height: 167px;
+}
+
+.custom-shape-divider-bottom-1731775089 .shape-fill {
+    fill: #f3f3f3a2;
+}
 </style>
 
 {% extends "master.html" %}
 {% block content %}
 {% load static %}
 
+<img src="{% static 'images/about background.png' %}" id="about_backimg" alt="">
 <main id="mainbox">
-    <!-- <div class="container"> -->
+    <div class="container-fluid p-0 mt-5">
+            <section class="container-fluid">
+                <div class="text-center py-5">
+                    <h5 class="display-4 fw-lighter mb-4 fw-bold">ABOUT US</h5>
+                    <p class="lead px-md-5 text-secondary">
+                        {{content.main_description}}
+                    </p>
+                </div>
+            </section>
 
-        <div class="container p-0 mt-5">
-            <main>
-                <section class="container-fluid">
-                    <div class="text-center py-5">
-                        <h5 class="display-4 fw-lighter mb-4 fw-bold">ABOUT US</h5>
-                        <p class="lead px-md-5 text-secondary">
-                            {{content.main_description}}
-                        </p>
-                        <!-- <p class="lead px-3 px-md-5">
-                            With over 20,000 associates in 35 countries around the world, we bring GPS navigation and
-                            wearable technology to the automotive, aviation, marine, outdoor and fitness markets. We
-                            think every day is an opportunity to innovate and a chance to beat yesterday.
-                        </p> -->
-                    </div>
-                </section>
-
-                <section class="row bg-0 pb-3 m-0">
-                    <div class="col-md-4 mb-4 mb-md-0">
-                        <div class="card h-100 border-3-dark rounded">
-                            <div class="card-body rounded">
-                                <h2 class="card-title text-center mb-4 fs-2 fw-bold">{{content.field1}} <i class="fa-solid fa-crosshairs text-primary fs-3"></i></h2>
-                                <p class="card-text">
-                                        {{content.field1_Description}}
-                                </p>
-                            </div>
+            <section class="row bg-0 m-0">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="card h-100 border-3-dark rounded">
+                        <div class="card-body rounded">
+                            <h2 class="card-title text-center mb-4 fs-2 fw-bold">{{content.field1}} <i
+                                    class="fa-solid fa-crosshairs text-primary fs-3"></i></h2>
+                            <p class="card-text">
+                                {{content.field1_Description}}
+                            </p>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-4 mb-md-0">
-                        <div class="card h-100 border-3-dark rounded">
-                            <div class="card-body rounded">
-                                <h2 class="card-title text-center mb-4 fs-2 fw-bold">{{content.field2}} <i class="fa-solid fa-eye text-danger fs-3"></i></h2>
-                                <p class="card-text">
-                                    {{content.field2_Description}}
-                                </p>
-                            </div>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="card h-100 border-3-dark rounded">
+                        <div class="card-body rounded">
+                            <h2 class="card-title text-center mb-4 fs-2 fw-bold">{{content.field2}} <i
+                                    class="fa-solid fa-eye text-danger fs-3"></i></h2>
+                            <p class="card-text">
+                                {{content.field2_Description}}
+                            </p>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card h-100 border-3-dark rounded">
-                            <div class="card-body rounded">
-                                <h2 class="card-title text-center mb-4 fs-2 fw-bold">{{content.field3}} <i class="fa-solid fa-hand-holding-hand text-success fs-3"></i></h2>
-                                <p class="card-text">
-                                    {{content.field3_Description}}
-                                </p>
-                            </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-3-dark rounded">
+                        <div class="card-body rounded">
+                            <h2 class="card-title text-center mb-4 fs-2 fw-bold">{{content.field3}} <i
+                                    class="fa-solid fa-hand-holding-hand text-success fs-3"></i></h2>
+                            <p class="card-text">
+                                {{content.field3_Description}}
+                            </p>
                         </div>
                     </div>
-                </section>
+                </div>
+            </section>
 
+            <div class="custom-shape-divider-bottom-1731775089">
+                <h1 class="position-absolute" id="company_name">QF Avionics</h1>
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
+            <div class="bg-light p-5">
                 {% for section in sections %}
-                <section class="bg-light p-4 rounded my-3 m-0">
+                <section class="bg-white p-4 rounded my-3 m-0">
                     <h2 class="h3 mb-4 text-center fw-bolder">{{section.title}}</h2>
                     <div class="row">
                         {% if section.column %}
@@ -89,13 +127,9 @@
                         </div>
                         {% endfor %}
                         {% endif %}
-                        
-                    </div>
                 </section>
-                {% endfor %}
-            </main>
+            {% endfor %}
         </div>
-    <!-- </div> -->
-
+    </div>
 </main>
 {% endblock %}
