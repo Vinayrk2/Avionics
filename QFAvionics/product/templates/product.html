@@ -14,10 +14,10 @@
     
 }
 
-#product_img {
+{% comment %} #product_img {
     height: 55vh;
     overflow: hidden;
-}
+} {% endcomment %}
 
 @media(max-width: 500px){
     #product_img {
@@ -31,18 +31,18 @@
     <main class="container-fluid my-5 border p-4 p-sm-5 rounded">
         <div class="row">
             <div class="col-md-6 pe-3">
-                <div id="product_img" style="height:80%">
+                {% comment %} <div id="product_img" style="height:80%"> {% endcomment %}
+                    {% comment %} style="border-radius: 100px; margin-left: -10px;" {% endcomment %}
+                    {% comment %} style="border-radius: 100px; margin-right: -10px;" {% endcomment %}
+                    <div class="d-flex justify-content-between" style="margin-top: 37.5%; mix-blend-mode: darken;">
+                        <i class="fa-solid fa-chevron-left fs-2 bg-light text-dark py-2 px-3" onclick="slideImage(-1)" ></i>
+                        <i class="fa-solid fa-chevron-right fs-2 bg-light text-dark py-2 px-3" onclick="slideImage(1)" ></i>
+                    </div>
                     <div>
-                        {% comment %} style="border-radius: 100px; margin-left: -10px;" {% endcomment %}
-                        {% comment %} style="border-radius: 100px; margin-right: -10px;" {% endcomment %}
-                        <div class="d-flex justify-content-between" style="margin-top: 45%; mix-blend-mode: darken;">
-                            <i class="fa-solid fa-chevron-left fs-2 bg-light text-dark py-2 px-3" onclick="slideImage(-1)" ></i>
-                            <i class="fa-solid fa-chevron-right fs-2 bg-light text-dark py-2 px-3" onclick="slideImage(1)" ></i>
-                        </div>
-                        <img src="{{product.image.url}}" alt="QF Avionics Product image" id="main-img"
+                    <img src="{{product.image.url}}" alt="QF Avionics Product image" id="main-img"
                             style="margin-top: -45%; height:80%;">
                     </div>
-                </div>
+                {% comment %} </div> {% endcomment %}
                 {% comment %} </div> {% endcomment %}
 
                 <div class="row img_container" style="display: flex; height:20%; flex-wrap: nowrap; overflow-x: scroll;">
