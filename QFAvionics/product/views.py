@@ -117,5 +117,5 @@ def search_result(request):
     count = {
         'products':  len(product_dict),
     }
-        
-    return render(request, "search_result.html", {'products':page_obj,  "query":query, 'news':news, 'count':count})
+    filter = get_filter_options()
+    return render(request, "search_result.html", {'products':page_obj,  "query":query, 'news':news, 'count':count, 'filters':filter})
