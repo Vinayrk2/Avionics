@@ -3,6 +3,47 @@ from .models import Product, Category
 from django.contrib import messages
 from notification.models import News
 from django.core.paginator import Paginator
+from django.db.models import Q
+from .models import Product
+
+
+def get_filtered_products(request, category=''):
+    # Get filter parameters from the request
+    category_id = request.GET.getlist('category')
+    manufacturer = request.GET.getlist('manufacturer')
+    condition = request.GET.getlist('condition')
+    availability = request.GET.getlist('availability')
+    # Build a query dynamically
+    filters = Q()
+    if category_id:
+        filters &= Q(category_id__in=category_id)
+    if manufacturer:
+        filters &= Q(manufacturer__in=manufacturer)
+    if availability:
+        filters &= Q(availability__in=availability)
+    if condition:
+        filters &= Q(condition__in=condition)
+    if category != 'all' and category != '':
+        filters &= Q(category__name=category)
+
+    # Apply filters to the Product model
+    filtered_products = Product.objects.filter(filters).distinct()
+    
+    return filtered_products
+
+def get_filter_options():
+    # get the distinct values for each filter option
+    categories = Category.objects.all()
+    manufacturers = Product.objects.values('manufacturer').distinct()
+    conditions = Product.objects.values('condition').distinct()
+    availabilities = Product.objects.values('availability').distinct()
+    
+    return {
+        'categories': categories,
+        'manufacturers': manufacturers,
+        'conditions': conditions,
+        'availabilities': availabilities
+    }
 
 def product_view(request, id):
     product = Product.objects.filter(id=id).first()
@@ -18,21 +59,22 @@ def product_view(request, id):
         return redirect("/")
 
 def product_by_category(request,name):
-    try:
-        if  name == "all":
-            products = Product.objects.all()
-        else:
-            category = Category.objects.get(name=name)
-            products = Product.objects.filter(category__name=category.name)
-    except Exception as e:
-        messages.add_message(request,  messages.WARNING, "Sorry! The category is not available")        
-        return redirect("/")
+    # try:
+        # if  name == "all":
+        #     products = Product.objects.all()
+        # else:
+        #     category = Category.objects.get(name=name)
+        #     products = Product.objects.filter(category__name=category.name)
+    # except Exception as e:
+    #     messages.add_message(request,  messages.WARNING, "Sorry! The category is not available")        
+    #     return redirect("/")
+    products = get_filtered_products(request, category=name)
     products_dict = []
     
     if not products:
         page_obj = None
         return render(request, 'product_by_category.html',{"products":page_obj})
-        
+    
     for product in products:
         temp = product.to_dict(request)
         temp["image"] = product.get_image().url
@@ -45,7 +87,9 @@ def product_by_category(request,name):
     count = {
         'products':  len(products_dict),
     }
-    return render(request, 'product_by_category.html',{"products":page_obj, "name":name, 'count':count})
+    
+    filter = get_filter_options()
+    return render(request, 'product_by_category.html',{"products":page_obj, "name":name, 'count':count, 'filters':filter})
 
 def search_result(request):
     query = request.GET.get("q")
