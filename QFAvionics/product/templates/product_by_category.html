@@ -83,8 +83,99 @@
             grid-template-columns: 1fr;
         }
     }
+
+    
+    /* filter functionality css */
+    #filter_main_div {
+        z-index: 30;
+        padding-bottom: 50px;
+        right: 100%;
+        width: 75%;
+        height: fit-content;
+        box-shadow: 1px 1px 5px grey;
+    }
+
+    #filter_list {
+        margin: 15px;
+        padding-top: 15px;
+        width: 300px;
+        height: fit-content;
+        background-color: #f0f0f0;
+        overflow: scroll;
+    }
+
+    #filter_option_list {
+        width: fit-content;
+    }
+
+    @media(max-width: 650px) {
+        #filter_main_div {
+            width: 98%;
+        }
+
+        #filter_list {
+            width: 570px;
+        }
+    }
+
+    #filter_list::-webkit-scrollbar {
+        display: none;
+    }
+
+    #filter_list ul li {
+        list-style-type: none;
+        margin: 0px 5px;
+        padding: 6px 0px;
+        color: #070736;
+        cursor: pointer;
+    }
+
+    #filter_list ul li:hover {
+        background-color: #e7e7e7;
+    }
+
+    #filter_option_list {
+        height: fit-content;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: scroll;
+    }
+
+    #filter_option_list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .fa-xmark {
+        top: 8px;
+        right: 10px;
+        font-size: 30px;
+        position: absolute;
+    }
+
+    #filter_btn {
+        height: fit-content;
+        letter-spacing: 0.5px;
+    }
 </style>
 <main class="mt-5 pt-4">
+    <!-- filter container -->
+    <div class="d-flex justify-content-end bg-light position-absolute px-md-4 pt-4" id="filter_main_div">
+        <i class="fa-solid fa-xmark"></i>
+        <div id="filter_option_list" class="m-md-4">
+          <div class="form-check my-2 mx-3">
+            <input class="form-check-input" type="checkbox" id="option1" value="Option 1">
+            <label class="form-check-label" for="option1">Garmin</label>
+          </div>
+          </div>
+        <div id="filter_list">
+            <ul class="p-0 text-center">
+                <li>Manufacturer</li>
+            </ul>
+        </div>
+            <button type="submit" class="btn text-white position-absolute" style="background-color: #090841; bottom: 13px; right: 40px;">Apply Filter</button>
+     </div>
+
+
 
     <a class="categorybtn d-sm-none mx-2 text-decoration-none">Categories <svg xmlns="http://www.w3.org/2000/svg"
             width="18" height="18" fill="currentColor" class="bi bi-sign-turn-right" viewBox="0 0 16 16">
@@ -110,8 +201,10 @@
     <div class="container-fluid mt-3">
         <div class="row d-flex  justify-content-center">
 
-            <!-- Sidebar -->
+            <div class="d-flex justify-content-between">
             <p class="mt-sm-5 pt-sm-3">Showing products of {{name}} category. </p>
+            <button class="btn border mt-sm-5 me-3 px-3" id="filter_btn"><i class="fa-solid fa-filter"></i> Filter Contant</button>
+            </div>
 
             <!-- Main Content -->
             <div class="row">
@@ -236,6 +329,18 @@
         categorybox.style.transition = "0.3s";
         a = 0;
     }
+
+    // filter option script
+    let openfilter = document.querySelector('#filter_btn');
+    let closefilter = document.querySelector('.fa-xmark');
+
+    openfilter.addEventListener("click", () => {
+        document.querySelector("#filter_main_div").style.right = "5px";
+    })
+
+    closefilter.addEventListener("click", () => {
+        document.querySelector("#filter_main_div").style.right = "100%";
+    })
 </script>
 
 {% endblock %}
