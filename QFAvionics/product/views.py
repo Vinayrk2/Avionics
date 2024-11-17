@@ -73,7 +73,8 @@ def product_by_category(request,name):
     
     if not products:
         page_obj = None
-        return render(request, 'product_by_category.html',{"products":page_obj})
+        filter = get_filter_options()
+        return render(request, 'product_by_category.html',{"products":page_obj, 'filters':filter})
     
     for product in products:
         temp = product.to_dict(request)

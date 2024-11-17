@@ -160,20 +160,86 @@
 <main class="mt-5 pt-4">
     <!-- filter container -->
     <div class="d-flex justify-content-end bg-light position-absolute px-md-4 pt-4" id="filter_main_div">
-        <i class="fa-solid fa-xmark"></i>
-        <div id="filter_option_list" class="m-md-4">
-          <div class="form-check my-2 mx-3">
-            <input class="form-check-input" type="checkbox" id="option1" value="Option 1">
-            <label class="form-check-label" for="option1">Garmin</label>
-          </div>
-          </div>
-        <div id="filter_list">
-            <ul class="p-0 text-center">
-                <li>Manufacturer</li>
-            </ul>
+        <form method="get" action="{{ request.path }}">
+            <i class="fa-solid fa-xmark"></i>
+            <div id="filter_option_list" class="m-md-4">
+                {% if filters.manufacturers %}
+                {% for manufacturer in filters.manufacturers %}
+                {% if manufacturer.manufacturer != '' %}
+              <div class="form-check my-2 mx-3">
+                <input class="form-check-input" type="checkbox" name="manufacturer" id="option_{{ forloop.counter }}" value="{{manufacturer.manufacturer}}" />
+                <label class="form-check-label" for="option_{{ forloop.counter }}">{{manufacturer.manufacturer}}</label>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
         </div>
+            <div id="filter_list">
+                <ul class="p-0 text-center">
+                    <li>Manufacturer</li>
+                </ul>
+            </div>
+            <i class="fa-solid fa-xmark"></i>
+            <div id="filter_option_list" class="m-md-4">
+                {% if filters.categories %}
+                {% for category in filters.categories %}
+                {% if category.category != '' %}
+              <div class="form-check my-2 mx-3">
+                <input class="form-check-input" type="checkbox" name="category" id="category{{ forloop.counter }}" value="{{category.id}}" />
+                <label class="form-check-label" for="category{{ forloop.counter }}">{{category.name}}</label>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% comment %} <div class="form-check my-2 mx-3">
+              <input class="form-check-input" type="checkbox" name="category" id="category{{ forloop.counter }}" value="{{category.id}}" />
+              <label class="form-check-label" for="category{{ forloop.counter }}">{{category.name}}</label>
+          </div> {% endcomment %}
+            {% endif %}
+        </div>
+            <div id="filter_list">
+                <ul class="p-0 text-center">
+                    <li>Category</li>
+                </ul>
+            </div>
+            <i class="fa-solid fa-xmark"></i>
+            <div id="filter_option_list" class="m-md-4">
+                {% if filters.conditions %}
+                {% for condition in filters.conditions %}
+                {% if condition.condition != '' and condition.condition != None %}
+              <div class="form-check my-2 mx-3">
+                <input class="form-check-input" type="checkbox" name="condition" id="condition{{ forloop.counter }}" value="{{condition.condition}}" />
+                <label class="form-check-label" for="condition{{ forloop.counter }}">{{condition.condition}}</label>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+            <div id="filter_list">
+                <ul class="p-0 text-center">
+                    <li>Condition</li>
+                </ul>
+            </div>
+            <i class="fa-solid fa-xmark"></i>
+            <div id="filter_option_list" class="m-md-4">
+                {% if filters.availabilities %}
+                {% for Availability in filters.availabilities %}
+                {% if Availability.availability != '' and Availability.availability != None %}
+              <div class="form-check my-2 mx-3">
+                <input class="form-check-input" type="checkbox" name="availability" id="availability_{{ forloop.counter }}" value="{{Availability.availability}}" />
+                <label class="form-check-label" for="availability_{{ forloop.counter }}">{{Availability.availability}}</label>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+            <div id="filter_list">
+                <ul class="p-0 text-center">
+                    <li>Availability</li>
+                </ul>
+            </div>
             <button type="submit" class="btn text-white position-absolute" style="background-color: #090841; bottom: 13px; right: 40px;">Apply Filter</button>
-     </div>
+        </form>
+        </div>
 
 
 
@@ -232,7 +298,9 @@
                                             {% endif %}
                                             {% if product.manufacturer != None and product.manufacturer != "" %}
                                             <tr>
-                                                <td class="fw-bold">Manufacturer</td>
+                                                <td class="fw-bold">
+                                                    Availability
+                                                </td>
                                                 <td>{{product.availability}}</td>
                                             </tr>
                                             {% endif %}
