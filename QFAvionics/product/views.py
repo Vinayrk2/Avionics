@@ -57,7 +57,7 @@ def search_result(request):
         return redirect("home")
     elif query:
         product_dict = []
-        products = Product.objects.filter(name__icontains=query) | Product.objects.filter(part_number__icontains=query) | Product.objects.filter(category__name__icontains=query)
+        products = Product.objects.filter(name__icontains=query) | Product.objects.filter(part_number__icontains=query) | Product.objects.filter(category__name__icontains=query) | Product.objects.filter(manufacturer__icontains=query)
         for product in products:
             pr = product.to_dict(request)
             pr["image"] = product.get_image().url
