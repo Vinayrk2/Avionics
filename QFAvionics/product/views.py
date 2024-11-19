@@ -68,7 +68,15 @@ def product_by_category(request,name):
     # except Exception as e:
     #     messages.add_message(request,  messages.WARNING, "Sorry! The category is not available")        
     #     return redirect("/")
-    products = get_filtered_products(request, category=name)
+    # if name != "all":
+    #     if request.GET.get('category'):
+    #         data = request.GET.
+    if name != "all" and request.GET.get("category",None):
+        data = request.GET.dict()
+        query = "&".join([f"{key}={value}" for key, value in data.items() if value != ""])
+        return redirect(f"/product/category/all/?{query}")
+    else:
+        products = get_filtered_products(request, category=name)
     products_dict = []
     
     if not products:
