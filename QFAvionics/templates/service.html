@@ -11,7 +11,6 @@
     html,
     body {
         height: 100vh;
-
     }
 
     .container {
@@ -43,11 +42,12 @@
             background-image: url({{service.image.url}});
             background-position: center;
             /* border: 1px solid black; */
-            margin: auto;
+            margin:0 auto;
         }
     }
 
-    @media (max-width:340px) {
+    @media (max-width:360px) {
+        
         #img-div {
             height: 30vh;
             width: 100%;
@@ -55,7 +55,7 @@
             background-image: url({{service.image.url}});
             background-position: center;
             /* border: 1px solid black; */
-            margin: auto;
+            margin: 0 auto;
         }
     }
 
@@ -128,6 +128,45 @@
         background-color: #f8f8f8;
         font-weight: bold;
     }
+
+    @media (max-width:620px) {
+        .service-table {
+            width: 100%;
+            border-collapse: collapse;
+            /* transform: translate(-50%,-50%); */
+            margin: 20px auto;
+        }
+
+        .service-table tbody,
+        .service-table tr,
+        .subtable .key {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            border: none;
+        }
+
+        /* .service-table tbody,
+        .service-table td, */
+        .label {
+            width: 100%;
+            padding: 10px 15px;
+            /* background-color: #e9ecef; */
+            border-bottom: 1px solid #ced4da;
+
+        }
+
+    }
+
+    /* @media (max-width: 350px) {
+
+        .service-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+    } */
 </style>
 
 <div class="container">
@@ -147,7 +186,7 @@
 
 
 
-        <div class="container">
+        <div class="cont">
             <table class="service-table">
                 <thead>
                     <tr>
@@ -159,23 +198,25 @@
                     <tr>
                         <td class="label">Specifications</td>
                         <td>
-                        <table class="subtable">
-                            <!-- <thead>
+                            <table class="subtable">
+                                <!-- <thead>
                                 <tr>
                                     <th>Key</th>
                                     <th>Value</th>
                                 </tr>
                             </thead> -->
-                            <tbody>
-                                {% for key, value in service.specifications.items %}
-                                <tr>
-                                    <td class="fw-bold">{{key}}</td>
-                                    <td><pre style="font-family:inherit;">{{value}}</pre></td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </td>
+                                <tbody>
+                                    {% for key, value in service.specifications.items %}
+                                    <tr class="key">
+                                        <td class="fw-bold">{{key}}</td>
+                                        <td>
+                                            <pre style="font-family:inherit;">{{value}}</pre>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
                     </tr>
                     {% endif %}
                     <tr>
@@ -208,7 +249,9 @@
                                     {% for key, value in service.technical_information.items %}
                                     <tr>
                                         <td class="fw-bold">{{key}}</td>
-                                        <td><pre style="font-family:inherit;">{{value}}</pre></td>
+                                        <td>
+                                            <pre style="font-family:inherit;">{{value}}</pre>
+                                        </td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>

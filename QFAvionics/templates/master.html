@@ -14,10 +14,11 @@
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Play:wght@400;700&display=swap');
-        *{
+
+        * {
             font-family: "Play", sans-serif;
-        font-weight: 400;
-        font-style: normal;
+            font-weight: 400;
+            font-style: normal;
         }
 
         #dropdown {
@@ -127,6 +128,7 @@
             }
         }
 
+        /* 
         .loader {
             display: flex;
             justify-content: center;
@@ -173,6 +175,234 @@
             100% {
                 transform: rotate(360deg);
             }
+        } */
+        #loading {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 2000;
+
+            display: none;
+        }
+
+        .pl {
+            width: 6em;
+            height: 6em;
+        }
+
+        .pl__ring {
+            animation: ringA 2s linear infinite;
+        }
+
+        .pl__ring--a {
+            stroke: #f42f25;
+        }
+
+        .pl__ring--b {
+            animation-name: ringB;
+            stroke: #f49725;
+        }
+
+        .pl__ring--c {
+            animation-name: ringC;
+            stroke: #255ff4;
+        }
+
+        .pl__ring--d {
+            animation-name: ringD;
+            stroke: #f42582;
+        }
+
+        /* Animations */
+        @keyframes ringA {
+
+            from,
+            4% {
+                stroke-dasharray: 0 660;
+                stroke-width: 20;
+                stroke-dashoffset: -330;
+            }
+
+            12% {
+                stroke-dasharray: 60 600;
+                stroke-width: 30;
+                stroke-dashoffset: -335;
+            }
+
+            32% {
+                stroke-dasharray: 60 600;
+                stroke-width: 30;
+                stroke-dashoffset: -595;
+            }
+
+            40%,
+            54% {
+                stroke-dasharray: 0 660;
+                stroke-width: 20;
+                stroke-dashoffset: -660;
+            }
+
+            62% {
+                stroke-dasharray: 60 600;
+                stroke-width: 30;
+                stroke-dashoffset: -665;
+            }
+
+            82% {
+                stroke-dasharray: 60 600;
+                stroke-width: 30;
+                stroke-dashoffset: -925;
+            }
+
+            90%,
+            to {
+                stroke-dasharray: 0 660;
+                stroke-width: 20;
+                stroke-dashoffset: -990;
+            }
+        }
+
+        @keyframes ringB {
+
+            from,
+            12% {
+                stroke-dasharray: 0 220;
+                stroke-width: 20;
+                stroke-dashoffset: -110;
+            }
+
+            20% {
+                stroke-dasharray: 20 200;
+                stroke-width: 30;
+                stroke-dashoffset: -115;
+            }
+
+            40% {
+                stroke-dasharray: 20 200;
+                stroke-width: 30;
+                stroke-dashoffset: -195;
+            }
+
+            48%,
+            62% {
+                stroke-dasharray: 0 220;
+                stroke-width: 20;
+                stroke-dashoffset: -220;
+            }
+
+            70% {
+                stroke-dasharray: 20 200;
+                stroke-width: 30;
+                stroke-dashoffset: -225;
+            }
+
+            90% {
+                stroke-dasharray: 20 200;
+                stroke-width: 30;
+                stroke-dashoffset: -305;
+            }
+
+            98%,
+            to {
+                stroke-dasharray: 0 220;
+                stroke-width: 20;
+                stroke-dashoffset: -330;
+            }
+        }
+
+        @keyframes ringC {
+            from {
+                stroke-dasharray: 0 440;
+                stroke-width: 20;
+                stroke-dashoffset: 0;
+            }
+
+            8% {
+                stroke-dasharray: 40 400;
+                stroke-width: 30;
+                stroke-dashoffset: -5;
+            }
+
+            28% {
+                stroke-dasharray: 40 400;
+                stroke-width: 30;
+                stroke-dashoffset: -175;
+            }
+
+            36%,
+            58% {
+                stroke-dasharray: 0 440;
+                stroke-width: 20;
+                stroke-dashoffset: -220;
+            }
+
+            66% {
+                stroke-dasharray: 40 400;
+                stroke-width: 30;
+                stroke-dashoffset: -225;
+            }
+
+            86% {
+                stroke-dasharray: 40 400;
+                stroke-width: 30;
+                stroke-dashoffset: -395;
+            }
+
+            94%,
+            to {
+                stroke-dasharray: 0 440;
+                stroke-width: 20;
+                stroke-dashoffset: -440;
+            }
+        }
+
+        @keyframes ringD {
+
+            from,
+            8% {
+                stroke-dasharray: 0 440;
+                stroke-width: 20;
+                stroke-dashoffset: 0;
+            }
+
+            16% {
+                stroke-dasharray: 40 400;
+                stroke-width: 30;
+                stroke-dashoffset: -5;
+            }
+
+            36% {
+                stroke-dasharray: 40 400;
+                stroke-width: 30;
+                stroke-dashoffset: -175;
+            }
+
+            44%,
+            50% {
+                stroke-dasharray: 0 440;
+                stroke-width: 20;
+                stroke-dashoffset: -220;
+            }
+
+            58% {
+                stroke-dasharray: 40 400;
+                stroke-width: 30;
+                stroke-dashoffset: -225;
+            }
+
+            78% {
+                stroke-dasharray: 40 400;
+                stroke-width: 30;
+                stroke-dashoffset: -395;
+            }
+
+            86%,
+            to {
+                stroke-dasharray: 0 440;
+                stroke-width: 20;
+                stroke-dashoffset: -440;
+            }
         }
     </style>
 
@@ -180,19 +410,14 @@
 
 <body>
 
-    <div class="loader" id="loading">
-        <div>
-            <div id="round"></div>
-            <div id="loading_text"> Processing... </div>
-        </div>
 
-    </div>
 
     <main id="mainbox" class="">
         <div class="top-bar">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <div class="d-sm-flex" style="cursor: pointer; color: rgb(160, 160, 160);">
-                    <div class="me-3" id="dialButton"><i class="fas fa-phone"></i> {{header.phone_number|default:"+1 (403) 886-4306"}}
+                    <div class="me-3" id="dialButton"><i class="fas fa-phone"></i> {{header.phone_number|default:"+1
+                        (403) 886-4306"}}
                     </div>
                     <div class="me-3" id="emailButton"><i class="fas fa-envelope"></i>
                         {{header.email|default:"info@qfavionics.com"}}</div>
@@ -227,9 +452,12 @@
             style="z-index: 200;box-sizing: border-box;">
             <!-- search box -->
             <div id="searchbox" class="d-flex justify-content-center position-absolute">
-                <form id="searchform" class="d-flex" action="{% url 'search'  %}" method="get" onsubmit="return searchfunc();">
-                    <p id="searchmsg" class="text-danger position-absolute" style="margin-top: -38px; font-size: 15px;"></p>
-                    <input id="searchinput" type="text" name="q" placeholder="Search by product name, manufacturer, category, news title ">&nbsp;
+                <form id="searchform" class="d-flex" action="{% url 'search'  %}" method="get"
+                    onsubmit="return searchfunc();">
+                    <p id="searchmsg" class="text-danger position-absolute" style="margin-top: -38px; font-size: 15px;">
+                    </p>
+                    <input id="searchinput" type="text" name="q"
+                        placeholder="Search by product name, manufacturer, category, news title ">&nbsp;
                     <button id="searchbtn" type="submit">Search</button>
                     <input type="hidden" name="page" value="1">
                     <svg id="searchcancel" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
@@ -373,22 +601,38 @@
                     <div class="text-secondary">
                         <a href="https://www.google.com/maps/dir//3801+Airport+Dr,+Springbrook,+AB+T4S+2E8/@52.1763421,-113.9696467,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x537450468fc942f9:0xb14e4971aebfab17!2m2!1d-113.8872465!2d52.1763708?entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D"
                             class="text-decoration-none text-secondary" target="_blank">
-                            <pre id="hover_white" style="font-size: 1rem; font-family: Play, sans-serif;">{{footer.location}}</pre></a>
+                            <pre id="hover_white"
+                                style="font-size: 1rem; font-family: Play, sans-serif;">{{footer.location}}</pre>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <h5><i class="fa-solid fa-hashtag"></i> Social Media Channel</h5>
                     <p class="text-secondary">Follow to get special offers, free giveaways, and once-in-a-lifetime
                         deals.</p>
-                    <a href="{{footer.instagram|default_if_none:" #" }}" class="text-secondary mt-2 me-2"><i id="hover_white" class="fa-brands fa-instagram mx-1 fs-4"></i></a>
-                    <a href="{{footer.youtube|default_if_none:" #"}}" class="text-secondary mt-2 me-2"><i id="hover_white"
-                            class="fa-brands fa-youtube mx-1 fs-4"></i></a>
-                    <a href="{{footer.linkedin|default_if_none:" #"}}" class="text-secondary mt-2 me-2"><i id="hover_white"
-                            class="fa-brands fa-linkedin mx-1 fs-4"></i></a>
+                    <a href="{{footer.instagram|default_if_none:" #" }}" class="text-secondary mt-2 me-2"><i
+                            id="hover_white" class="fa-brands fa-instagram mx-1 fs-4"></i></a>
+                    <a href="{{footer.youtube|default_if_none:" #"}}" class="text-secondary mt-2 me-2"><i
+                            id="hover_white" class="fa-brands fa-youtube mx-1 fs-4"></i></a>
+                    <a href="{{footer.linkedin|default_if_none:" #"}}" class="text-secondary mt-2 me-2"><i
+                            id="hover_white" class="fa-brands fa-linkedin mx-1 fs-4"></i></a>
                 </div>
             </div>
         </div>
     </footer>
+    <div class="load" id="loading">
+        <svg class="pl" width="240" height="240" viewBox="0 0 240 240">
+            <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20"
+                stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20"
+                stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20"
+                stroke-dasharray="0 440" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20"
+                stroke-dasharray="0 440" stroke-linecap="round"></circle>
+        </svg>
+    </div>
+
 
     <script>
         let searchcancel = document.querySelector('#searchcancel');
@@ -403,7 +647,7 @@
                 searchmsg.innerText = "";
             }, 5000);
 
-        if (searchinput.length < 3) {
+            if (searchinput.length < 3) {
                 searchmsg.innerText = "search text length must be greater then 3 characters!";
                 return false;
             } else {
@@ -473,7 +717,7 @@
         });
 
         // phone number functionality
-        document.getElementById("dialButton").addEventListener("click", function() {
+        document.getElementById("dialButton").addEventListener("click", function () {
             const phoneNumber = '{{header.phone_number|default:"403 886 4306"}}';
             window.location.href = `tel:${phoneNumber}`;
         });
