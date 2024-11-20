@@ -29,8 +29,8 @@ Welcome to the Avionics Project! This real-life project is designed to provide a
 This project was developed by a team of three dedicated developers. You can visit their profiles for more information:
 
 - **Vinay Koshti**: [Backend Developer's Profile](https://github.com/Vinayrk2)
-- **Neesarg Soni**: [Front-end Developer 2's Profile](https://github.com/Neesargsoni)
-- **Nirmal Prajapati**: [Front-end Developer 3's Profile](https://github.com/NIRMAL-PRAJAPATI)
+- **Neesarg Soni**: [Front-end Developer 1's Profile](https://github.com/Neesargsoni)
+- **Nirmal Prajapati**: [Front-end Developer 2's Profile](https://github.com/NIRMAL-PRAJAPATI)
 
 ## Access the Avionics Project
 
