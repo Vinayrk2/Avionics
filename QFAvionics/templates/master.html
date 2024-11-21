@@ -177,13 +177,17 @@
             }
         } */
         #loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-            z-index: 2000;
+            left:0;top:0;
+            z-index: 5000;
+            height: 100vh;
+            width:100vw;
             display:none;
-            {% comment %} display: none; {% endcomment %}
+            background-color: transparent;
+        
         }
 
         .pl {
@@ -619,6 +623,7 @@
             </div>
         </div>
     </footer>
+    
     <div class="load" id="loading">
         <svg class="pl" width="240" height="240" viewBox="0 0 240 240" style="display:inherit;">
             <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20"
