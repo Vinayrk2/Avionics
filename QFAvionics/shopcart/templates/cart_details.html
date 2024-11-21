@@ -103,11 +103,11 @@
                     <form action="{% url 'send_detail' %}" method="post" onsubmit="return showLoading()">
                         {% csrf_token %}
                         <button type="submit" class="btn w-100 mb-3 text-white"
-                            style="background-color: #090841;;">Submit</button>
+                            style="background-color: #090841;;" >Submit</button>
                     </form>
-                    <button type="submit" class="btn w-100 mb-3" style="background-color: #090841;">
+                    <button type="submit" class="btn w-100 mb-3 btn-primary" >
                         <a class=" text-center d-block text-decoration-none text-white"
-                            href="{% url 'product-list-categorized' name='all' %}">Continue Shopping</a>
+                            href="{% url 'product-list-categorized' name='all' %}">Continue Shopping >></a>
 
                     </button>
                 </div>

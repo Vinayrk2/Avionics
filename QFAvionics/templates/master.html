@@ -182,8 +182,8 @@
             top: 50%;
             transform: translate(-50%,-50%);
             z-index: 2000;
-
-            display: none;
+            display:none;
+            {% comment %} display: none; {% endcomment %}
         }
 
         .pl {
@@ -620,7 +620,7 @@
         </div>
     </footer>
     <div class="load" id="loading">
-        <svg class="pl" width="240" height="240" viewBox="0 0 240 240">
+        <svg class="pl" width="240" height="240" viewBox="0 0 240 240" style="display:inherit;">
             <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20"
                 stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
             <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20"
