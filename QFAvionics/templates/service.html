@@ -42,12 +42,12 @@
             background-image: url({{service.image.url}});
             background-position: center;
             /* border: 1px solid black; */
-            margin:0 auto;
+            margin: 0 auto;
         }
     }
 
     @media (max-width:360px) {
-        
+
         #img-div {
             height: 30vh;
             width: 100%;
@@ -77,89 +77,98 @@
         color: #065baa;
         font-size: 1.5rem;
     }
-    .cont{
-        width:90vw;
-        height: auto;
+
+    .service-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-header {
+    grid-column: 1 / -1;
+    background-color: #f2f2f2;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.service-item {
+   
+}
+
+.item-label {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    padding: 0.75rem;
+    border-right: 1px solid #ddd;
+}
+
+.item-content {
+    padding: 0.75rem;
+    word-wrap: break-word;
+}
+
+.nested-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.5rem;
+}
+
+.nested-label {
+    font-weight: bold;
+}
+
+.nested-value {
+    word-wrap: break-word;
+    text-align: justify;
+}
+
+.status-available {
+    color: black;
+}
+
+.status-unavailable {
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .service-item {
+        grid-template-columns: 1fr;
     }
-    .service-table {
-        width: fit-content;
-        border-collapse: collapse;
-        margin-top: 20px;
+
+    .item-label {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
     }
 
-    #title {
-        font-size: 1.5rem;
+    .nested-grid {
+        grid-template-columns: 1fr;
     }
 
-    .service-table th,
-    .service-table td {
-        border: 1px solid #ddd;
-        padding: 12px;
-        text-align: left;
-        font-size: 1rem;
+    .nested-label {
+        background-color: #f8f9fa;
+        padding: 0.25rem;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        font-size: 14px;
     }
 
-    .table-header {
-        background-color: #f2f2f2;
-        font-size: 1.5rem;
-        font-weight: bold;
+    .service-header {
+        font-size: 1.2rem;
     }
 
-    .label {
-        font-weight: bold;
-        width: 30%;
+    .item-label, .item-content {
+        padding: 0.5rem;
     }
-
-    ul {
-        margin: 0;
-        padding-left: 20px;
-    }
-
-    .subtable {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .subtable th,
-    .subtable td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-
-    .subtable th {
-        background-color: #f8f8f8;
-        font-weight: bold;
-    }
-
-    @media (max-width:620px) {
-        .service-table {
-            width: 100%;
-            border-collapse: collapse;
-            /* transform: translate(-50%,-50%); */
-            margin: 20px auto;
-        }
-
-        .service-table tbody,
-        .service-table tr,
-        .subtable .key {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            border: none;
-        }
-
-        /* .service-table tbody,
-        .service-table td, */
-        .label {
-            width: 100%;
-            padding: 10px 15px;
-            /* background-color: #e9ecef; */
-            border-bottom: 1px solid #ced4da;
-
-        }
-
-    }
+}
 
     /* @media (max-width: 350px) {
 
@@ -186,89 +195,62 @@
         <div class="row img-fluid" id="img-div">
             <!-- <img src="" alt="" class="img-fluid"> -->
         </div>
-
-
-
-        <div class="cont">
-            <table class="service-table">
-                <thead>
-                    <tr>
-                        <th colspan="2" class="table-header" id="title">Service Information</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% if service.specifications %}
-                    <tr>
-                        <td class="label">Specifications</td>
-                        <td>
-                            <table class="subtable">
-                                <!-- <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Value</th>
-                                </tr>
-                            </thead> -->
-                                <tbody>
-                                    {% for key, value in service.specifications.items %}
-                                    <tr class="key">
-                                        <td class="fw-bold">{{key}}</td>
-                                        <td>
-                                            <pre style="font-family:inherit;">{{value}}</pre>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    {% endif %}
-                    <tr>
-                        <td class="label">Service Status</td>
-                        <td>
-                            {% if service.status %}
-                            <span class="status-available">Available</span>
-                            {% else %}
-                            <span class="status-unavailable">Not Available</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label">Service Type</td>
-                        <td>{{service.service_type}}</td>
-                    </tr>
-                    {% if service.technical_information %}
-
-                    <tr>
-                        <td class="label">Technical Information</td>
-                        <td>
-                            <table class="subtable">
-                                <!-- <thead>
-                                    <tr>
-                                        <th>Key</th>
-                                        <th>Value</th>
-                                    </tr>
-                                </thead> -->
-                                <tbody>
-                                    {% for key, value in service.technical_information.items %}
-                                    <tr>
-                                        <td class="fw-bold">{{key}}</td>
-                                        <td>
-                                            <pre style="font-family:inherit;">{{value}}</pre>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-
-                    {% endif %}
-                </tbody>
-            </table>
-        </div>
-
-
     </div>
+
+    <!-- table code -->
+
+    <div class="container-fluid mt-4"></div>
+        <div class="service-grid">
+            <div class="service-header" id="title">Service Information</div>
+            
+            {% if service.specifications %}
+            <div class="service-item">
+                <div class="item-label">Specifications</div>
+                <div class="item-content">
+                    <div class="nested-grid">
+                        {% for key, value in service.specifications.items %}
+                        <div class="nested-label">{{key}}</div>
+                        <div class="nested-value">{{value}}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="service-item">
+                <div class="item-label">Service Status</div>
+                <div class="item-content">
+                    {% if service.status %}
+                    <span class="status-available">Available</span>
+                    {% else %}
+                    <span class="status-unavailable">Not Available</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="item-label">Service Type</div>
+                <div class="item-content">{{service.service_type}}</div>
+            </div>
+
+            {% if service.technical_information %}
+            <div class="service-item">
+                <div class="item-label">Technical Information</div>
+                <div class="item-content">
+                    <div class="nested-grid">
+                        {% for key, value in service.technical_information.items %}
+                        <div class="nested-label">{{key}}</div>
+                        <div class="nested-value">{{value}}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+
 
 
 
