@@ -4,7 +4,7 @@ from .views import home, aboutpage, contactpage, service
 from django.conf import settings
 from django.conf.urls.static import static
 from user.views import signup,userlogin, userlogout, userprofile, get_user_by_email, verify_email
-from additional_option.views import service, set_currency
+from additional_option.views import service, set_currency, galary_list, galary_detail
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -31,4 +31,6 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('verify/userbyemail/', get_user_by_email, name="verify_user" ),
     path('verify/<uidb64>/<token>/', verify_email, name='verify_email'),
+    path('galary/view/', galary_list, name="galary_list"),
+    path('galary/<int:pk>/view/', galary_detail, name="galary_item"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

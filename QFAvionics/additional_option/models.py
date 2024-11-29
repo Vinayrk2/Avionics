@@ -203,3 +203,34 @@ class CarasoleImage(models.Model):
 
     def __str__(self):
         return "Image - {}".format(self.pk)
+    
+class GalaryItem(models.Model):
+    heading = models.CharField(max_length=250, default="")
+    
+    def __str__(self):
+        return self.heading
+    
+    @property
+    def image(self):
+        # Return the URL of the first image associated with this product
+        first_image = self.subitems.first()  # Access related images
+        return first_image.image if first_image else DefaultImage()    
+    
+    # @property
+    # def subitems(self):
+    #     # Return the sub details for the galary item
+    #     return self.images.all()  # Access related subitems
+    class Meta:
+        verbose_name = "Galary"
+        verbose_name_plural = "Galary"
+    
+class DefaultImage():
+    url = "/static/images/defult.png"
+    
+class GalaryItemDetail(models.Model):
+    galaryItem = models.ForeignKey('GalaryItem', related_name='subitems', on_delete=models.CASCADE, blank=True)
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='static/images/galary', blank=True, null=True, help_text="Upload image for the gallery item")
+    
+    def __str__(self):
+        return self.description
