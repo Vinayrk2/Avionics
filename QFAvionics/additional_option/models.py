@@ -214,7 +214,10 @@ class GalleryItem(models.Model):
     def image(self):
         # Return the URL of the first image associated with this product
         first_image = self.subitems.first()  # Access related images
-        return first_image.image if first_image else DefaultImage()    
+        try:
+            return first_image.image.url
+        except Exception as e:
+            return  DefaultImage().url    
     
     # @property
     # def subitems(self):
