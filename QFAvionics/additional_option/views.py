@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Service, GalaryItem
+from .models import Service, GalleryItem, GalleryItemDetail
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -7,16 +7,23 @@ from cart.cart import Cart
 from django.contrib import messages
 
 def galary_list(request):
-    items = GalaryItem.objects.all()
+    items = GalleryItem.objects.all()
     return render(request, 'galary_view.html', {'items': items})
 
 def galary_detail(request, pk):
     try:
-        item = GalaryItem.objects.filter(pk=pk).first()
+        item = GalleryItem.objects.filter(pk=pk).first()
         subitems = item.subitems.all()
+        
+        gallery = GalleryItem.objects.get(id=1)
+        print(gallery.heading)
+
+        # Fetch all associated images and descriptions
+        for image in gallery.subitems.all():
+            print(image.description, image.image.url)
         print(subitems)
         return render(request, 'galary_item.html', {'item': item, 'subitems':subitems})
-    except GalaryItem.DoesNotExist as e:
+    except GalleryItem.DoesNotExist as e:
         return render(request, '404.html', {"error":e})
 
 def service(request, id):

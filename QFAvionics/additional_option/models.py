@@ -204,7 +204,7 @@ class CarasoleImage(models.Model):
     def __str__(self):
         return "Image - {}".format(self.pk)
     
-class GalaryItem(models.Model):
+class GalleryItem(models.Model):
     heading = models.CharField(max_length=250, default="")
     
     def __str__(self):
@@ -218,19 +218,32 @@ class GalaryItem(models.Model):
     
     # @property
     # def subitems(self):
-    #     # Return the sub details for the galary item
+    #     # Return the sub details for the gallery item
     #     return self.images.all()  # Access related subitems
     class Meta:
-        verbose_name = "Galary"
-        verbose_name_plural = "Galary"
+        verbose_name = "Gallery"
+        verbose_name_plural = "Gallery"
     
 class DefaultImage():
     url = "/static/images/defult.png"
     
-class GalaryItemDetail(models.Model):
-    galaryItem = models.ForeignKey('GalaryItem', related_name='subitems', on_delete=models.CASCADE, blank=True)
-    description = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='static/images/galary', blank=True, null=True, help_text="Upload image for the gallery item")
-    
+class GalleryItemDetail(models.Model):
+    gallery_item = models.ForeignKey(
+        GalleryItem,
+        related_name='subitems',
+        on_delete=models.CASCADE,
+        help_text="The gallery item this image belongs to"
+    )
+    image = models.ImageField(
+        upload_to='static/galary/',
+        blank=True,
+        null=True,
+        help_text="Upload an image for the gallery item"
+    )
+    description = models.TextField(
+        blank=True,
+        null=True,
+        help_text="A description for the image"
+    )
     def __str__(self):
         return self.description

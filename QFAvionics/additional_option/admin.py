@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Service, Link
-from .models import SiteSettings, AboutSection, AboutContent, HomeSection, GalaryItem, GalaryItemDetail
+from .models import Service, Link, GalleryItem, GalleryItemDetail
+from .models import SiteSettings, AboutSection, AboutContent, HomeSection
 from .adminform import ServiceForm, AboutSectionForm
 from django.core.exceptions import ValidationError
 from django.forms import BaseInlineFormSet
@@ -64,10 +64,10 @@ class HomeSectionAdmin(admin.ModelAdmin):
     inlines = [HomeSectionItemInline, HomeSectionImageInline]
 
 
-class GalaryItemsInline(admin.TabularInline):
-    model = GalaryItemDetail
+class GalleryItemsInline(admin.TabularInline):
+    model = GalleryItemDetail
     extra = 1
     
-@admin.register(GalaryItem)
-class GalaryIAdmin(admin.ModelAdmin):
-    inlines = [GalaryItemsInline]
+@admin.register(GalleryItem)
+class GalleryIAdmin(admin.ModelAdmin):
+    inlines = [GalleryItemsInline]
