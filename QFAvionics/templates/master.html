@@ -459,10 +459,10 @@
                     onsubmit="return searchfunc();">
                     <p id="searchmsg" class="text-danger position-absolute" style="margin-top: -20px; font-size: 15px; z-index: 1000;"></p>
                     <input id="searchinput" type="text" name="q"
-                        placeholder="Search by product name, manufacturer, category, news title ">&nbsp;
-                    <button id="searchbtn" type="submit" class="px-3"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        placeholder="Search by product name, manufacturer, category, news title">&nbsp;
+                    <button id="searchbtn" type="submit" class="px-3">Search</button>
                     <input type="hidden" name="page" value="1">
-                        <i id="searchcancel" style="margin: -10px -5px 0px 5px; cursor: pointer;" fill="currentColor" class="fa-solid fa-xmark fs-5"></i>
+                        <i id="searchcancel" style="top: 0px; right: 2px; cursor: pointer; border-radius: 100px;" fill="currentColor" class="fa-solid fa-xmark fs-5 position-absolute bg-white p-1"></i>
                 </form>
             </div>
 
@@ -482,8 +482,7 @@
                                     class="fa-solid fa-house"></i> HOME</a>
                         </li>
                         <li class="nav-item" id="menu">
-                            <a class="nav-link text-decoration-none"><i class="fa-solid fa-layer-group"></i>
-                                SERVICES</a>
+                            <a class="nav-link text-decoration-none"><i class="fa-solid fa-layer-group"></i> SERVICES</a>
                             <ul id="dropdown" class="text-decoration-none">
                                 {% comment %} <li>Airframe Wiring</li>
                                 <li>Fixed Wings</li>
@@ -500,7 +499,7 @@
                             </ul>
                         </li>
                         <li class="nav-item" id="menu">
-                            <a class="nav-link"><i class="fa-solid fa-bag-shopping"></i> SHOP</a>
+                            <a class="nav-link"><i class="fa-solid fa-store"></i> SHOP</a>
                             <ul id="dropdown">
                                 <a href="{% url 'product-list-categorized' name='all' %}"
                                     style="text-decoration:none; color:black;">
@@ -515,22 +514,17 @@
                             </ul>
                         </li>
                         <li class="nav-item" id="menu">
-                            <a class="nav-link" href="{% url 'view-news' %}"><i class="fa-solid fa-newspaper"></i>
-                                NEWS</a>
+                            <a class="nav-link" href="{% url 'view-news' %}"><i class="fa-solid fa-newspaper"></i> NEWS</a>
+                        </li>
+                        <li class="nav-item" id="menu">
+                            <a class="nav-link" href="{% url 'galary_list' %}"><i class="fa-solid fa-image"></i> GALARY</a>
+                        </li>
+                        <li class="nav-item" id="menu">
+                            <a class="nav-link" href="{% url 'aboutpage' %}"><i class="fa-solid fa-address-card"></i> ABOUT</a>
 
                         </li>
                         <li class="nav-item" id="menu">
-                            <a class="nav-link" href="{% url 'aboutpage' %}"><i class="fa-solid fa-address-card"></i>
-                                ABOUT</a>
-
-                        </li>
-                        <li class="nav-item" id="menu">
-                            <a class="nav-link" href="{% url 'contactpage' %}"><i class="fa-solid fa-address-book"></i>
-                                CONTACT</a>
-                        </li>
-                        <li class="nav-item" id="menu">
-                            <a class="nav-link" href="{% url 'galary_list' %}"><i class="fa-solid fa-address-card"></i>
-                                GALARY</a>
+                            <a class="nav-link" href="{% url 'contactpage' %}"><i class="fa-solid fa-address-book"></i> CONTACT</a>
                         </li>
                     </ul>
                     <div class="icon-container d-flex mx-2 mt-2 mt-md-0 mb-3 mb-md-0">
