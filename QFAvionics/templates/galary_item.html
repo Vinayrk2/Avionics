@@ -1,23 +1,57 @@
 {% extends "master.html" %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-4">
-            <div>
+<style>
+    *{
+        box-sizing: border-box;
+    }
+   
+    .row {
+        display: flex;
+        justify-content: center;
+        /* background-color: antiquewhite; */
+        margin-top: 5vh;
+    }
+    .title{
+        font-size: 3rem;
+    }
+
+    .caption h3 {
+        font-size: 2rem;
+    }
+
+    @media (max-width:450px) {
+        .row{
+            margin-top: 3vh;
+        }
+        .title{
+            font-size: 1.3rem;
+        }
+        .caption h3 {
+            font-size: 1rem;
+        }
+    }
+
+</style>
+
+
+    <div class="row w-100 p-5">
+        <div class="col-md-4 w-auto cont">
+            <div class="title">
                 {{item}}
             </div>
             {% if subitems %}
             {% for sitem in subitems %}
             <div>
-            <div class="thumbnail">
+                <div class="thumbnail mt-5">
                     <img src="{{ sitem.image.url }}" alt="Image">
                 </div>
-                <div class="caption">
+                <div class="caption mt-5">
                     <h3>{{ sitem }}</h3>
                 </div>
             </div>
             {% endfor%}
             {% endif %}
-            </div>
+        </div>
     </div>
 {% endblock %}
