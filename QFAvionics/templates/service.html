@@ -75,7 +75,7 @@
 
     .service-name {
         color: #065baa;
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     .service-grid {
@@ -94,46 +94,54 @@
     font-weight: bold;
     padding: 1rem;
     text-align: center;
-    border: 1px solid #ddd;
 }
 
 .service-item {
-   
+   border: 1px solid rgb(230, 230, 230);
 }
 
 .item-label {
     background-color: #f8f9fa;
     font-weight: bold;
     padding: 0.75rem;
-    border-right: 1px solid #ddd;
+    font-size: 20px;
 }
 
 .item-content {
     padding: 0.75rem;
     word-wrap: break-word;
+    font-size: 15px;
 }
 
 .nested-grid {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 0.5rem;
+    /* gap: 1rem; */
 }
 
 .nested-label {
     font-weight: bold;
+    padding: 10px;
+    border-bottom: 1px solid rgb(228, 228, 228);
 }
 
 .nested-value {
     word-wrap: break-word;
     text-align: justify;
+    padding: 10px;
+    border-bottom: 1px solid rgb(228, 228, 228);
 }
 
 .status-available {
-    color: black;
+    font-size: 22px;
+    color: green;
+    letter-spacing: 0.5px;
 }
 
 .status-unavailable {
-    color: black;
+    font-size: 22px;
+    color: red;
+    letter-spacing: 0.5px;
 }
 
 @media (max-width: 768px) {
@@ -152,7 +160,12 @@
 
     .nested-label {
         background-color: #f8f9fa;
-        padding: 0.25rem;
+        padding: 0.25rem 0px;
+        border: none;
+    }
+
+    .nested-value {
+        border: none;
     }
 }
 
@@ -182,9 +195,9 @@
 </style>
 
 <div class="container">
-    <div class="service-item">
+    <div class="">
         <div class="row">
-            <p class="service-name mt-lg-3 fw-bold">
+            <p class="service-name mt-3 fw-bold">
                 {{service.name}}
             </p>
         </div>
@@ -193,7 +206,6 @@
         </div>
 
         <div class="row img-fluid" id="img-div">
-            <!-- <img src="" alt="" class="img-fluid"> -->
         </div>
     </div>
 
@@ -221,9 +233,9 @@
                 <div class="item-label">Service Status</div>
                 <div class="item-content">
                     {% if service.status %}
-                    <span class="status-available">Available</span>
+                    <span>Available </span>
                     {% else %}
-                    <span class="status-unavailable">Not Available</span>
+                    <span>Not Available</span>
                     {% endif %}
                 </div>
             </div>
